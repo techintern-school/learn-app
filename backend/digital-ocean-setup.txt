@@ -1,0 +1,4 @@
+// followed instructions here: https://medium.com/@tomnashflex/how-we-use-circleci-with-git-and-digitalocean-to-streamline-our-deployments-49a6a02b6dd6
+
+sudo apt install nodejs
+sudo apt install npm

@@ -1,0 +1,4 @@
+student creates account through browser
+student is guided through the curicculum through the browser
+student develops applications locally, and uses ti.s command line application to interact with curicculum server
+server records student progress through curicculum and tells student what to do next

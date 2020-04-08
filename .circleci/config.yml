@@ -31,7 +31,7 @@ jobs:
       - run: ssh -oStrictHostKeyChecking=no -v $DROPLET_USER@$DROPLET_IP "./deploy_project.sh"
   deploy-prod-frontend:
     docker:
-      - image: alpine:3.7
+      - image: cimg/base:2020.01
     steps:
       - run:
           command: curl -X POST -d {} $NETLIFY_BUILD_ENDPOINT

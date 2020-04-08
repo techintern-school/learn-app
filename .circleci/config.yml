@@ -24,8 +24,8 @@ jobs:
             - run: yarn test
   deploy-prod-backend:
     docker:
-    # specify the version you desire here (you might not want node)
-    - image: circleci/node:7.10
+      # specify the version you desire here (you might not want node)
+      - image: circleci/node:7.10
     steps:
       - checkout
       - run: ssh -oStrictHostKeyChecking=no -v $DROPLET_USER@$DROPLET_IP "./deploy_project.sh"
@@ -41,17 +41,15 @@ workflows:
     jobs:
       - build-and-test-backend
       - deploy-prod-backend:
-        filters:
-          branches:
-            only:
-                - master
-        requires:
+          requires:
             - build-and-test-backend
+          filters:
+            branches:
+              only: master
       - build-and-test-frontend
       - deploy-prod-frontend:
-        filters:
-          branches:
-            only:
-                - master
-        requires:
+          requires:
             - build-and-test-frontend
+          filters:
+            branches:
+              only: master

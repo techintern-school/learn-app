@@ -4,7 +4,7 @@ orbs:
 jobs:
   build-and-test-backend:
     docker:
-      - image: 'cimg/base:stable'
+      - image: 'circleci/node:10'
     steps:
       - checkout
       - node/with-cache:
@@ -14,7 +14,7 @@ jobs:
             - run: npm run test
   build-and-test-frontend:
     docker:
-      - image: 'cimg/base:stable'
+      - image: 'circleci/node:10'
     steps:
       - checkout
       - node/with-cache:
@@ -25,13 +25,13 @@ jobs:
             - run: ./node_modules/.bin/netlify deploy --site $NETLIFY_SITE_ID --auth $NETLIFY_ACCESS_TOKEN --dir=build
   deploy-prod-backend:
     docker:
-      - image: 'cimg/base:stable'
+      - image: 'circleci/node:10'
     steps:
       - checkout
       - run: ssh -oStrictHostKeyChecking=no -v $DROPLET_USER@$DROPLET_IP "./deploy_project.sh"
   deploy-prod-frontend:
     docker:
-      - image: 'cimg/base:stable'
+      - image: 'circleci/node:10'
     steps:
       - run:
           command: /node_modules/.bin/netlify deploy --site $NETLIFY_SITE_ID --auth $NETLIFY_ACCESS_TOKEN --prod --dir=build

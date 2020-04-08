@@ -33,9 +33,9 @@ jobs:
     machine:
         macos:
           xcode: '9.0'
-      steps:
-        - run:
-            command: curl -X POST -d {} $NETLIFY_BUILD_ENDPOINT
+    steps:
+      - run:
+          command: curl -X POST -d {} $NETLIFY_BUILD_ENDPOINT
 workflows:
   version: 2
   build-and-deploy:

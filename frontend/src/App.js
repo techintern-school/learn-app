@@ -5,7 +5,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        Hello World!
+        A bigger change to the frontend to confim if netlify diffing will catch this :/
       </header>
     </div>
   );

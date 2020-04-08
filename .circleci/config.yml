@@ -49,10 +49,10 @@ workflows:
                 - master
           requires:
             - build-and-test-backend
-     - deploy-prod-frontend:
-          filters:
-            branches:
-              only:
-                - master
-          requires:
-            - build-and-test-frontend
+      - deploy-prod-frontend:
+        filters:
+          branches:
+            only:
+              - master
+        requires:
+          - build-and-test-frontend

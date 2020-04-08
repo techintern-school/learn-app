@@ -30,9 +30,8 @@ jobs:
       - checkout
       - run: ssh -oStrictHostKeyChecking=no -v $DROPLET_USER@$DROPLET_IP "./deploy_project.sh"
   deploy-prod-frontend:
-    machine:
-        macos:
-          xcode: '9.0'
+    docker:
+      - image: alpine:3.7
     steps:
       - run:
           command: curl -X POST -d {} $NETLIFY_BUILD_ENDPOINT
@@ -41,14 +40,14 @@ workflows:
   build-and-deploy:
     jobs:
       - build-and-test-backend
-      - build-and-test-frontend
-      - deploy-prod-backend:
+       - deploy-prod-backend:
           filters:
             branches:
               only:
                 - master
           requires:
             - build-and-test-backend
+      - build-and-test-frontend
       - deploy-prod-frontend:
         filters:
           branches:

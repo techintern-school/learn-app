@@ -44,14 +44,14 @@ workflows:
         filters:
           branches:
             only:
-              - master
+                - master
         requires:
-          - build-and-test-backend
+            - build-and-test-backend
       - build-and-test-frontend
       - deploy-prod-frontend:
         filters:
           branches:
             only:
-              - master
+                - master
         requires:
-          - build-and-test-frontend
+            - build-and-test-frontend

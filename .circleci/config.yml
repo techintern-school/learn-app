@@ -40,13 +40,13 @@ workflows:
   build-and-deploy:
     jobs:
       - build-and-test-backend
-       - deploy-prod-backend:
-          filters:
-            branches:
-              only:
-                - master
-          requires:
-            - build-and-test-backend
+      - deploy-prod-backend:
+        filters:
+          branches:
+            only:
+              - master
+        requires:
+          - build-and-test-backend
       - build-and-test-frontend
       - deploy-prod-frontend:
         filters:

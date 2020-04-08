@@ -3,8 +3,8 @@ orbs:
   node: circleci/node@1.1.6
 jobs:
   build-and-test-backend:
-    executor:
-      name: node/default
+    docker:
+      - image: 'cimg/base:stable'
     steps:
       - checkout
       - node/with-cache:
@@ -13,8 +13,8 @@ jobs:
             - run: npm install
             - run: npm run test
   build-and-test-frontend:
-    executor:
-      name: node/default
+    docker:
+      - image: 'cimg/base:stable'
     steps:
       - checkout
       - node/with-cache:
@@ -22,19 +22,19 @@ jobs:
             - run: cd frontend
             - run: yarn install
             - run: yarn test
+            - run: ./node_modules/.bin/netlify deploy --site $NETLIFY_SITE_ID --auth $NETLIFY_ACCESS_TOKEN --dir=build
   deploy-prod-backend:
     docker:
-      # specify the version you desire here (you might not want node)
-      - image: circleci/node:7.10
+      - image: 'cimg/base:stable'
     steps:
       - checkout
       - run: ssh -oStrictHostKeyChecking=no -v $DROPLET_USER@$DROPLET_IP "./deploy_project.sh"
   deploy-prod-frontend:
     docker:
-      - image: cimg/base:2020.01
+      - image: 'cimg/base:stable'
     steps:
       - run:
-          command: curl -X POST -d {} $NETLIFY_BUILD_ENDPOINT
+          command: /node_modules/.bin/netlify deploy --site $NETLIFY_SITE_ID --auth $NETLIFY_ACCESS_TOKEN --prod --dir=build
 workflows:
   version: 2
   build-and-deploy:

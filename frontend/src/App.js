@@ -1,14 +1,24 @@
-import React from 'react';
-import './App.css';
+import React from "react";
+import { createBrowserHistory } from "history";
+import { Router, Route, Switch } from "react-router";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        A bigger change to the frontend to confim if netlify diffing will catch this :/
-      </header>
-    </div>
-  );
+import './App.css';
+import "./assets/scss/material-kit-pro-react.scss?v=1.8.0";
+
+import HomePage from "./pages/Home/Home.js";
+
+var hist = createBrowserHistory();
+
+class App extends React.Component {
+  render() {
+     return (
+      <Router history={hist}>
+        <Switch>
+          <Route path="/" component={HomePage} />
+        </Switch>
+      </Router>
+     );
+  }
 }
 
 export default App;

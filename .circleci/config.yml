@@ -54,6 +54,7 @@ jobs:
             --acl public-read \
             --cache-control "max-age=no-cache"
           from: ~/curapp/frontend/build/index.html
+          overwrite: true
           to: 's3://tis-cdn-bucket'
 workflows:
   version: 2

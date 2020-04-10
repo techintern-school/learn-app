@@ -46,7 +46,7 @@ jobs:
           arguments: |
             --acl public-read \
             --cache-control "max-age=86400"
-          from: ./frontend/build
+          from: curapp/frontend/build
           overwrite: true
           to: 's3://tis-cdn-bucket'
       - aws-s3/copy:

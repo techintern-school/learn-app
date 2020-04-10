@@ -15,16 +15,17 @@ jobs:
   build-and-test-frontend:
     docker:
       - image: 'circleci/node:10'
+    working_directory: /frontend
     steps:
       - checkout
       - node/with-cache:
           steps:
-            - run: cd frontend && yarn install
-            - run: cd frontend && yarn test
-            - run: cd frontend && yarn build
-            - run: cd frontend && ./node_modules/.bin/netlify deploy --site $NETLIFY_SITE_ID --auth $NETLIFY_ACCESS_TOKEN --dir=build
+            - run: yarn install
+            - run: yarn test
+            - run: yarn build
+            - run: ./node_modules/.bin/netlify deploy --site $NETLIFY_SITE_ID --auth $NETLIFY_ACCESS_TOKEN --dir=build
       - persist_to_workspace:
-          root: /frontend
+          root: /project/frontend
           paths:
               - build/*
       
@@ -39,7 +40,7 @@ jobs:
       - image: 'cimg/python:3.6'
     steps:
       - attach_workspace:
-          at: /frontend
+          at: /project/frontend
       - aws-s3/sync:
           arguments: |
             --acl public-read \

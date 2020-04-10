@@ -17,6 +17,8 @@ jobs:
       - image: 'circleci/node:10'
     steps:
       - checkout
+      - attach_workspace:
+          at: ~/curapp
       - node/with-cache:
           steps:
             - run: cd frontend && yarn install
@@ -24,7 +26,7 @@ jobs:
             - run: cd frontend && yarn build
             - run: cd frontend && ./node_modules/.bin/netlify deploy --site $NETLIFY_SITE_ID --auth $NETLIFY_ACCESS_TOKEN --dir=build
       - persist_to_workspace:
-          root: /home/circleci/project
+          root: .
           paths:
               - frontend/build/*
       
@@ -39,7 +41,7 @@ jobs:
       - image: 'cimg/python:3.6'
     steps:
       - attach_workspace:
-          at: ~/frontend
+          at: ~/curapp
       - aws-s3/sync:
           arguments: |
             --acl public-read \

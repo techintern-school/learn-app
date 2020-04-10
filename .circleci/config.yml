@@ -39,7 +39,7 @@ jobs:
       - image: 'cimg/python:3.6'
     steps:
       - attach_workspace:
-          at: /project/frontend
+          at: /frontend
       - aws-s3/sync:
           arguments: |
             --acl public-read \

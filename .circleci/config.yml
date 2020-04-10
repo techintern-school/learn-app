@@ -42,7 +42,7 @@ jobs:
     steps:
       - attach_workspace:
           at: ~/curapp
-      - run: ls -al
+      - run: ls -al | less
       - run: pwd
       - aws-s3/sync:
           arguments: |

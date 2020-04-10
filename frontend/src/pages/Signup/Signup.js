@@ -56,13 +56,11 @@ class SignupPage extends React.Component {
                             <CustomInput
                                 id="regular"
                                 labelText="Enter your email address"
-                                inputProps={{
-                                    placeholder: "Your Email Address"
-                                }}
                                 formControlProps={{
                                     fullWidth: true
                                 }}
                                 inputProps={{
+                                    placeholder: "Your Email Address",
                                     onChange: this.onEmailInputChange.bind(this),
                                     type: "text"
                                 }}
@@ -71,7 +69,7 @@ class SignupPage extends React.Component {
                     <form action="https://school.us19.list-manage.com/subscribe/post" method="POST" noValidate>
                         <input type="hidden" name="u" value="1489a6b87612b4e8ed744e47e" />
                         <input type="hidden" name="id" value="c0f77afcb9" />
-                        <input type="hidden" name="MMERGE7" id="mce-MMERGE7" value={"" + this.state.mHours} />
+                        <input type="hidden" name="MMERGE7" id="MMERGE7" value={"" + this.state.mHours} />
                         <input 
                             type="hidden" 
                             name="EMAIL" 

@@ -15,5 +15,7 @@
   "bugs": {
     "url": "https://github.com/geoff616/currapp/issues"
   },
-  "homepage": "https://github.com/geoff616/currapp#readme"
+  "homepage": "https://github.com/geoff616/currapp#readme",
+  "dependencies": {
+  }
 }

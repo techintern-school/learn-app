@@ -33,7 +33,7 @@ export default function SectionPricing() {
               Choose between our different mentoring options below - you will be able to adjust your choice at any time. Your mentoring will begin after you complete the first month of studying. All options will charge $9 platform fee for your first month, and $49/month thereafter. Mentoring is charged at $100/hour in 30 minute increments.
             </h4>
             <GridContainer justify="center">
-              <GridItem md={4} sm={4}>
+              <GridItem lg={4} md={12} sm={12}>
                 <Card
                   className={classNames(
                     classes.card,
@@ -56,13 +56,11 @@ export default function SectionPricing() {
                         <b>0.5 hours</b> of mentoring<small>/mo</small>
                                 </li>
                     </ul>
-                    <Button href="#pablo" round color="rose">
-                      Enroll Now!
-                              </Button>
+                    <Link to="/enroll?mHours=0.5"><Button round color="rose">Enroll Now!</Button></Link>
                   </CardBody>
                 </Card>
               </GridItem>
-              <GridItem md={4} sm={4}>
+              <GridItem lg={4} md={12} sm={12}>
                 <Card className={classes.card}>
                   <CardBody className={classes.cardBody}>
                     <h6 className={classes.cardCategory}>
@@ -83,13 +81,11 @@ export default function SectionPricing() {
                         <b>Recommended</b>
                                 </li>
                     </ul>
-                    <Button href="#pablo" round color="rose">
-                      Enroll Now!
-                              </Button>
+                    <Link to="/enroll?mHours=1.5"><Button round color="rose">Enroll Now!</Button></Link>
                   </CardBody>
                 </Card>
               </GridItem>
-              <GridItem md={4} sm={4}>
+              <GridItem lg={4} md={12} sm={12}>
                 <Card
                   className={classNames(
                     classes.card,
@@ -113,7 +109,7 @@ export default function SectionPricing() {
                                 </li>
                     </ul>
                     
-                      <Link to="/enroll?mHours=4.5"><Button href="#pablo" round color="rose">Enroll Now!</Button></Link>
+                      <Link to="/enroll?mHours=4.5"><Button round color="rose">Enroll Now!</Button></Link>
                   </CardBody>
                 </Card>
               </GridItem>

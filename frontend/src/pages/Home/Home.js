@@ -22,7 +22,7 @@ import presentationStyle from "../../assets/jss/material-kit-pro-react/views/pre
 
 const useStyles = makeStyles(presentationStyle);
 
-export default function PresentationPage() {
+export default function HomePage() {
   React.useEffect(() => {
     window.scrollTo(0, 0);
     document.body.scrollTop = 0;

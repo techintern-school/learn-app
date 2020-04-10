@@ -15,7 +15,6 @@ jobs:
   build-and-test-frontend:
     docker:
       - image: 'circleci/node:10'
-    working_directory: /frontend
     steps:
       - checkout
       - node/with-cache:

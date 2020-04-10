@@ -69,7 +69,7 @@ class SignupPage extends React.Component {
                     <form action="https://school.us19.list-manage.com/subscribe/post" method="POST" noValidate>
                         <input type="hidden" name="u" value="1489a6b87612b4e8ed744e47e" />
                         <input type="hidden" name="id" value="c0f77afcb9" />
-                        <input type="hidden" name="MMERGE7" id="MMERGE7" value={"" + this.state.mHours} />
+                        <input type="hidden" name="MERGE7" id="MERGE7" value={"" + this.state.mHours} />
                         <input 
                             type="hidden" 
                             name="EMAIL" 

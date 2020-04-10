@@ -24,9 +24,9 @@ jobs:
             - run: cd frontend && yarn build
             - run: cd frontend && ./node_modules/.bin/netlify deploy --site $NETLIFY_SITE_ID --auth $NETLIFY_ACCESS_TOKEN --dir=build
       - persist_to_workspace:
-          root: /home/circleci/frontend
+          root: $CIRCLE_WORKING_DIRECTORY
           paths:
-              - build/*
+              - frontend/build/*
       
   deploy-prod-backend:
     docker:

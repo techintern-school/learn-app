@@ -69,7 +69,9 @@ export default function Header(props) {
         <Button className={classes.title}>
           <Link to="/">{brand}</Link>
         </Button>
-        <Hidden smDown implementation="css" className={classes.hidden}>
+       
+      { /* 
+       <Hidden smDown implementation="css" className={classes.hidden}>
           <div className={classes.collapse}>{links}</div>
         </Hidden>
         <Hidden mdUp>
@@ -103,6 +105,8 @@ export default function Header(props) {
           <div className={classes.appResponsive}>{links}</div>
         </Drawer>
       </Hidden>
+      */}
+      </Toolbar>
     </AppBar>
   );
 }

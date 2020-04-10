@@ -33,7 +33,7 @@ export default function SectionOverview() {
         </GridItem>
         <div className={classes.container}>
           <GridContainer justify="center">
-            <GridItem sm={3} className={classes.featuresShow}>
+            <GridItem md={3} className={classes.featuresShow}>
               <InfoArea
                 title="Learn by doing"
                 description={
@@ -46,7 +46,7 @@ export default function SectionOverview() {
                 vertical={true}
               />
             </GridItem>
-            <GridItem sm={3} className={classes.featuresShow}>
+            <GridItem md={3} className={classes.featuresShow}>
               <InfoArea
                 title="1 on 1 Mentoring"
                 description={
@@ -59,7 +59,7 @@ export default function SectionOverview() {
                 vertical={true}
               />
             </GridItem>
-            <GridItem sm={3} className={classes.featuresShow}>
+            <GridItem md={3} className={classes.featuresShow}>
               <InfoArea
                 title="Cheaper than a bootcamp"
                 description={
@@ -72,7 +72,7 @@ export default function SectionOverview() {
                 vertical={true}
               />
             </GridItem>
-            <GridItem sm={3} className={classes.featuresShow}>
+            <GridItem md={3} className={classes.featuresShow}>
               <InfoArea
                 title="Learn faster"
                 description={

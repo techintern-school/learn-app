@@ -29,7 +29,7 @@ export default function PresentationPage() {
   });
   const classes = useStyles();
   let headlineStyles = {
-    color: '#11999e'
+    color: 'primary'
   };
   return (
     <div>
@@ -70,7 +70,7 @@ export default function PresentationPage() {
           <div>
             <div className={classes.left}>
               <a
-                href="https://www.creative-tim.com/product/material-kit-pro-react?ref=mkpr-presentation"
+                href="#"
                 target="_blank"
                 className={classes.footerBrand}
               >

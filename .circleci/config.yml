@@ -21,9 +21,9 @@ jobs:
           at: ~/curapp
       - node/with-cache:
           steps:
-            - run: cd frontend && yarn install
-            - run: cd frontend && yarn test
-            - run: cd frontend && yarn build
+            - run: cd frontend && npm run install
+            - run: cd frontend && npm run test
+            - run: cd frontend && npm run build
             - run: cd frontend && ./node_modules/.bin/netlify deploy --site $NETLIFY_SITE_ID --auth $NETLIFY_ACCESS_TOKEN --dir=build
       - persist_to_workspace:
           root: .

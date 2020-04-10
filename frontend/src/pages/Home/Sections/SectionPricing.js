@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 // nodejs library that concatenates classes
 import classNames from "classnames";
 // core components
@@ -111,9 +112,8 @@ export default function SectionPricing() {
                         <b>4.5 hours</b> of mentoring<small>/mo</small>
                                 </li>
                     </ul>
-                    <Button href="#pablo" round color="rose">
-                      Enroll Now!
-                              </Button>
+                    
+                      <Link to="/enroll?mHours=4.5"><Button href="#pablo" round color="rose">Enroll Now!</Button></Link>
                   </CardBody>
                 </Card>
               </GridItem>

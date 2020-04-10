@@ -35,11 +35,7 @@ class SignupPage extends React.Component {
                 <Header
                     brand="techIntern.school"
                     fixed
-                    color="success"
-                    changeColorOnScroll={{
-                        height: 400,
-                        color: "primary"
-                    }}
+                    color="primary"
                 />
                 <GridContainer
                     justify="center"
@@ -86,7 +82,7 @@ class SignupPage extends React.Component {
                         /> 
                         <div style={{position: "absolute", left: "-5000px", "ariaHidden": "true"}}><input type="text" name="b_1489a6b87612b4e8ed744e47e_c0f77afcb9" tabIndex="-1" defaultValue=""/></div>
                         <GridItem xs={12} sm={12} md={8} lg={8}>
-                            <Button color="primary" type="submit" className="submit" name="subscribe" id="mc-embedded-subscribe">Subscribe</Button>
+                            <Button color="success" type="submit" className="submit" name="subscribe" id="mc-embedded-subscribe">Subscribe</Button>
                         </GridItem>
                         
                     </form>

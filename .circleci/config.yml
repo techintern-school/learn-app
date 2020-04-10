@@ -23,6 +23,11 @@ jobs:
             - run: cd frontend && yarn test
             - run: cd frontend && yarn build
             - run: cd frontend && ./node_modules/.bin/netlify deploy --site $NETLIFY_SITE_ID --auth $NETLIFY_ACCESS_TOKEN --dir=build
+      - persist_to_workspace:
+          root: /tmp/workspace
+          paths:
+              - frontend/build/*
+      
   deploy-prod-backend:
     docker:
       - image: 'circleci/node:10'
@@ -33,24 +38,20 @@ jobs:
     docker:
       - image: 'cimg/python:3.6'
     steps:
-      - checkout
-      - node/with-cache:
-          steps:
-            - run: cd frontend && yarn install
-            - run: cd frontend && yarn test
-            - run: cd frontend && yarn build
+      - attach_workspace:
+          at: /tmp/workspace
       - aws-s3/sync:
           arguments: |
             --acl public-read \
             --cache-control "max-age=86400"
-          from: frontend/build
+          from: tmp/workspace/frontend/build
           overwrite: true
           to: 's3://tis-cdn-bucket'
       - aws-s3/copy:
           arguments: |
             --acl public-read \
             --cache-control "max-age=no-cache"
-          from: frontend/build/index.html
+          from: /tmp/workspace/frontend/build/index.html
           to: 's3://tis-cdn-bucket'
 workflows:
   version: 2

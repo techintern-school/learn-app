@@ -24,7 +24,7 @@ jobs:
             - run: cd frontend && yarn build
             - run: cd frontend && ./node_modules/.bin/netlify deploy --site $NETLIFY_SITE_ID --auth $NETLIFY_ACCESS_TOKEN --dir=build
       - persist_to_workspace:
-          root: $CIRCLE_WORKING_DIRECTORY
+          root: /home/circleci/project
           paths:
               - frontend/build/*
       

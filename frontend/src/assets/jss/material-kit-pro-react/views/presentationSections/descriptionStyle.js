@@ -1,10 +1,12 @@
 import {
   container,
   section,
-  darkTealColor
+  darkTealColor, 
+  title
 } from "../../../../../assets/jss/material-kit-pro-react.js";
 
 const descriptionStyle = {
+  title,
   container,
   description: {
     color: darkTealColor,

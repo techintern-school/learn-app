@@ -39,7 +39,7 @@ export default function PresentationPage() {
         color="transparent"
         changeColorOnScroll={{
           height: 400,
-          color: "info"
+          color: "primary"
         }}
       />
       <Parallax
@@ -51,7 +51,7 @@ export default function PresentationPage() {
             <GridItem>
               <div className={classes.brand}>
                 <h1 className={classes.title} style={headlineStyles}>
-                Become a software engineer. 
+                Become a software engineer
                 </h1>
               </div>
             </GridItem>
@@ -63,6 +63,49 @@ export default function PresentationPage() {
         <SectionOverview />
         <SectionPricing />
       </div>
+      
+      <Footer
+        theme="white"
+        content={
+          <div>
+            <div className={classes.left}>
+              <a
+                href="https://www.creative-tim.com/product/material-kit-pro-react?ref=mkpr-presentation"
+                target="_blank"
+                className={classes.footerBrand}
+              >
+                techIntern.school
+              </a>
+            </div>
+            <div className={classes.rightLinks}>
+              <ul>
+                <li>
+                  <Button
+                    href="https://www.linkedin.com/company/techintern-school"
+                    target="_blank"
+                    color="instagram"
+                    justIcon
+                    simple
+                  >
+                    <i className="fab fa-linkedin" />
+                  </Button>
+                </li>
+                <li>
+                  <Button
+                    href="https://twitter.com/techinternschl"
+                    target="_blank"
+                    color="twitter"
+                    justIcon
+                    simple
+                  >
+                    <i className="fab fa-twitter" />
+                  </Button>
+                </li>
+              </ul>
+            </div>
+          </div>
+        }
+      />
     </div>
   );
 }

@@ -35,7 +35,7 @@ export default function SectionOverview() {
           <GridContainer justify="center">
             <GridItem sm={3} className={classes.featuresShow}>
               <InfoArea
-                title="Learn by doing."
+                title="Learn by doing"
                 description={
                   <p>
                     In our project based curicclum, you will learn to solve real problems you will encounter in your career. These projects will help build out your resume, and demonstrate you can learn the skills employers need. 
@@ -74,10 +74,10 @@ export default function SectionOverview() {
             </GridItem>
             <GridItem sm={3} className={classes.featuresShow}>
               <InfoArea
-                title="Save Time"
+                title="Learn faster"
                 description={
                   <p>
-                    It is possible to become a software engineer through self guided study. The problem isn't a lack of resources, but too many. Our curicclum will focus your time the right skills, and help you becine a software engineer faster. 
+                    It is possible to become a software engineer through self guided study. The problem isn't a lack of resources, but too many. Our curicclum will focus your time on learning the right skills, so you can become a software engineer sooner. 
                   </p>
                 }
                 icon={AccessTime}

@@ -38,7 +38,7 @@ export default function SectionOverview() {
                 title="Learn by doing"
                 description={
                   <p>
-                    In our project based curicclum, you will learn to solve real problems you will encounter in your career. These projects will help build out your resume, and demonstrate you can learn the skills employers need. 
+                    In our project based curriculum, you will learn to solve real problems you will encounter in your career. These projects will help build out your resume, and demonstrate you can learn the skills employers need. 
                   </p>
                 }
                 icon={WbIncandescentIcon}
@@ -64,7 +64,7 @@ export default function SectionOverview() {
                 title="Cheaper than a bootcamp"
                 description={
                   <p>
-                    We designed our learning platform to be a fraction of the cost of a traditional bootcamp. Without sacrificing the valubale mentorship that bootcamps offer. We charge a monthly tuition fee, and you are able to cancel at anytime. 
+                    We designed our learning platform to be a fraction of the cost of a traditional bootcamp. Without sacrificing the valuable mentorship that bootcamps offer. We charge a monthly tuition fee, and you are able to cancel at anytime. 
                   </p>
                 }
                 icon={AttachMoney}
@@ -77,7 +77,7 @@ export default function SectionOverview() {
                 title="Learn faster"
                 description={
                   <p>
-                    It is possible to become a software engineer through self guided study. The problem isn't a lack of resources, but too many. Our curicclum will focus your time on learning the right skills, so you can become a software engineer sooner. 
+                    It is possible to become a software engineer through self guided study. The problem isn't a lack of resources, but too many. Our curriculum will focus your time on learning the right skills, so you can become a software engineer sooner. 
                   </p>
                 }
                 icon={AccessTime}

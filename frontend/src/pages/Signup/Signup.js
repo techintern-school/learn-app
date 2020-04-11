@@ -1,5 +1,6 @@
 import React from 'react'
 import Header from "../../mk-components/Header/Header.js";
+import { connect } from 'react-redux'
 
 
 // core components
@@ -13,20 +14,21 @@ import Timelapse from "@material-ui/icons/Timelapse";
 // core components
 import InfoArea from "../../mk-components/InfoArea/InfoArea.js";
 
-const urlParams = new URLSearchParams(window.location.search);
-
 class SignupPage extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             emailValue: '',
-            mHours: urlParams.get('mHours') || ""
+            mHours: ''
         };
     }
 
     onEmailInputChange(e) {
-        this.setState({emailValue: e.target.value}); 
-        console.log(this.state)
+        const urlParams = new URLSearchParams(window.location.search);
+        this.setState({
+            emailValue: e.target.value,
+            mHours: urlParams.get('mHours')
+        }); 
     } 
 
     render() {
@@ -69,7 +71,8 @@ class SignupPage extends React.Component {
                     <form action="https://school.us19.list-manage.com/subscribe/post" method="POST" noValidate>
                         <input type="hidden" name="u" value="1489a6b87612b4e8ed744e47e" />
                         <input type="hidden" name="id" value="c0f77afcb9" />
-                        <input type="hidden" name="MERGE7" id="MERGE7" value={"" + this.state.mHours} />
+                        <input type="hidden" name="MMERGE7" id="mce-MMERGE7" value={this.state.mHours} />
+                        
                         <input 
                             type="hidden" 
                             name="EMAIL" 
@@ -90,4 +93,10 @@ class SignupPage extends React.Component {
     }
 }
 
-export default SignupPage
+function mapStateToProps(state) {
+    const query = state.router.location && state.router.location.query;
+    const mHours = query ? query.mHours : '';
+    return { mHours }
+  }
+  
+export default connect(mapStateToProps)(SignupPage)

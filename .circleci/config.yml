@@ -55,7 +55,7 @@ jobs:
             --cache-control "max-age=no-cache"
           from: ~/curapp/frontend/build/index.html
           to: 's3://tis-cdn-bucket'
-      - run: aws cloudfront create-invalidation --distribution-id $CLOUDFRONT_DIST_ID --paths *
+      - run: aws cloudfront create-invalidation --distribution-id $CLOUDFRONT_DIST_ID --paths '/*'
 workflows:
   version: 2
   build-and-deploy:

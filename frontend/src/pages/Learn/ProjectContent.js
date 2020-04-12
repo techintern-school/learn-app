@@ -51,8 +51,8 @@ function HintContent(content) {
                         </Typography>
                     </ExpansionPanelDetails>
                 </ExpansionPanel>
-
             )}
+            <br/>
         </div>
     )
 }
@@ -69,18 +69,19 @@ function DiscriptionContent(content) {
             <Typography variant={'body1'} paragraph>
                 <b>Requirements</b>: 
             </Typography>
-            {CheckList(content.requirements)}
+            <CheckList items={content.requirements}/>
         </div>
     )
 }
 
 
 
-function CheckList(items) {
+function CheckList(props) {
     const useStyles = makeStyles((theme) => ({
         root: {
+            marginLeft: '10%',
             width: '100%',
-            maxWidth: 360,
+            maxWidth: '70%',
             backgroundColor: theme.palette.background.paper,
         },
     }));
@@ -102,7 +103,7 @@ function CheckList(items) {
 
     return (
         <List className={classes.root}>
-            {items.map((item, i) => {
+            {props.items.map((item, i) => {
                 const labelId = `checkbox-list-label-${i}`;
 
                 return (
@@ -134,9 +135,12 @@ function DiscussionContent(content) {
 
 function NextStepContent(content) {
     return (
-        <Typography variant={'caption'} paragraph style={{ paddingTop: "10px" }}>
-            <b>Discussion:</b> {content}
-        </Typography>
+        <div>
+            <Typography variant={'body1'} paragraph style={{ paddingTop: "10px" }}>
+                <b>Next Steps:</b>
+            </Typography>
+            <CheckList items={content}/>
+        </div>
     )
 }
 

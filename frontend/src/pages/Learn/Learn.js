@@ -16,6 +16,8 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import ProjectContent from './ProjectContent'
 import projects from '../../curic/seProjects.json'
+import GithubIssue from '../../components/GithubIssue'
+import Button from '@material-ui/core/Button';
 
 const drawerWidth = 240;
 
@@ -76,6 +78,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
+
 export default function Learn() {
     const classes = useStyles();
     const theme = useTheme();
@@ -84,6 +87,8 @@ export default function Learn() {
 
     const handleProjectClick = (index) => {
         setActiveProject(index);
+        document.body.scrollTop = 0; // For Safari
+        document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
     }
 
     const handleDrawerOpen = () => {
@@ -93,6 +98,26 @@ export default function Learn() {
     const handleDrawerClose = () => {
         setOpen(false);
     };
+
+    function getProject(index) {
+        if (typeof projects[index] === "object") {
+            return projects[index];
+        } else {
+            console.log(`unknown project ${index}`)
+            return {
+                "content": [],
+                "version": "0.0.1",
+                "name": "Unknown project"
+            }
+        }
+        
+    }
+
+    function NextProject(){
+        return(
+            <Button variant="contained" color="primary" onClick={handleProjectClick.bind(null, activeProject + 1)}>NEXT PROJECT</Button>
+        )
+    }
 
     return (
         <div className={classes.root}>
@@ -115,7 +140,8 @@ export default function Learn() {
                     </IconButton>
                     <Typography variant="h6" noWrap>
                         techIntern.school - Online Learning Portal
-          </Typography>
+                    </Typography>
+                    <GithubIssue/>
                 </Toolbar>
             </AppBar>
             <Drawer
@@ -147,7 +173,8 @@ export default function Learn() {
                 })}
             >
                 <div className={classes.drawerHeader} />
-                <ProjectContent project={projects[activeProject]} />
+                <ProjectContent project={getProject(activeProject)} />
+                <NextProject/>
             </main>
         </div>
     );

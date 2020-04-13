@@ -27,7 +27,7 @@ export default function SectionDescription() {
               techIntern.school will teach you to think like a software engineer by solving real business problems.
             </h4>
             <h5 className={classes.description} style={headlineStyles}>
-            You will be guided through solving problems for a fictitious ecommerce company - <b>onandon.com</b> You will learn to create web applications, analyze log files, build a recommendation service, debug legacy applications, run A/B tests, and much more. Through our project based curriculum, you will learn the foundational skills you need to start your software engineering career. 
+            Through our project based curriculum, you will learn the foundational skills you need to become a software engineer. You will learn how to create web applications, analyze log files, build a recommendation service, debug legacy applications, run A/B tests, and much more. The online course will take 6+ months of full time effort, but can be completed part time as your schedule allows. 
             </h5>
           </GridItem>
         </GridContainer>

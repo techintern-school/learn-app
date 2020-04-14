@@ -6,9 +6,9 @@ import {
   whiteColor,
   blackColor,
   hexToRgb
-} from "assets/jss/material-kit-pro-react.js";
+} from "../../../../assets/jss/material-kit-pro-react.js";
 
-import customCheckboxRadioSwitchStyle from "assets/jss/material-kit-pro-react/customCheckboxRadioSwitchStyle.js";
+import customCheckboxRadioSwitchStyle from "../customCheckboxRadioSwitchStyle.js";
 
 const signupPageStyle = {
   container: {

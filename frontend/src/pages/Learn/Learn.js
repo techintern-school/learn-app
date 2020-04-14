@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux'
 import clsx from 'clsx';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
@@ -79,7 +80,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-export default function Learn() {
+function Learn(props) {
     const classes = useStyles();
     const theme = useTheme();
     const [open, setOpen] = React.useState(false);
@@ -174,8 +175,15 @@ export default function Learn() {
             >
                 <div className={classes.drawerHeader} />
                 <ProjectContent project={getProject(activeProject)} />
-                <NextProject/>
+                <NextProject/> TODO remove this {props.counter}
             </main>
         </div>
     );
 }
+
+const mapStateToProps = state => {
+    return { counter: state.counter };
+  };
+const ConnectedLearn = connect(mapStateToProps)(Learn)
+
+export default ConnectedLearn;

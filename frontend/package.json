@@ -89,7 +89,7 @@
   "scripts": {
     "start": "node scripts/start.js",
     "build": "node scripts/build.js && gulp licenses",
-    "test": "exit 0",
+    "test": "jest",
     "lint:check": "eslint . --ext=js,jsx;  exit 0",
     "lint:fix": "eslint . --ext=js,jsx --fix;  exit 0",
     "install:clean": "rm -rf node_modules/ && rm -rf package-lock.json && npm install && npm start",

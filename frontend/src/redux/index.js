@@ -1,6 +1,6 @@
 import { applyMiddleware, createStore, combineReducers, compose } from 'redux';
 import { routerMiddleware, connectRouter } from 'connected-react-router/immutable';
-import { SET_USER } from './actions';
+import { SET_USER, PROJECT_COMPLETE_CONSTANT, PROJECT_INCOMPLETE_CONSTANT, SET_CURIC_VERSION, MARK_PROJECT_COMPLETED, SET_CURRENT_PROJECT } from './actions';
 
 let composeEnhancers = null;
 if (process.env.NODE_ENV === 'development') {
@@ -9,7 +9,7 @@ if (process.env.NODE_ENV === 'development') {
   composeEnhancers = compose;
 }
 
-export default function configureStore(history) {
+export function configureStore(history) {
   //Init middlewares
   const middlewares = [routerMiddleware(history)];
 
@@ -29,25 +29,45 @@ export default function configureStore(history) {
 const rootReducer = (history) =>
   combineReducers({
     router: connectRouter(history),
-    counter: counterReducer,
+    learning: learningReducer,
     user: userReducer
   })
 
 export function userReducer(state = {}, action) {
   switch (action.type) {
     case SET_USER:
-      return {...state, ...action.user}  
+      return {...state, user: action.user}  
     default:
       return state
   }
 }
 
-export function counterReducer(state = 0, action) {
+export function handleProjectCompleted(index, completedProjects) {
+  let projects = [...completedProjects]
+  // handle case where projects is longer than current index
+  if (projects.length > index) {
+    projects[index] = PROJECT_COMPLETE_CONSTANT
+  } else {
+    while(projects.length < index) {
+      projects.push(PROJECT_INCOMPLETE_CONSTANT)
+    }
+    projects.push(PROJECT_COMPLETE_CONSTANT)
+  }
+  return projects
+}
+
+export function learningReducer(state = {
+  currentProject: 0, 
+  completedProjects: [], 
+  curicVersion: 1
+}, action) {
   switch (action.type) {
-    case 'INCREMENT':
-      return state + 1
-    case 'DECREMENT':
-      return state - 1
+    case SET_CURRENT_PROJECT:
+      return {...state, currentProject: action.index}
+    case MARK_PROJECT_COMPLETED:
+      return {...state, completedProjects: handleProjectCompleted(action.index, state.completedProjects)}
+    case SET_CURIC_VERSION:
+      return {...state, curicVersion: action.version}
     default:
       return state
   }

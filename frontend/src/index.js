@@ -6,7 +6,7 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { ConnectedRouter } from 'connected-react-router/immutable'
 import { Provider } from 'react-redux'
-import configureStore from './redux/index.js'
+import { configureStore } from './redux/index.js'
 import withTracker from './components/withTracker';
 import { Route } from "react-router-dom";
 import { createBrowserHistory } from "history";

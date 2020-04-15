@@ -47,7 +47,8 @@ export function handleLoginFromRefresh(setUser, setActiveProject) {
         }
     });
 }
-function setActiveProjectFromDB(setActiveProject) {
+
+export function setActiveProjectFromDB(setActiveProject) {
     const user = auth.currentUser
     if (user) {
         firestore.collection("users").doc(user.uid).get().then(function(doc) {

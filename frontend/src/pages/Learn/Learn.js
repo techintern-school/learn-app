@@ -20,7 +20,7 @@ import projects from '../../curic/seProjects.json'
 import GithubIssue from '../../components/GithubIssue'
 import Button from '@material-ui/core/Button';
 import { setActiveProject, markProjectCompleted } from '../../redux/actions.js';
-import { updateUserData, handleLoginFromRefresh, setActiveProjectFromDB } from '../../utils/backend.js'
+import { updateUserData, handleLoginFromRefresh } from '../../utils/backend.js'
 import { setUser } from '../../redux/actions.js';
 const drawerWidth = 240;
 
@@ -117,7 +117,7 @@ function Learn(props) {
     }
     useEffect(() => {
         handleLoginFromRefresh(props.setUser, props.setActiveProject);
-    }, [])
+    }, [props.setUser, props.setActiveProject])
     
     function NextProject(){
         return(

@@ -1,9 +1,9 @@
 
 import React from 'react';
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
-import { auth, gProvider } from "../../utils/backend.js"
+import { auth, gProvider, setActiveProjectFromDB } from "../../utils/backend.js"
 import { connect } from 'react-redux'
-import { setUser } from '../../redux/actions.js';
+import { setUser, setActiveProject } from '../../redux/actions.js';
 
 
 
@@ -22,7 +22,7 @@ function Login(props) {
             signInSuccessWithAuthResult: function (authResult) {
                 var user = authResult.user;
                 props.onLogin(user);
-                // TODO set active project here
+                setActiveProjectFromDB(setActiveProject)
                 props.history.push('/learn')
                 return false;
             },
@@ -45,9 +45,8 @@ function Login(props) {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onLogin: (user) => {
-            dispatch(setUser(user))
-        }
+        onLogin: (user) => { dispatch(setUser(user)) }, 
+        setActiveProject: (id) => { dispatch(setActiveProject(id)) }
     }
 };
 const mapStateToProps = state => {

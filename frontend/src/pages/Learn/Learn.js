@@ -20,7 +20,7 @@ import projects from '../../curic/seProjects.json'
 import GithubIssue from '../../components/GithubIssue'
 import Button from '@material-ui/core/Button';
 import { setActiveProject, markProjectCompleted } from '../../redux/actions.js';
-import { updateUserData, handleLoginFromRefresh } from '../../utils/backend.js'
+import { updateUserData, handleLoginFromRefresh, setActiveProjectFromDB } from '../../utils/backend.js'
 import { setUser } from '../../redux/actions.js';
 const drawerWidth = 240;
 
@@ -88,8 +88,8 @@ function Learn(props) {
     const [open, setOpen] = React.useState(false);
 
     const handleProjectClick = (index) => {
-        props.onChangeProject(index);
-        updateUserData(props.user, {currentPoject: index})
+        props.setActiveProject(index);
+        updateUserData({activeProject: index})
         document.body.scrollTop = 0; // For Safari
         document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
     }
@@ -116,7 +116,7 @@ function Learn(props) {
         
     }
     useEffect(() => {
-        handleLoginFromRefresh(props.setUser);
+        handleLoginFromRefresh(props.setUser, props.setActiveProject);
     }, [])
     
     function NextProject(){
@@ -194,7 +194,7 @@ function Learn(props) {
 
 const mapDispatchToProps = dispatch => {
     return { 
-        onChangeProject: (id) => { dispatch(setActiveProject(id)) }, 
+        setActiveProject: (id) => { dispatch(setActiveProject(id)) }, 
         onProjectComplte: (id) => { dispatch(markProjectCompleted(id)) }, 
         setUser: (user) => { 
             dispatch(setUser(user)) 

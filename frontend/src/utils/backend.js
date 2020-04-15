@@ -22,23 +22,47 @@ export const auth = firebase.auth();
 export const firestore = firebase.firestore();
 export const gProvider = new firebase.auth.GoogleAuthProvider();
 
-export function updateUserData(userRef, data) {
-    firestore.collection("users").doc(userRef.uid).set(data, { merge: true })
-    .then(function() {
-        console.log("Document successfully written!");
-    })
-    .catch(function(error) {
-        console.error("Error writing document: ", error);
-    });
+export function updateUserData(data) {
+    const user = auth.currentUser
+    if (user) {
+        firestore.collection("users").doc(user.uid).set(data, { merge: true })
+        .then(function() {
+            console.log("Document successfully written!");
+        })
+        .catch(function(error) {
+            console.error("Error writing document: ", error);
+        });
+    }
+    
 
 }
 
-export function handleLoginFromRefresh(setUser) {
+export function handleLoginFromRefresh(setUser, setActiveProject) {
     auth.onAuthStateChanged(function (user) {
         console.log('auth state changed')
         if (user) {
             console.log('got user')
             setUser(user);
+            setActiveProjectFromDB(setActiveProject)
         }
     });
+}
+function setActiveProjectFromDB(setActiveProject) {
+    const user = auth.currentUser
+    if (user) {
+        firestore.collection("users").doc(user.uid).get().then(function(doc) {
+            if (doc.exists) {
+                const activeProject = doc.data().activeProject
+                if (activeProject) {
+                    setActiveProject(activeProject)
+                }
+                console.log("Document data:", doc.data());
+            } else {
+                // doc.data() will be undefined in this case
+                console.log("No such document!");
+            }
+        }).catch(function(error) {
+            console.log("Error getting document:", error);
+        });
+    }
 }

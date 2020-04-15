@@ -22,6 +22,7 @@ function Login(props) {
             signInSuccessWithAuthResult: function (authResult) {
                 var user = authResult.user;
                 props.onLogin(user);
+                // TODO set active project here
                 props.history.push('/learn')
                 return false;
             },

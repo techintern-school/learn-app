@@ -10,6 +10,7 @@
   "license": "UNLICENSED",
   "dependencies": {
     "commander": "^5.0.0",
-    "ncp": "^2.0.0"
+    "ncp": "^2.0.0",
+    "shortid": "^2.2.15"
   }
 }

@@ -1,12 +1,9 @@
 --- 
 name: "food"
-id: "i1pcfYdlO"
+id: "UGQNFC6XB"
 version: "0.0.1"
 index: "1"
 sections:
   - type: text
     content: 'some words'
-  - type: text
-    content: 'some words'
-  - type: text
-    content: 'some words'
+    id: "DpA8ILHNFH"

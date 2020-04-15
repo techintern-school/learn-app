@@ -6,3 +6,4 @@ index: "%%INDEX%%"
 sections:
   - type: text
     content: 'some words'
+    id: "%%ID%%"

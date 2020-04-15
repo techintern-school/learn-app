@@ -1,0 +1,11 @@
+  - type: description
+    id: "%%ID%%"
+    content: 
+      overview: "what is what"
+      requirements:
+        - id: "%%ID%%"
+          text: "do x"
+          checkable: true
+        - id: "%%ID%%"
+          text: "do y"
+          checkable: true

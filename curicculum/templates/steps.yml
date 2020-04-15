@@ -1,0 +1,10 @@
+  - type: steps
+    id: "%%ID%%"
+    content: 
+      requirements:
+        - id: "%%ID%%"
+          text: "do x"
+          checkable: true
+        - id: "%%ID%%"
+          text: "do y"
+          checkable: true

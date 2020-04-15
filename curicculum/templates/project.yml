@@ -1,7 +1,8 @@
 --- 
- name: "%%NAME%%"
- id: "%%ID%%"
- version: "0.0.1"
- index: "%%INDEX%%"
- sections:
-  placeholder: some text
+name: "%%NAME%%"
+id: "%%ID%%"
+version: "0.0.1"
+index: "%%INDEX%%"
+sections:
+  - type: text
+    content: 'some words'

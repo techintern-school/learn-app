@@ -1,7 +1,10 @@
 --- 
- name: "test"
- id: "aHkaPy3Sd"
- version: "0.0.1"
- index: "0"
- sections:
-  placeholder: some text
+name: "test"
+id: "aHkaPy3Sd"
+version: "0.0.1"
+index: "0"
+sections:
+  - type: text
+    content: 'some words'
+  - type: text
+  content: 'some words'

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux'
 import clsx from 'clsx';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
@@ -19,7 +19,9 @@ import ProjectContent from './ProjectContent'
 import projects from '../../curic/seProjects.json'
 import GithubIssue from '../../components/GithubIssue'
 import Button from '@material-ui/core/Button';
-
+import { setActiveProject, markProjectCompleted } from '../../redux/actions.js';
+import { updateUserData, handleLoginFromRefresh } from '../../utils/backend.js'
+import { setUser } from '../../redux/actions.js';
 const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
@@ -84,10 +86,10 @@ function Learn(props) {
     const classes = useStyles();
     const theme = useTheme();
     const [open, setOpen] = React.useState(false);
-    const [activeProject, setActiveProject] = React.useState(0);
 
     const handleProjectClick = (index) => {
-        setActiveProject(index);
+        props.onChangeProject(index);
+        updateUserData(props.user, {currentPoject: index})
         document.body.scrollTop = 0; // For Safari
         document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
     }
@@ -113,12 +115,18 @@ function Learn(props) {
         }
         
     }
-
+    useEffect(() => {
+        handleLoginFromRefresh(props.setUser);
+    }, [])
+    
     function NextProject(){
         return(
-            <Button variant="contained" color="primary" onClick={handleProjectClick.bind(null, activeProject + 1)}>NEXT PROJECT</Button>
+            <Button variant="contained" color="primary" onClick={handleProjectClick.bind(null, props.activeProject + 1)}>NEXT PROJECT</Button>
         )
     }
+
+
+    
 
     return (
         <div className={classes.root}>
@@ -168,22 +176,37 @@ function Learn(props) {
                     ))}
                 </List>
             </Drawer>
-            <main
+            {props.user.uid ? (
+                <main
                 className={clsx(classes.content, {
                     [classes.contentShift]: open,
                 })}
             >
                 <div className={classes.drawerHeader} />
-                <ProjectContent project={getProject(activeProject)} />
-                <NextProject/> TODO remove this {props.counter}
+                <ProjectContent project={getProject(props.activeProject)} />
+                <NextProject/>
             </main>
+            ) : <div><br/><br/><br/><br/>TODO: Need to login</div>}
+            
         </div>
     );
 }
 
+const mapDispatchToProps = dispatch => {
+    return { 
+        onChangeProject: (id) => { dispatch(setActiveProject(id)) }, 
+        onProjectComplte: (id) => { dispatch(markProjectCompleted(id)) }, 
+        setUser: (user) => { 
+            dispatch(setUser(user)) 
+        }
+    }
+};
 const mapStateToProps = state => {
-    return { counter: state.counter };
-  };
-const ConnectedLearn = connect(mapStateToProps)(Learn)
+    const { learning: {activeProject, completedProjects}, user } = state;
+    return {
+        activeProject, completedProjects, user
+    }
+}
+const ConnectedLearn = connect(mapStateToProps, mapDispatchToProps)(Learn)
 
 export default ConnectedLearn;

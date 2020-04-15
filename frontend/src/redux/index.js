@@ -36,7 +36,7 @@ const rootReducer = (history) =>
 export function userReducer(state = {}, action) {
   switch (action.type) {
     case SET_USER:
-      return {...state, user: action.user}  
+      return action.user
     default:
       return state
   }
@@ -57,13 +57,13 @@ export function handleProjectCompleted(index, completedProjects) {
 }
 
 export function learningReducer(state = {
-  currentProject: 0, 
+  activeProject: 0, 
   completedProjects: [], 
   curicVersion: 1
 }, action) {
   switch (action.type) {
     case SET_CURRENT_PROJECT:
-      return {...state, currentProject: action.index}
+      return {...state, activeProject: action.index}
     case MARK_PROJECT_COMPLETED:
       return {...state, completedProjects: handleProjectCompleted(action.index, state.completedProjects)}
     case SET_CURIC_VERSION:

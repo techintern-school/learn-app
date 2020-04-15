@@ -1,5 +1,5 @@
 import { userReducer, learningReducer, handleProjectCompleted } from './index.js';
-import { setUser, setCuricVersion, setCurrentProject, markProjectCompleted } from './actions.js'
+import { setUser, setCuricVersion, setActiveProject, markProjectCompleted } from './actions.js'
 
 test('handleProjectCompleted marks the right projects as completed', () => {
     expect(handleProjectCompleted(0, [])).toStrictEqual([1])
@@ -16,36 +16,36 @@ test('handleProjectCompleted marks the right projects as completed', () => {
 
 test('userReducer', () => {
   const testUser = {name: 'foo'}
-  expect(userReducer({}, setUser(testUser))).toEqual({user: testUser});
-  expect(userReducer({user: {name: 'otherUser'}}, setUser(testUser))).toEqual({user: testUser});
+  expect(userReducer({}, setUser(testUser))).toEqual(testUser);
+  expect(userReducer({user: {name: 'otherUser'}}, setUser(testUser))).toEqual(testUser);
 });
 
 test('learningReducer', () => {
   const defaultState = {
-    currentProject: 0, 
+    activeProject: 0, 
     completedProjects: [], 
     curicVersion: 1
   }
-  expect(learningReducer(defaultState, setCurrentProject(2))).toEqual({
-    currentProject: 2, 
+  expect(learningReducer(defaultState, setActiveProject(2))).toEqual({
+    activeProject: 2, 
     completedProjects: [], 
     curicVersion: 1
   });
 
   expect(learningReducer(defaultState, setCuricVersion(2))).toEqual({
-    currentProject: 0, 
+    activeProject: 0, 
     completedProjects: [], 
     curicVersion: 2
   });
 
   expect(learningReducer(defaultState, markProjectCompleted(2))).toEqual({
-    currentProject: 0, 
+    activeProject: 0, 
     completedProjects: [0,0,1], 
     curicVersion: 1
   });
 
   expect(learningReducer(defaultState, markProjectCompleted(0))).toEqual({
-    currentProject: 0, 
+    activeProject: 0, 
     completedProjects: [1], 
     curicVersion: 1
   });

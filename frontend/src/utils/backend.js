@@ -21,3 +21,24 @@ firebase.analytics();
 export const auth = firebase.auth();
 export const firestore = firebase.firestore();
 export const gProvider = new firebase.auth.GoogleAuthProvider();
+
+export function updateUserData(userRef, data) {
+    firestore.collection("users").doc(userRef.uid).set(data, { merge: true })
+    .then(function() {
+        console.log("Document successfully written!");
+    })
+    .catch(function(error) {
+        console.error("Error writing document: ", error);
+    });
+
+}
+
+export function handleLoginFromRefresh(setUser) {
+    auth.onAuthStateChanged(function (user) {
+        console.log('auth state changed')
+        if (user) {
+            console.log('got user')
+            setUser(user);
+        }
+    });
+}

@@ -11,7 +11,7 @@ export const SET_CURIC_VERSION = 'SET_CURIC_VERSION'
 export const PROJECT_COMPLETE_CONSTANT = 1
 export const PROJECT_INCOMPLETE_CONSTANT = 0
 
-export function setCurrentProject(index) {
+export function setActiveProject(index) {
     return { type: SET_CURRENT_PROJECT, index }
 }
 

@@ -1,23 +1,32 @@
 const { Command } = require('commander');
-var fs = require('fs');
-var ncp = require('ncp').ncp;
+const yaml = require('js-yaml');
+const fs = require('fs');
+const ncp = require('ncp').ncp;
 const shortid = require('shortid');
+const child_process = require('child_process')
+const path = require('path')
 
 const configPath = "./config.json"
 const config = JSON.parse(fs.readFileSync(configPath, 'utf8'));
 
+ncp.limit = 16;
+
 const program = new Command();
 program.version('0.0.1');
 
-const projectsDirectory = `${__dirname}${config.cDirectory}/${config.currentCurriculumVersion}`;
-const templateDirectory = `${__dirname}${config.templateDirectory}/`
+const curicDirectory = `${__dirname}${config.cDirectory}`;
+const projectsDirectory = `${curicDirectory}/${config.currentCurriculumVersion}`;
+const templateDirectory = `${__dirname}${config.templateDirectory}/`;
+const buildDirectory = `${__dirname}${config.buildDirectory}/`;
+const frontendDirectory = path.join(__dirname, config.frontendDirectory)
 
+// insert dynamic information into a YAML string
 function processMacros(text, values={}) {
     const {name, index} = values;
     if (name) {
         text = text.replace(/%%NAME%%/g, name)
     }
-    if (index) {
+    if (typeof(index) !== undefined) {
         text = text.replace(/%%INDEX%%/g, index)
     }
 
@@ -45,7 +54,6 @@ program.command('make-version')
         }
         // copy existing curriculum as starting point
         if (fs.existsSync(currentCurriculumPath)) {
-            ncp.limit = 16;
 
             ncp(currentCurriculumPath, newCurriculumPath, function (err) {
                 if (err) {
@@ -104,14 +112,32 @@ program.command('make-json')
     .alias('mj')
     .description('make a json of the curriculum')
     .action(() => {
-        /* 
-          TODO turn all of the curriculum versions into the JSON files needed by the frontend 
-          - iterate over the version folders
-          - iterate over the files
-          - parse YAML into JS object
-          - add JS object to output object
-          - JSON.serialize the output object, and write to frontend directory
-        */
+        fs.readdir(curicDirectory, (err, versions) => {
+            versions.forEach((v) => {
+                versionDirectory = `${curicDirectory}/${v}`
+                let curicVersion = {
+                    version: v, 
+                    gitHash: child_process.execSync('git rev-parse HEAD').toString().trim(), 
+                    content: []
+                }
+                fs.readdir(versionDirectory, (err, files) => {
+                    files.forEach((fileName) => {
+                        const filePath = `${versionDirectory}/${fileName}`
+                        const doc = yaml.safeLoad(fs.readFileSync(filePath, 'utf8'));
+                        curicVersion.content.push(doc)
+                    })
+                    const vJson = JSON.stringify(curicVersion);
+                    // write to local directory
+                    const filePart = `/se${v}.json`
+                    buildPath = `${buildDirectory}${filePart}`
+                    
+                    fs.writeFileSync(buildPath, vJson);
+                    // also write to frontend directory
+                    fePath = `${frontendDirectory}${filePart}`
+                    fs.writeFileSync(fePath, vJson);
+                })
+            })            
+        })
     });
 
 program.parse(process.argv);

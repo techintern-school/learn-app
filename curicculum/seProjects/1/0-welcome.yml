@@ -1,0 +1,31 @@
+--- 
+name: "welcome"
+id: "M_42tuQZ5"
+version: "0.0.1"
+index: "0"
+sections:
+  - type: text
+    content: 'some words'
+    id: "Y7GR7FtYhU"
+  - type: description
+    id: "W-UAil0Mm"
+    content: 
+      overview: "what is what"
+      requirements:
+        - id: "M-HEYjwwE3"
+          text: "do x"
+          checkable: true
+        - id: "q-HihJ7z0b"
+          text: "do y"
+          checkable: true
+  - type: description
+    id: "43JNadCn4"
+    content: 
+      overview: "what is what"
+      requirements:
+        - id: "0g6tzSSa5_"
+          text: "do x"
+          checkable: true
+        - id: "ga01y76bqA"
+          text: "do y"
+          checkable: true

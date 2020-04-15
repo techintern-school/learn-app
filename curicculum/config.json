@@ -2,6 +2,6 @@
     "currentCurriculumVersion": 1,
     "cDirectory": "/seProjects",
     "buildDirectory": "/build",
-    "frontendDirectory": "../frontend/src/curic", 
+    "frontendDirectory": "../frontend/public/curic", 
     "templateDirectory": "/templates"
 }

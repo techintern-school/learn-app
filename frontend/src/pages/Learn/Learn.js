@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux'
 import clsx from 'clsx';
-import { makeStyles, useTheme } from '@material-ui/core/styles';
+import { useTheme } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import AppBar from '@material-ui/core/AppBar';
@@ -16,76 +16,19 @@ import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import ProjectContent from './ProjectContent'
-import projects from '../../curic/seProjects.json'
 import GithubIssue from '../../components/GithubIssue'
 import Button from '@material-ui/core/Button';
 import { setActiveProject, markProjectCompleted } from '../../redux/actions.js';
 import { updateUserData, handleLoginFromRefresh } from '../../utils/backend.js'
 import { setUser } from '../../redux/actions.js';
-const drawerWidth = 240;
-
-const useStyles = makeStyles((theme) => ({
-    root: {
-        display: 'flex',
-    },
-    appBar: {
-        transition: theme.transitions.create(['margin', 'width'], {
-            easing: theme.transitions.easing.sharp,
-            duration: theme.transitions.duration.leavingScreen,
-        }),
-    },
-    appBarShift: {
-        width: `calc(100% - ${drawerWidth}px)`,
-        marginLeft: drawerWidth,
-        transition: theme.transitions.create(['margin', 'width'], {
-            easing: theme.transitions.easing.easeOut,
-            duration: theme.transitions.duration.enteringScreen,
-        }),
-    },
-    menuButton: {
-        marginRight: theme.spacing(2),
-    },
-    hide: {
-        display: 'none',
-    },
-    drawer: {
-        width: drawerWidth,
-        flexShrink: 0,
-    },
-    drawerPaper: {
-        width: drawerWidth,
-    },
-    drawerHeader: {
-        display: 'flex',
-        alignItems: 'center',
-        padding: theme.spacing(0, 1),
-        // necessary for content to be below app bar
-        ...theme.mixins.toolbar,
-        justifyContent: 'flex-end',
-    },
-    content: {
-        flexGrow: 1,
-        padding: theme.spacing(3),
-        transition: theme.transitions.create('margin', {
-            easing: theme.transitions.easing.sharp,
-            duration: theme.transitions.duration.leavingScreen,
-        }),
-        marginLeft: -drawerWidth,
-    },
-    contentShift: {
-        transition: theme.transitions.create('margin', {
-            easing: theme.transitions.easing.easeOut,
-            duration: theme.transitions.duration.enteringScreen,
-        }),
-        marginLeft: 0,
-    },
-}));
+import { useStyles } from "./Styles.js"
 
 
 function Learn(props) {
     const classes = useStyles();
     const theme = useTheme();
     const [open, setOpen] = React.useState(false);
+    const [projects, setProjects] = React.useState([{Name: "Loading Projects"}]);
 
     const handleProjectClick = (index) => {
         props.setActiveProject(index);
@@ -101,6 +44,17 @@ function Learn(props) {
     const handleDrawerClose = () => {
         setOpen(false);
     };
+
+    // get projects from JSON file
+    useEffect(() => {
+        
+        fetch(`/curic/se${props.curicVersion}.json`)
+        .then(response => response.json())
+        .then(json => {
+            setProjects(json.content)
+        })
+        .catch(error => console.log(error))
+    }, [props.curicVersion])
 
     function getProject(index) {
         if (typeof projects[index] === "object") {
@@ -123,10 +77,7 @@ function Learn(props) {
         return(
             <Button variant="contained" color="primary" onClick={handleProjectClick.bind(null, props.activeProject + 1)}>NEXT PROJECT</Button>
         )
-    }
-
-
-    
+    }  
 
     return (
         <div className={classes.root}>
@@ -202,9 +153,9 @@ const mapDispatchToProps = dispatch => {
     }
 };
 const mapStateToProps = state => {
-    const { learning: {activeProject, completedProjects}, user } = state;
+    const { learning: {activeProject, completedProjects, curicVersion}, user } = state;
     return {
-        activeProject, completedProjects, user
+        activeProject, completedProjects, curicVersion, user
     }
 }
 const ConnectedLearn = connect(mapStateToProps, mapDispatchToProps)(Learn)

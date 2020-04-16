@@ -11,6 +11,7 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import Checkbox from '@material-ui/core/Checkbox';
 import Divider from '@material-ui/core/Divider';
+import { titleCaseFromKebabCase } from "../../utils/strings.js"
 
 function TextContent(content) {
     return (
@@ -86,6 +87,7 @@ function CheckList(props) {
         },
     }));
     const classes = useStyles();
+    // TODO keep this in global state using the ids
     const [checked, setChecked] = React.useState([0]);
 
     const handleToggle = (value) => () => {
@@ -117,7 +119,7 @@ function CheckList(props) {
                                 inputProps={{ 'aria-labelledby': labelId }}
                             />
                         </ListItemIcon>
-                        <ListItemText id={labelId} primary={item} />
+                        <ListItemText id={labelId} primary={item.text} />
                     </ListItem>
                 );
             })}
@@ -187,10 +189,10 @@ export default function ProjectContent(props) {
     return (
         <div className={classes.container}>
             <Typography key={'header'} variant={'h3'} className={classes.centered} paragraph>
-                {props.project.name}
+                {titleCaseFromKebabCase(props.project.name)}
             </Typography>
             <div className={classes.centered}>
-                {props.project.content.map((section, i) => getSectionContent(section, i))}
+                {props.project.sections.map((section, i) => getSectionContent(section, i))}
             </div>
 
         </div>

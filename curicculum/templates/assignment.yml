@@ -1,11 +1,11 @@
-  - type: description
+  - type: assignment
     id: "%%ID%%"
     content: 
       overview: "what is what"
       requirements:
         - id: "%%ID%%"
           text: "do x"
-          checkable: true
+          isCheckable: false
         - id: "%%ID%%"
           text: "do y"
-          checkable: true
+          isCheckable: false

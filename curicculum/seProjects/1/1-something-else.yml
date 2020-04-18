@@ -7,14 +7,24 @@ sections:
   - type: text
     content: 'some words'
     id: "7J66zU3rB7"
-  - type: description
-    id: "VFYiB8iFm"
+  - type: assignment
+    id: "097_sLBuK"
     content: 
       overview: "what is what"
       requirements:
-        - id: "9O5iM783kK"
+        - id: "Y7BCsb6TL_"
           text: "do x"
-          checkable: true
-        - id: "pgKSndAlE2"
+          isCheckable: false
+        - id: "x6b0tf-_D3"
           text: "do y"
-          checkable: true
+          isCheckable: false
+  - type: steps
+    id: "UoyHhD2dP"
+    content: 
+      requirements:
+        - id: "QE7-ku3peM"
+          text: "do x"
+          isCheckable: true
+        - id: "VUrzN7Dn-Q"
+          text: "do y"
+          isCheckable: true

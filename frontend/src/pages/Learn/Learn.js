@@ -60,11 +60,10 @@ function Learn(props) {
         if (typeof projects[index] === "object") {
             return projects[index];
         } else {
-            console.log(`unknown project ${index}`)
             return {
-                "content": [],
+                "sections": [],
                 "version": "0.0.1",
-                "name": "Unknown project"
+                "name": `Unknown project ${index}` 
             }
         }
         

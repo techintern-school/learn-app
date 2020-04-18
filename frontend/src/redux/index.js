@@ -1,6 +1,16 @@
 import { applyMiddleware, createStore, combineReducers, compose } from 'redux';
 import { routerMiddleware, connectRouter } from 'connected-react-router/immutable';
-import { SET_USER, PROJECT_COMPLETE_CONSTANT, PROJECT_INCOMPLETE_CONSTANT, SET_CURIC_VERSION, MARK_PROJECT_COMPLETED, SET_CURRENT_PROJECT } from './actions';
+import { 
+  SET_USER, 
+  PROJECT_COMPLETE_CONSTANT, 
+  PROJECT_INCOMPLETE_CONSTANT, 
+  SET_CURIC_VERSION, 
+  MARK_PROJECT_COMPLETED, 
+  SET_CURRENT_PROJECT, 
+  ADD_COMPLETED_SECTION, 
+  REMOVE_COMPLETED_SECTION
+
+} from './actions';
 
 let composeEnhancers = null;
 if (process.env.NODE_ENV === 'development') {
@@ -48,7 +58,7 @@ export function handleProjectCompleted(index, completedProjects) {
   if (projects.length > index) {
     projects[index] = PROJECT_COMPLETE_CONSTANT
   } else {
-    while(projects.length < index) {
+    while (projects.length < index) {
       projects.push(PROJECT_INCOMPLETE_CONSTANT)
     }
     projects.push(PROJECT_COMPLETE_CONSTANT)
@@ -57,17 +67,22 @@ export function handleProjectCompleted(index, completedProjects) {
 }
 
 export function learningReducer(state = {
-  activeProject: 0, 
-  completedProjects: [], 
-  curicVersion: 1
+  activeProject: 0,
+  completedProjects: [],
+  curicVersion: 1,
+  completedSections: []
 }, action) {
   switch (action.type) {
     case SET_CURRENT_PROJECT:
-      return {...state, activeProject: action.index}
+      return { ...state, activeProject: action.index }
     case MARK_PROJECT_COMPLETED:
-      return {...state, completedProjects: handleProjectCompleted(action.index, state.completedProjects)}
+      return { ...state, completedProjects: handleProjectCompleted(action.index, state.completedProjects) }
     case SET_CURIC_VERSION:
-      return {...state, curicVersion: action.version}
+      return { ...state, curicVersion: action.version }
+    case ADD_COMPLETED_SECTION:
+      return { ...state, completedSections: [...state.completedSections, action.sectionID] }
+    case REMOVE_COMPLETED_SECTION:
+      return { ...state, completedSections: state.completedSections.filter(sectionID => sectionID !== action.sectionID) }
     default:
       return state
   }

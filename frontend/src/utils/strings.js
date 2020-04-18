@@ -6,7 +6,7 @@ export function titleCase(str) {
     return str.join(' ');
 }
 
-export function titleCaseFromKebabCase(kebabStr) {
+export function titleCaseFromKebabCase(kebabStr = "") {
     let unKebabStr = kebabStr.replace(/-/g, ' ');
     return titleCase(unKebabStr);
 }

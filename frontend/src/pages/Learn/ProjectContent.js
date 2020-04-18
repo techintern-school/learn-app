@@ -5,13 +5,9 @@ import ExpansionPanel from '@material-ui/core/ExpansionPanel';
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import Checkbox from '@material-ui/core/Checkbox';
 import Divider from '@material-ui/core/Divider';
 import { titleCaseFromKebabCase } from "../../utils/strings.js"
+import CheckList from "./CheckList.js"
 
 function TextContent(content) {
     return (
@@ -58,11 +54,11 @@ function HintContent(content) {
     )
 }
 
-function DiscriptionContent(content) {
+function AssignmentContent(content) {
     return (
         <div>
             <Typography variant={'h4'} paragraph>
-                Project:
+                Assignment:
             </Typography>
             <Typography variant={'body1'} paragraph>
                 <b>Overview</b>: {content.overview}
@@ -73,58 +69,6 @@ function DiscriptionContent(content) {
             <CheckList items={content.requirements}/>
         </div>
     )
-}
-
-
-
-function CheckList(props) {
-    const useStyles = makeStyles((theme) => ({
-        root: {
-            marginLeft: '10%',
-            width: '100%',
-            maxWidth: '70%',
-            backgroundColor: theme.palette.background.paper,
-        },
-    }));
-    const classes = useStyles();
-    // TODO keep this in global state using the ids
-    const [checked, setChecked] = React.useState([0]);
-
-    const handleToggle = (value) => () => {
-        const currentIndex = checked.indexOf(value);
-        const newChecked = [...checked];
-
-        if (currentIndex === -1) {
-            newChecked.push(value);
-        } else {
-            newChecked.splice(currentIndex, 1);
-        }
-
-        setChecked(newChecked);
-    };
-
-    return (
-        <List className={classes.root}>
-            {props.items.map((item, i) => {
-                const labelId = `checkbox-list-label-${i}`;
-
-                return (
-                    <ListItem key={i} role={undefined} dense button onClick={handleToggle(item)}>
-                        <ListItemIcon>
-                            <Checkbox
-                                edge="start"
-                                checked={checked.indexOf(item) !== -1}
-                                tabIndex={-1}
-                                disableRipple
-                                inputProps={{ 'aria-labelledby': labelId }}
-                            />
-                        </ListItemIcon>
-                        <ListItemText id={labelId} primary={item.text} />
-                    </ListItem>
-                );
-            })}
-        </List>
-    );
 }
 
 function DiscussionContent(content) {
@@ -138,10 +82,10 @@ function DiscussionContent(content) {
 function NextStepContent(content) {
     return (
         <div>
-            <Typography variant={'body1'} paragraph style={{ paddingTop: "10px" }}>
-                <b>Next Steps:</b>
+            <Typography variant={'h4'} paragraph>
+                Next Steps:
             </Typography>
-            <CheckList items={content}/>
+            <CheckList items={content.requirements}/>
         </div>
     )
 }
@@ -151,7 +95,7 @@ function getSectionContent(section, i) {
     const lookup = {
         text: TextContent,
         hints: HintContent,
-        description: DiscriptionContent,
+        assignment: AssignmentContent,
         discussion: DiscussionContent,
         steps: NextStepContent
     }

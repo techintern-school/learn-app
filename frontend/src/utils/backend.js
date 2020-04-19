@@ -3,6 +3,7 @@ import "firebase/auth";
 import "firebase/firestore";
 import "firebase/analytics";
 import { createFirestoreInstance } from 'redux-firestore'
+import { handleProjectCompleted } from '../redux/index.js'
 
 var firebaseConfig = {
     apiKey: "AIzaSyB-I5W47oNXCcaToXY2UIBnRZYSHV6PLEk",
@@ -38,11 +39,23 @@ export function getRrfProps(store) {
 
 }
 
+export function updateCompletedSections(completedSections, projectID) {
+    const user = auth.currentUser
+    const projectDoc = firestore.collection("users").doc(user.uid).collection('projects').doc(projectID)
+    projectDoc.set({completedSections}, {merge: true})
+        .then(function () {
+            console.log("Document successfully written!");
+        })
+        .catch(function (error) {
+            console.error("Error writing document: ", error);
+        });
+}
+
 export function updateUserData(data) {
     const user = auth.currentUser
     if (user) {
         const userDoc = firestore.collection("users").doc(user.uid)
-        userDoc.set(data, { merge: true })
+        userDoc.set({...data}, {merge: true})
             .then(function () {
                 console.log("Document successfully written!");
             })
@@ -52,13 +65,23 @@ export function updateUserData(data) {
     }
 }
 
-export function handleLoginFromRefresh(setUser, setActiveProject) {
+export function updateProjectsCompleted(projectIndex) {
+    const user = auth.currentUser
+    const userDoc = firestore.collection("users").doc(user.uid)
+    const completedProjects = userDoc.completedProjects || [];
+    userDoc.set({completedProjects: handleProjectCompleted(projectIndex, completedProjects)}, {merge: true})
+        .then(function () {
+            console.log("Document successfully written!");
+        })
+        .catch(function (error) {
+            console.error("Error writing document: ", error);
+        });
+}
+
+export function handleLoginFromRefresh(setUser) {
     auth.onAuthStateChanged(function (user) {
-        console.log('auth state changed')
         if (user) {
-            console.log('got user')
             setUser(user);
-            setActiveProjectFromDB(setActiveProject)
         }
     });
 }

@@ -6,7 +6,7 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import Checkbox from '@material-ui/core/Checkbox';
-import { useFirestore } from 'react-redux-firebase'
+import { updateCompletedSections } from '../../utils/backend.js'
 
 function CheckList(props) {
     const useStyles = makeStyles((theme) => ({
@@ -19,9 +19,7 @@ function CheckList(props) {
     }));
     const classes = useStyles();
 
-    const firestore = useFirestore()
-    // up with the checkbox state
-    const updateCheckboxState = (item) => () => {
+    const handleCheckboxClick = (item) => () => {
 
         let previouslyCompletedSections = props.project.completedSections || []
         let completedSections;
@@ -32,16 +30,9 @@ function CheckList(props) {
         } else {
             completedSections = previouslyCompletedSections.filter(itemID => itemID !== id)
         }
+        
+        updateCompletedSections(completedSections, props.userInfo.activeProjectID)
 
-        firestore.set({
-            collection: 'users',
-            doc: props.user.uid,
-            subcollections: [{
-                collection: 'projects',
-                doc: props.userInfo.activeProjectID
-            }],
-            merge: true
-        }, { completedSections });
     };
 
     function isSectionCompleted(section) {
@@ -58,7 +49,7 @@ function CheckList(props) {
                 const labelId = `checkbox-list-label-${i}`;
 
                 return (
-                    <ListItem key={i} role={undefined} dense button onClick={item.isCheckable ? updateCheckboxState(item) : null}>
+                    <ListItem key={i} role={undefined} dense button onClick={item.isCheckable ? handleCheckboxClick(item) : null}>
                         <ListItemIcon>
                             <Checkbox
                                 edge="start"

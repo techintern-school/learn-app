@@ -19,7 +19,7 @@ import ProjectContent from './ProjectContent'
 import GithubIssue from '../../components/GithubIssue'
 import Button from '@material-ui/core/Button';
 import { setActiveProject, markProjectCompleted } from '../../redux/actions.js';
-import { updateUserData, handleLoginFromRefresh } from '../../utils/backend.js'
+import { handleLoginFromRefresh, updateUserData, updateProjectsCompleted } from '../../utils/backend.js'
 import { setUser } from '../../redux/actions.js';
 import { useStyles } from "./Styles.js"
 import { useFirestoreConnect } from 'react-redux-firebase'
@@ -76,9 +76,10 @@ function Learn(props) {
     }
 
     const handleProjectClick = (index) => {
-        // TODO: do with firestore
-        props.setActiveProject(index);
-        updateUserData({ activeProject: index, activeProjectID: projects.length > index ? projects[index].id : "" })
+        updateUserData({ 
+            activeProject: index, 
+            activeProjectID: projects.length > index ? projects[index].id : "" 
+        }); 
         // TODO put into helper function
         document.body.scrollTop = 0; // For Safari
         document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
@@ -114,16 +115,20 @@ function Learn(props) {
 
     }
     useEffect(() => {
-        // TODO: move active project to firestore?
-        handleLoginFromRefresh(props.setUser, props.setActiveProject);
+        handleLoginFromRefresh(props.setUser);
+    }, [props.setUser])
 
-    }, [props.setUser, props.setActiveProject])
+    function handleProjectCompelted() {
 
-
+        updateProjectsCompleted(getActiveProject(props))
+        // increment project index by one
+        handleProjectClick(getActiveProject(props) + 1)
+    }
 
     function NextProject() {
         return (
-            <Button variant="contained" color="primary" onClick={handleProjectClick.bind(null, getActiveProject(props) + 1)}>NEXT PROJECT</Button>
+            // TODO: make this only clickable when all requirements
+            <Button variant="contained" color="primary" onClick={handleProjectCompelted}>MARK PROJECT COMPLETE</Button>
         )
     }
 

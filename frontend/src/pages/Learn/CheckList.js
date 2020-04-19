@@ -1,12 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux'
-import { setSectionComplete, setSectionIncomplete } from '../../redux/actions.js';
 import { makeStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import Checkbox from '@material-ui/core/Checkbox';
+import { useFirestore } from 'react-redux-firebase'
 
 function CheckList(props) {
     const useStyles = makeStyles((theme) => ({
@@ -19,14 +19,38 @@ function CheckList(props) {
     }));
     const classes = useStyles();
 
+    const firestore = useFirestore()
+    // up with the checkbox state
     const updateCheckboxState = (item) => () => {
+
+        let previouslyCompletedSections = props.project.completedSections || []
+        let completedSections;
+
         const { id } = item
-        if (props.completedSections.indexOf(id) > -1) {
-            props.setSectionIncomplete(id)
+        if (previouslyCompletedSections.indexOf(id) === -1) {
+            completedSections = [...previouslyCompletedSections, item.id]
         } else {
-            props.setSectionComplete(id)
+            completedSections = previouslyCompletedSections.filter(itemID => itemID !== id)
         }
+
+        firestore.set({
+            collection: 'users',
+            doc: props.user.uid,
+            subcollections: [{
+                collection: 'projects',
+                doc: props.userInfo.activeProjectID
+            }],
+            merge: true
+        }, { completedSections });
     };
+
+    function isSectionCompleted(section) {
+        let completed = false;
+        if (props.project && Array.isArray(props.project.completedSections)) {
+            completed = props.project.completedSections.indexOf(section.id) > -1;
+        }
+        return completed;
+    }
 
     return (
         <List className={classes.root}>
@@ -38,7 +62,7 @@ function CheckList(props) {
                         <ListItemIcon>
                             <Checkbox
                                 edge="start"
-                                checked={props.completedSections.indexOf(item.id) !== -1}
+                                checked={isSectionCompleted(item)}
                                 tabIndex={-1}
                                 disableRipple
                                 inputProps={{ 'aria-labelledby': labelId }}
@@ -52,19 +76,13 @@ function CheckList(props) {
     );
 }
 
-const mapDispatchToProps = dispatch => {
-    return { 
-        setSectionComplete: (id) => { dispatch(setSectionComplete(id)) }, 
-        setSectionIncomplete: (id) => { dispatch(setSectionIncomplete(id)) }
-    }
-};
 const mapStateToProps = state => {
-    const { learning: {completedSections} } = state;
+    const { firestore: { data: { userInfo, project } }, user } = state;
     return {
-        completedSections
+        userInfo, project, user
     }
 }
-const ConnectedChecklist = connect(mapStateToProps, mapDispatchToProps)(CheckList)
+const ConnectedChecklist = connect(mapStateToProps)(CheckList)
 
 export default ConnectedChecklist
 

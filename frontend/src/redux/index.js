@@ -1,15 +1,13 @@
 import { applyMiddleware, createStore, combineReducers, compose } from 'redux';
 import { routerMiddleware, connectRouter } from 'connected-react-router/immutable';
-import { 
-  SET_USER, 
-  PROJECT_COMPLETE_CONSTANT, 
-  PROJECT_INCOMPLETE_CONSTANT, 
-  SET_CURIC_VERSION, 
-  MARK_PROJECT_COMPLETED, 
-  SET_CURRENT_PROJECT, 
-  ADD_COMPLETED_SECTION, 
-  REMOVE_COMPLETED_SECTION
-
+import { firestoreReducer } from 'redux-firestore'
+import {
+  SET_USER,
+  PROJECT_COMPLETE_CONSTANT,
+  PROJECT_INCOMPLETE_CONSTANT,
+  SET_CURIC_VERSION,
+  MARK_PROJECT_COMPLETED,
+  SET_CURRENT_PROJECT
 } from './actions';
 
 let composeEnhancers = null;
@@ -40,7 +38,8 @@ const rootReducer = (history) =>
   combineReducers({
     router: connectRouter(history),
     learning: learningReducer,
-    user: userReducer
+    user: userReducer,
+    firestore: firestoreReducer
   })
 
 export function userReducer(state = {}, action) {
@@ -70,7 +69,9 @@ export function learningReducer(state = {
   activeProject: 0,
   completedProjects: [],
   curicVersion: 1,
-  completedSections: []
+  project: {
+    completedSections: []
+  }
 }, action) {
   switch (action.type) {
     case SET_CURRENT_PROJECT:
@@ -79,10 +80,6 @@ export function learningReducer(state = {
       return { ...state, completedProjects: handleProjectCompleted(action.index, state.completedProjects) }
     case SET_CURIC_VERSION:
       return { ...state, curicVersion: action.version }
-    case ADD_COMPLETED_SECTION:
-      return { ...state, completedSections: [...state.completedSections, action.sectionID] }
-    case REMOVE_COMPLETED_SECTION:
-      return { ...state, completedSections: state.completedSections.filter(sectionID => sectionID !== action.sectionID) }
     default:
       return state
   }

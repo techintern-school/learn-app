@@ -49,7 +49,7 @@ function HintContent(content) {
                     </ExpansionPanelDetails>
                 </ExpansionPanel>
             )}
-            <br/>
+            <br />
         </div>
     )
 }
@@ -64,9 +64,9 @@ function AssignmentContent(content) {
                 <b>Overview</b>: {content.overview}
             </Typography>
             <Typography variant={'body1'} paragraph>
-                <b>Requirements</b>: 
+                <b>Requirements</b>:
             </Typography>
-            <CheckList items={content.requirements}/>
+            <CheckList items={content.requirements} />
         </div>
     )
 }
@@ -85,7 +85,7 @@ function NextStepContent(content) {
             <Typography variant={'h4'} paragraph>
                 Next Steps:
             </Typography>
-            <CheckList items={content.requirements}/>
+            <CheckList items={content.requirements} />
         </div>
     )
 }
@@ -104,7 +104,7 @@ function getSectionContent(section, i) {
     }
     return (<span key={`section${i}`} style={{ paddingTop: "10px" }}>
         {lookup[type](section.content)}
-        <Divider/>
+        <Divider />
         <div style={{ paddingTop: "20px" }}></div>
     </span>)
 }

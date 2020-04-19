@@ -22,17 +22,64 @@ import { setActiveProject, markProjectCompleted } from '../../redux/actions.js';
 import { updateUserData, handleLoginFromRefresh } from '../../utils/backend.js'
 import { setUser } from '../../redux/actions.js';
 import { useStyles } from "./Styles.js"
+import { useFirestoreConnect } from 'react-redux-firebase'
 
 
 function Learn(props) {
     const classes = useStyles();
     const theme = useTheme();
     const [open, setOpen] = React.useState(false);
-    const [projects, setProjects] = React.useState([{Name: "Loading Projects"}]);
+    const [projects, setProjects] = React.useState([{ Name: "Loading Projects" }]);
+
+    let fireStoreConnectArg = []
+
+    if (props.user.uid) {
+        fireStoreConnectArg.push({
+            collection: 'users',
+            doc: props.user.uid,
+            storeAs: 'userInfo'
+        })
+        if (getActiveProjectID(props)) {
+            fireStoreConnectArg.push({
+                collection: 'users',
+                doc: props.user.uid,
+                subcollections: [{
+                    collection: 'projects',
+                    doc: getActiveProjectID(props)
+                }],
+                storeAs: 'project'
+            })
+        }
+    }
+    useFirestoreConnect(fireStoreConnectArg);
+
+    function getCuricVersion(userInfo) {
+        const defaultCuricVersion = 1;
+        if (!userInfo) {
+            return defaultCuricVersion;
+        }
+        return userInfo.curicVersion || defaultCuricVersion
+    }
+
+
+    function getActiveProject(props) {
+        if (props.userInfo) {
+            return props.userInfo.activeProject
+        }
+        return null;
+    }
+    function getActiveProjectID(props) {
+        if (props.userInfo) {
+            return props.userInfo.activeProjectID
+        }
+        return null;
+    }
 
     const handleProjectClick = (index) => {
+        // TODO: do with firestore
         props.setActiveProject(index);
-        updateUserData({activeProject: index})
+        updateUserData({ activeProject: index, activeProjectID: projects.length > index ? projects[index].id : "" })
+        // TODO put into helper function
         document.body.scrollTop = 0; // For Safari
         document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
     }
@@ -47,36 +94,38 @@ function Learn(props) {
 
     // get projects from JSON file
     useEffect(() => {
-        
-        fetch(`/curic/se${props.curicVersion}.json`)
-        .then(response => response.json())
-        .then(json => {
-            setProjects(json.content)
-        })
-        .catch(error => console.log(error))
-    }, [props.curicVersion])
+
+        fetch(`/curic/se${getCuricVersion(props.userInfo)}.json`)
+            .then(response => response.json())
+            .then(json => {
+                setProjects(json.content)
+                // TODO: should set projectID for user?
+            })
+            .catch(error => console.log(error))
+    }, [props.userInfo])
 
     function getProject(index) {
         if (typeof projects[index] === "object") {
             return projects[index];
         } else {
-            return {
-                "sections": [],
-                "version": "0.0.1",
-                "name": `Unknown project ${index}` 
-            }
+            // return first project
+            return projects[0];
         }
-        
+
     }
     useEffect(() => {
+        // TODO: move active project to firestore?
         handleLoginFromRefresh(props.setUser, props.setActiveProject);
+
     }, [props.setUser, props.setActiveProject])
-    
-    function NextProject(){
-        return(
-            <Button variant="contained" color="primary" onClick={handleProjectClick.bind(null, props.activeProject + 1)}>NEXT PROJECT</Button>
+
+
+
+    function NextProject() {
+        return (
+            <Button variant="contained" color="primary" onClick={handleProjectClick.bind(null, getActiveProject(props) + 1)}>NEXT PROJECT</Button>
         )
-    }  
+    }
 
     return (
         <div className={classes.root}>
@@ -100,7 +149,7 @@ function Learn(props) {
                     <Typography variant="h6" noWrap>
                         techIntern.school - Online Learning Portal
                     </Typography>
-                    <GithubIssue/>
+                    <GithubIssue />
                 </Toolbar>
             </AppBar>
             <Drawer
@@ -120,7 +169,7 @@ function Learn(props) {
                 <Divider />
                 <List>
                     {projects.map((projectInfo, index) => (
-                        <ListItem onClick={handleProjectClick.bind(null, index)} button key={projectInfo.name}>
+                        <ListItem onClick={handleProjectClick.bind(null, index)} button key={projectInfo.name + { index }}>
                             <ListItemText primary={`${index}. ${projectInfo.name}`} />
                         </ListItem>
                     ))}
@@ -128,33 +177,33 @@ function Learn(props) {
             </Drawer>
             {props.user.uid ? (
                 <main
-                className={clsx(classes.content, {
-                    [classes.contentShift]: open,
-                })}
-            >
-                <div className={classes.drawerHeader} />
-                <ProjectContent project={getProject(props.activeProject)} />
-                <NextProject/>
-            </main>
-            ) : <div><br/><br/><br/><br/>TODO: Need to login</div>}
-            
+                    className={clsx(classes.content, {
+                        [classes.contentShift]: open,
+                    })}
+                >
+                    <div className={classes.drawerHeader} />
+                    <ProjectContent project={getProject(getActiveProject(props))} />
+                    <NextProject />
+                </main>
+            ) : <div><br /><br /><br /><br />TODO: Need to login</div>}
+
         </div>
     );
 }
 
 const mapDispatchToProps = dispatch => {
-    return { 
-        setActiveProject: (id) => { dispatch(setActiveProject(id)) }, 
-        onProjectComplte: (id) => { dispatch(markProjectCompleted(id)) }, 
-        setUser: (user) => { 
-            dispatch(setUser(user)) 
+    return {
+        setActiveProject: (id) => { dispatch(setActiveProject(id)) },
+        onProjectComplte: (id) => { dispatch(markProjectCompleted(id)) },
+        setUser: (user) => {
+            dispatch(setUser(user))
         }
     }
 };
 const mapStateToProps = state => {
-    const { learning: {activeProject, completedProjects, curicVersion}, user } = state;
+    const { firestore: { data: { userInfo, project } }, user } = state;
     return {
-        activeProject, completedProjects, curicVersion, user
+        userInfo, project, user
     }
 }
 const ConnectedLearn = connect(mapStateToProps, mapDispatchToProps)(Learn)

@@ -9,6 +9,7 @@
   "author": "",
   "license": "UNLICENCED",
   "dependencies": {
-    "commander": "^5.0.0"
+    "commander": "^5.0.0",
+    "readline-sync": "^1.4.10"
   }
 }

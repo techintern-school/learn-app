@@ -2,7 +2,7 @@ const { Command } = require('commander');
 const readlineSync = require('readline-sync');
 const fs = require('fs');
 const homedir = require('os').homedir();
-const {execSync} = require('child_process');
+const { execSync } = require('child_process');
 const firebase = require("firebase/app");
 
 require("firebase/firestore");
@@ -23,15 +23,21 @@ var firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 firestore = firebase.firestore();
 
-function updateCompletedSections(uid, completedSection, projectID) {
+function updateDB(dbInfo, runInfo) {
+    const { uid, challengeID, projectID } = dbInfo;
     return new Promise((resolve, reject) => {
         const projectDoc = firestore.collection("users").doc(uid).collection('projects').doc(projectID)
-
         projectDoc.get()
             .then((doc) => {
-                const previouslyCompleted = doc.data().completedSections || []        
-                const completedSections = [...previouslyCompleted, completedSection]
-                projectDoc.set({completedSections}, {merge: true})
+                const dbData = doc.data()
+                const previouslyCompleted = dbData.completedSections || []
+                const completedSections = [...previouslyCompleted, challengeID]
+                let challengeRuns = dbData.challengeRuns || {}
+                if (!challengeRuns.hasOwnProperty(challengeID)) {
+                    challengeRuns[challengeID] = []
+                }
+                challengeRuns[challengeID].push(runInfo)
+                projectDoc.set({ completedSections, challengeRuns }, { merge: true })
                     .then(function () {
                         console.log("Document successfully written!");
                         resolve()
@@ -41,9 +47,7 @@ function updateCompletedSections(uid, completedSection, projectID) {
                         reject()
                     });
             })
-     });
-    
-    
+    });
 }
 
 const program = new Command();
@@ -67,7 +71,6 @@ program.command('run')
         // get the config file for the user from the configFile directory
         const userConfig = JSON.parse(fs.readFileSync(configFile, 'utf8'))
         // get the config file for the challenge from the current directory 
-        // TODO define schema - shell command to execute, ???
         const challengeConfig = JSON.parse(fs.readFileSync(`${__dirname}/.tisP.json`, 'utf8'));
 
         // run the evaluation code 
@@ -75,22 +78,37 @@ program.command('run')
         let error;
         try {
             output = execSync(challengeConfig.exec);
-        } catch(e) {
+        } catch (e) {
             error = e;
             console.log(e)
         }
-        console.log(output && output.hasOwnProperty('toString') ? output.toString() : "")
+
         // submit update to server
+        const dbInfo = {
+            uid: userConfig.userID,
+            challengeID: challengeConfig.challengeID,
+            projectID: challengeConfig.projectID
+        }
+        let runInfo = {
+            ts: Date.now()
+        }
         if (error === undefined) {
             // update completed sections
-            updateCompletedSections(userConfig.userID, challengeConfig.challengeID, challengeConfig.projectID)
-                .then(() => process.exit())
-                .catch(() => process.exit())
+            runInfo.status = 1
+            if (output && output.hasOwnProperty('toString') && output.toString().length > 0) {
+                runInfo.output = output.toString();
+            }
+
         } else {
             // update challenge attempt
-
+            runInfo.status = 0
+            // TODO: is this too much info to save to firestore? Is there a better place to store this?
+            runInfo.error = error
         }
-        
+        updateDB(dbInfo, runInfo)
+            .then(() => process.exit())
+            .catch(() => process.exit())
+
     });
 
 

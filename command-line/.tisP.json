@@ -1,5 +1,5 @@
 {
     "challengeID": "test3",
     "projectID": "testProject",
-    "exec": "exit 0"
+    "exec": "exit 1"
 }

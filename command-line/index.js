@@ -102,8 +102,8 @@ program.command('run')
         } else {
             // update challenge attempt
             runInfo.status = 0
-            // TODO: is this too much info to save to firestore? Is there a better place to store this?
-            runInfo.error = error
+            // TODO: is stack too much info to save to firestore? Is there a better place to store this?
+            runInfo.error = error.message
         }
         updateDB(dbInfo, runInfo)
             .then(() => process.exit())

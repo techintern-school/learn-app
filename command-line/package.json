@@ -1,5 +1,5 @@
 {
-  "name": "command-line",
+  "name": "tis-cli",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -12,6 +12,9 @@
     "commander": "^5.0.0",
     "firebase": "^7.14.1",
     "readline-sync": "^1.4.10"
+  },
+  "bin": {
+    "tis": "./index.js"
   },
   "devDependencies": {
     "jest": "^25.4.0"

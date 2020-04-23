@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 const { Command } = require('commander');
 const readlineSync = require('readline-sync');
 const fs = require('fs');
@@ -29,7 +31,7 @@ function updateDB(dbInfo, runInfo) {
         const projectDoc = firestore.collection("users").doc(uid).collection('projects').doc(projectID)
         projectDoc.get()
             .then((doc) => {
-                const dbData = doc.data()
+                const dbData = doc.data() || {};
                 const previouslyCompleted = dbData.completedSections || []
                 const completedSections = [...previouslyCompleted, challengeID]
                 let challengeRuns = dbData.challengeRuns || {}
@@ -52,7 +54,15 @@ function updateDB(dbInfo, runInfo) {
 
 const program = new Command();
 program.version('0.0.1');
-const configFile = `${homedir}/.tisConfig.json`;
+const userConfigFilePath = `${homedir}/.tisConfig.json`;
+
+function getOutputString(output) {
+    let str = 'no output';
+    if (output && typeof output.toString === 'function' && output.toString().length > 0) {
+        str = output.toString();
+    }
+    return str
+}
 
 program.command('setup')
     .description('run this command to link your ti.s account to the command line application')
@@ -62,22 +72,47 @@ program.command('setup')
         const config = {
             userID, githubID
         }
-        fs.writeFileSync(configFile, JSON.stringify(config, null, 4))
+        fs.writeFileSync(userConfigFilePath, JSON.stringify(config, null, 4))
     });
 
 program.command('run')
     .description('run the program associated with the challenge in the current directory')
     .action(() => {
         // get the config file for the user from the configFile directory
-        const userConfig = JSON.parse(fs.readFileSync(configFile, 'utf8'))
+        let userConfigFile;
+        try {
+            userConfigFile = fs.readFileSync(userConfigFilePath, 'utf8')            
+        } catch(e) {
+            console.log(e)
+            console.log('Oh no. There was an error reading .tisConfig.json with error the above error message:')
+            if(typeof userConfigFile !== undefined) {
+                console.log(' Have you run the setup command yet? If not, run: tis setup')
+            }
+            return
+        }
+        
+        const userConfig = JSON.parse(userConfigFile)
+        
         // get the config file for the challenge from the current directory 
-        const challengeConfig = JSON.parse(fs.readFileSync(`${__dirname}/.tisP.json`, 'utf8'));
+        let challengeConfigFile;
+        try {
+            challengeConfigFile = fs.readFileSync(`${process.cwd()}/.tisC.json`, 'utf8')         
+        } catch(e) {
+            console.log(e)
+            console.log('Oh no. There was an error reading .tisC.json with error the above error message:')
+            if(typeof challengeConfigFile !== undefined) {
+                console.log(' Are you running this command in a challenge directory?')
+            }
+            return
+        }
+        const challengeConfig = JSON.parse(challengeConfigFile);
 
         // run the evaluation code 
         let output;
         let error;
         try {
             output = execSync(challengeConfig.exec);
+            console.log(getOutputString(output))
         } catch (e) {
             error = e;
             console.log(e)
@@ -90,14 +125,14 @@ program.command('run')
             projectID: challengeConfig.projectID
         }
         let runInfo = {
-            ts: Date.now()
+            ts: Date.now(), 
+
+            output: getOutputString(output)
         }
         if (error === undefined) {
             // update completed sections
+            // TODO enumerate these values somewhere
             runInfo.status = 1
-            if (output && output.hasOwnProperty('toString') && output.toString().length > 0) {
-                runInfo.output = output.toString();
-            }
 
         } else {
             // update challenge attempt

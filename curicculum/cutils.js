@@ -134,14 +134,14 @@ program.command('make-json')
                             sections: project.sections.map(function (section) {
                                 // section with no external markdown, return unchanged
                                 if (!section.hasOwnProperty("path")) {
-                                    return project
+                                    return section
                                 }
                                 fileContents = fs.readFileSync(section.path, 'utf8')
                                 // delete the path property, and create content with htmlified markdown
-                                project.content = md.render(fileContents);
-                                delete project.path
-
-                                return project
+                                section.content = md.render(fileContents);
+                                section.wasMarkdown = true;
+                                delete section.path
+                                return section
                             })
                         }
                     })

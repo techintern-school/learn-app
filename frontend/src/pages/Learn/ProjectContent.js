@@ -9,7 +9,16 @@ import Divider from '@material-ui/core/Divider';
 import { titleCaseFromKebabCase } from "../../utils/strings.js"
 import CheckList from "./CheckList.js"
 
-function TextContent(content) {
+
+function renderHTML(html) {
+    const htmlArg = { __html: html }
+    return (<div dangerouslySetInnerHTML={htmlArg} />);
+}
+
+function TextContent(content, isHTML) {
+    if (isHTML) {
+        return renderHTML(content)
+    }
     return (
         <Typography variant={'body1'} paragraph>
             {content}
@@ -71,13 +80,17 @@ function AssignmentContent(content) {
     )
 }
 
-function DiscussionContent(content) {
+function DiscussionContent(content, isHTML) {
+    if (isHTML) {
+        return renderHTML(content)
+    }
     return (
         <Typography variant={'caption'} paragraph style={{ paddingTop: "10px" }}>
             <b>Discussion:</b> {content}
         </Typography>
     )
 }
+
 
 function NextStepContent(content) {
     return (
@@ -103,7 +116,7 @@ function getSectionContent(section, i) {
         return `<div> BAD TYPE: ${type}</div>`;
     }
     return (<span key={`section${i}`} style={{ paddingTop: "10px" }}>
-        {lookup[type](section.content)}
+        {lookup[type](section.content, section.wasMarkdown)}
         <Divider />
         <div style={{ paddingTop: "20px" }}></div>
     </span>)

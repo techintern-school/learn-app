@@ -5,6 +5,7 @@ const ncp = require('ncp').ncp;
 const shortid = require('shortid');
 const child_process = require('child_process')
 const path = require('path')
+var md = require('markdown-it')();
 
 const configPath = "./config.json"
 const config = JSON.parse(fs.readFileSync(configPath, 'utf8'));
@@ -21,22 +22,22 @@ const buildDirectory = `${__dirname}${config.buildDirectory}/`;
 const frontendDirectory = path.join(__dirname, config.frontendDirectory)
 
 // insert dynamic information into a YAML string
-function processMacros(text, values={}) {
-    const {name, index} = values;
+function processMacros(text, values = {}) {
+    const { name, index } = values;
     if (name) {
         text = text.replace(/%%NAME%%/g, name)
     }
-    if (typeof(index) !== undefined) {
+    if (typeof (index) !== undefined) {
         text = text.replace(/%%INDEX%%/g, index)
     }
 
     // replace all ID macros with unique short UUIDs
-    text = text.replace(/%%ID%%/g, function(){
+    text = text.replace(/%%ID%%/g, function () {
         return shortid.generate()
     });
-    
+
     return text;
-    
+
 }
 
 program.command('make-version')
@@ -85,7 +86,7 @@ program.command('make-project <name>')
             const newProjectPath = `${projectsDirectory}/${newProjectFileName}`
             const templateFile = `${templateDirectory}/project.yml`
             const template = fs.readFileSync(templateFile, 'utf8');
-            const macrosReplacedTemplate = processMacros(template, {name, index: nextProjectIndex});
+            const macrosReplacedTemplate = processMacros(template, { name, index: nextProjectIndex });
 
             fs.writeFileSync(newProjectPath, macrosReplacedTemplate);
         });
@@ -116,8 +117,8 @@ program.command('make-json')
             versions.forEach((v) => {
                 versionDirectory = `${curicDirectory}/${v}`
                 let curicVersion = {
-                    version: v, 
-                    gitHash: child_process.execSync('git rev-parse HEAD').toString().trim(), 
+                    version: v,
+                    gitHash: child_process.execSync('git rev-parse HEAD').toString().trim(),
                     content: []
                 }
                 fs.readdir(versionDirectory, (err, files) => {
@@ -126,17 +127,35 @@ program.command('make-json')
                         const doc = yaml.safeLoad(fs.readFileSync(filePath, 'utf8'));
                         curicVersion.content.push(doc)
                     })
+                    // remplace all paths to markdown with actual markdown
+                    curicVersion.content = curicVersion.content.map(function (project) {
+                        return {
+                            ...project,
+                            sections: project.sections.map(function (section) {
+                                // section with no external markdown, return unchanged
+                                if (!section.hasOwnProperty("path")) {
+                                    return project
+                                }
+                                fileContents = fs.readFileSync(section.path, 'utf8')
+                                // delete the path property, and create content with htmlified markdown
+                                project.content = md.render(fileContents);
+                                delete project.path
+
+                                return project
+                            })
+                        }
+                    })
                     const vJson = JSON.stringify(curicVersion);
                     // write to local directory
                     const filePart = `/se${v}.json`
                     buildPath = `${buildDirectory}${filePart}`
-                    
+
                     fs.writeFileSync(buildPath, vJson);
                     // also write to frontend directory
                     fePath = `${frontendDirectory}${filePart}`
                     fs.writeFileSync(fePath, vJson);
                 })
-            })            
+            })
         })
     });
 

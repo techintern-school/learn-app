@@ -5,7 +5,7 @@ version: "0.0.1"
 index: "1"
 sections:
   - type: text
-    content: 'some words'
+    path: 'markdown/1-test.md'
     id: "7J66zU3rB7"
   - type: assignment
     id: "097_sLBuK"
@@ -28,3 +28,6 @@ sections:
         - id: "VUrzN7Dn-Q"
           text: "do y"
           isCheckable: true
+  - type: text
+    path: 'markdown/1-test.md'
+    id: "VCyUsUKKg"

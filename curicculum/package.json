@@ -7,9 +7,10 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
-  "license": "UNLICENSED",
+  "license": "GNU GPLv3",
   "dependencies": {
     "commander": "^5.0.0",
+    "markdown-it": "^10.0.0",
     "ncp": "^2.0.0",
     "shortid": "^2.2.15"
   },

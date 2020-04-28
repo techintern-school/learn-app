@@ -7,7 +7,7 @@ import {
   twitterColor,
   dribbbleColor,
   instagramColor,
-  grayColor
+  grayColor,
 } from "../../../../../assets/jss/material-kit-pro-react.js";
 
 import imagesStyles from "../../../../../assets/jss/material-kit-pro-react/imagesStyles.js";
@@ -19,7 +19,7 @@ const style = {
   description,
   section: {
     ...section,
-    padding: "70px 0px"
+    padding: "70px 0px",
   },
   socialFeed: {
     "& p": {
@@ -27,42 +27,42 @@ const style = {
       verticalAlign: "top",
       overflow: "hidden",
       paddingBottom: "10px",
-      maxWidth: 300
+      maxWidth: 300,
     },
     "& i": {
       fontSize: "20px",
       display: "table-cell",
-      paddingRight: "10px"
-    }
+      paddingRight: "10px",
+    },
   },
   img: {
     width: "20%",
     marginRight: "5%",
     marginBottom: "5%",
-    float: "left"
+    float: "left",
   },
   list: {
     marginBottom: "0",
     padding: "0",
-    marginTop: "0"
+    marginTop: "0",
   },
   inlineBlock: {
     display: "inline-block",
     padding: "0px",
-    width: "auto"
+    width: "auto",
   },
   left: {
     float: "left!important",
-    display: "block"
+    display: "block",
   },
   right: {
     padding: "15px 0",
     margin: "0",
-    float: "right"
+    float: "right",
   },
   aClass: {
     textDecoration: "none",
-    backgroundColor: "transparent"
+    backgroundColor: "transparent",
   },
   block: {
     color: "inherit",
@@ -73,7 +73,7 @@ const style = {
     borderRadius: "3px",
     textDecoration: "none",
     position: "relative",
-    display: "block"
+    display: "block",
   },
   footerBrand: {
     height: "50px",
@@ -84,11 +84,11 @@ const style = {
     color: grayColor[1],
     textDecoration: "none",
     fontWeight: 700,
-    fontFamily: "Roboto Slab,Times New Roman,serif"
+    fontFamily: "Roboto Slab,Times New Roman,serif",
   },
   pullCenter: {
     display: "inline-block",
-    float: "none"
+    float: "none",
   },
   rightLinks: {
     float: "right!important",
@@ -97,15 +97,15 @@ const style = {
       padding: 0,
       listStyle: "none",
       "& li": {
-        display: "inline-block"
+        display: "inline-block",
       },
       "& a": {
-        display: "block"
-      }
+        display: "block",
+      },
     },
     "& i": {
-      fontSize: "20px"
-    }
+      fontSize: "20px",
+    },
   },
   linksVertical: {
     "& li": {
@@ -113,17 +113,17 @@ const style = {
       marginLeft: "-5px",
       marginRight: "-5px",
       "& a": {
-        padding: "5px !important"
-      }
-    }
+        padding: "5px !important",
+      },
+    },
   },
   footer: {
     "& ul li": {
-      display: "inline-block"
+      display: "inline-block",
     },
     "& h4, & h5": {
       color: grayColor[1],
-      textDecoration: "none"
+      textDecoration: "none",
     },
     "& ul:not($socialButtons) li a": {
       color: "inherit",
@@ -134,16 +134,16 @@ const style = {
       borderRadius: "3px",
       textDecoration: "none",
       position: "relative",
-      display: "block"
+      display: "block",
     },
     "& small": {
       fontSize: "75%",
-      color: grayColor[10]
+      color: grayColor[10],
     },
     "& $pullCenter": {
       display: "inline-block",
-      float: "none"
-    }
+      float: "none",
+    },
   },
   iconSocial: {
     width: "41px",
@@ -152,37 +152,37 @@ const style = {
     minWidth: "41px",
     padding: 0,
     overflow: "hidden",
-    position: "relative"
+    position: "relative",
   },
   copyRight: {
-    padding: "15px 0px"
+    padding: "15px 0px",
   },
   socialButtons: {
     "& li": {
-      display: "inline-block"
-    }
+      display: "inline-block",
+    },
   },
   btnTwitter: {
     ...btnLink,
-    color: twitterColor
+    color: twitterColor,
   },
   btnDribbble: {
     ...btnLink,
-    color: dribbbleColor
+    color: dribbbleColor,
   },
   btnInstagram: {
     ...btnLink,
-    color: instagramColor
+    color: instagramColor,
   },
   icon: {
     top: "3px",
     width: "18px",
     height: "18px",
-    position: "relative"
+    position: "relative",
   },
   customFormControl: {
-    paddingTop: "14px"
-  }
+    paddingTop: "14px",
+  },
 };
 
 export default style;

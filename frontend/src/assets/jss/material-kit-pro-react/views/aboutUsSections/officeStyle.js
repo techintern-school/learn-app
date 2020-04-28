@@ -2,7 +2,7 @@ import {
   title,
   description,
   mrAuto,
-  mlAuto
+  mlAuto,
 } from "assets/jss/material-kit-pro-react.js";
 import imagesStyles from "assets/jss/material-kit-pro-react/imagesStyles.js";
 
@@ -16,16 +16,16 @@ const servicesStyle = {
   mrAuto,
   mlAuto,
   textCenter: {
-    textAlign: "center!important"
+    textAlign: "center!important",
   },
   office: {
     "& img": {
-      margin: "20px 0px"
-    }
+      margin: "20px 0px",
+    },
   },
   imgRaised,
   rounded,
-  imgFluid
+  imgFluid,
 };
 
 export default servicesStyle;

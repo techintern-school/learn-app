@@ -5,28 +5,28 @@ import {
   whiteColor,
   grayColor,
   mainRaised,
-  hexToRgb
+  hexToRgb,
 } from "../../../../assets/jss/material-kit-pro-react.js";
 import footerStyle from "../../../../assets/jss/material-kit-pro-react/views/componentsSections/footerStyle.js";
 
 const presentationStyle = {
   ...footerStyle,
   main: {
-    ...main
+    ...main,
     /*overflow: "hidden"*/
   },
   mainRaised,
   parallax: {
     height: "90vh",
-    overflow: "hidden"
+    overflow: "hidden",
   },
   container: {
     ...container,
-    zIndex: 1
+    zIndex: 1,
   },
   title: {
     ...title,
-    color: whiteColor
+    color: whiteColor,
   },
   brand: {
     color: whiteColor,
@@ -35,8 +35,8 @@ const presentationStyle = {
       fontSize: "4.2rem",
       fontWeight: "600",
       display: "inline-block",
-      position: "relative"
-    }
+      position: "relative",
+    },
   },
   proBadge: {
     position: "relative",
@@ -50,8 +50,8 @@ const presentationStyle = {
     borderRadius: "3px",
     color: grayColor[18],
     lineHeight: "22px",
-    boxShadow: "0 5px 5px -2px rgba(" + hexToRgb(grayColor[25]) + ",.4)"
-  }
+    boxShadow: "0 5px 5px -2px rgba(" + hexToRgb(grayColor[25]) + ",.4)",
+  },
 };
 
 export default presentationStyle;

@@ -18,11 +18,11 @@ export default function Instruction(props) {
   const classes = useStyles();
   const instructionClasses = cx({
     [classes.instruction]: true,
-    [className]: className !== undefined
+    [className]: className !== undefined,
   });
   const pictureClasses = cx({
     [classes.picture]: true,
-    [imageClassName]: imageClassName !== undefined
+    [imageClassName]: imageClassName !== undefined,
   });
   return (
     <div className={instructionClasses}>
@@ -42,7 +42,7 @@ export default function Instruction(props) {
 }
 
 Instruction.defaultProps = {
-  imageAlt: "..."
+  imageAlt: "...",
 };
 
 Instruction.propTypes = {
@@ -51,5 +51,5 @@ Instruction.propTypes = {
   image: PropTypes.string.isRequired,
   imageAlt: PropTypes.string,
   className: PropTypes.string,
-  imageClassName: PropTypes.string
+  imageClassName: PropTypes.string,
 };

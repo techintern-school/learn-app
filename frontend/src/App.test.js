@@ -11,6 +11,6 @@ test('renders learn react link', () => {
 });
 */
 
-test('canary test', () => {
+test("canary test", () => {
   expect(3).toBe(3);
 });

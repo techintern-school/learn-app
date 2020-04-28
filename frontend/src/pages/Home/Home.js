@@ -29,7 +29,7 @@ export default function HomePage() {
   });
   const classes = useStyles();
   let headlineStyles = {
-    color: 'primary'
+    color: "primary",
   };
   return (
     <div>
@@ -39,7 +39,7 @@ export default function HomePage() {
         color="transparent"
         changeColorOnScroll={{
           height: 400,
-          color: "primary"
+          color: "primary",
         }}
       />
       <Parallax
@@ -51,7 +51,7 @@ export default function HomePage() {
             <GridItem>
               <div className={classes.brand}>
                 <h1 className={classes.title} style={headlineStyles}>
-                Become a software engineer
+                  Become a software engineer
                 </h1>
               </div>
             </GridItem>
@@ -63,17 +63,13 @@ export default function HomePage() {
         <SectionOverview />
         <SectionPricing />
       </div>
-      
+
       <Footer
         theme="white"
         content={
           <div>
             <div className={classes.left}>
-              <a
-                href="#"
-                target="_blank"
-                className={classes.footerBrand}
-              >
+              <a href="#" target="_blank" className={classes.footerBrand}>
                 techIntern.school
               </a>
             </div>

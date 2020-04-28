@@ -36,7 +36,7 @@ export default function Media(props) {
         {body}
         <div className={classes.mediaFooter}>{footer}</div>
         {innerMedias !== undefined
-          ? innerMedias.map(prop => {
+          ? innerMedias.map((prop) => {
               return prop;
             })
           : null}
@@ -47,7 +47,7 @@ export default function Media(props) {
 
 Media.defaultProps = {
   avatarLink: "#pablo",
-  avatarAlt: "..."
+  avatarAlt: "...",
 };
 
 Media.propTypes = {
@@ -57,5 +57,5 @@ Media.propTypes = {
   title: PropTypes.node,
   body: PropTypes.node,
   footer: PropTypes.node,
-  innerMedias: PropTypes.arrayOf(PropTypes.object)
+  innerMedias: PropTypes.arrayOf(PropTypes.object),
 };

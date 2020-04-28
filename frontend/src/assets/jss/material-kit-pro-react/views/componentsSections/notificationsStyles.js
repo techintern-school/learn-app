@@ -2,7 +2,7 @@ import {
   container,
   title,
   whiteColor,
-  section
+  section,
 } from "assets/jss/material-kit-pro-react.js";
 
 const notificationsStyles = {
@@ -12,19 +12,19 @@ const notificationsStyles = {
     width: "100%",
     position: "relative",
     padding: "70px 0",
-    ...section
+    ...section,
   },
   title: {
     ...title,
     marginTop: "30px",
     minHeight: "32px",
-    textDecoration: "none"
+    textDecoration: "none",
   },
   space70: {
     height: "70px",
-    display: "block"
+    display: "block",
   },
-  container
+  container,
 };
 
 export default notificationsStyles;

@@ -19,5 +19,5 @@ export default function Rose(props) {
 }
 
 Rose.propTypes = {
-  children: PropTypes.node
+  children: PropTypes.node,
 };

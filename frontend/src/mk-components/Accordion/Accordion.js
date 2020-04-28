@@ -21,7 +21,7 @@ export default function Accordion(props) {
   const [single] = React.useState(
     props.active.length === undefined ? true : false
   );
-  const handleChange = panel => () => {
+  const handleChange = (panel) => () => {
     let newArray;
 
     if (single) {
@@ -52,7 +52,7 @@ export default function Accordion(props) {
             key={key}
             classes={{
               root: classes.expansionPanel,
-              expanded: classes.expansionPanelExpanded
+              expanded: classes.expansionPanelExpanded,
             }}
           >
             <ExpansionPanelSummary
@@ -65,7 +65,7 @@ export default function Accordion(props) {
                   classes[activeColor + "ExpansionPanelSummaryExpaned"]
                 }`,
                 content: classes.expansionPanelSummaryContent,
-                expandIcon: classes.expansionPanelSummaryExpandIcon
+                expandIcon: classes.expansionPanelSummaryExpandIcon,
               }}
             >
               <h4 className={classes.title}>{prop.title}</h4>
@@ -82,19 +82,19 @@ export default function Accordion(props) {
 
 Accordion.defaultProps = {
   active: -1,
-  activeColor: "primary"
+  activeColor: "primary",
 };
 
 Accordion.propTypes = {
   // index of the default active collapse
   active: PropTypes.oneOfType([
     PropTypes.number,
-    PropTypes.arrayOf(PropTypes.number)
+    PropTypes.arrayOf(PropTypes.number),
   ]),
   collapses: PropTypes.arrayOf(
     PropTypes.shape({
       title: PropTypes.string,
-      content: PropTypes.node
+      content: PropTypes.node,
     })
   ).isRequired,
   activeColor: PropTypes.oneOf([
@@ -104,6 +104,6 @@ Accordion.propTypes = {
     "danger",
     "success",
     "info",
-    "rose"
-  ])
+    "rose",
+  ]),
 };

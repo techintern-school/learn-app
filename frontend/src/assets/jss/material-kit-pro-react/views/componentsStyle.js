@@ -6,7 +6,7 @@ import {
   whiteColor,
   grayColor,
   section,
-  hexToRgb
+  hexToRgb,
 } from "assets/jss/material-kit-pro-react.js";
 
 const componentsStyle = {
@@ -14,12 +14,12 @@ const componentsStyle = {
   mainRaised,
   parallax: {
     height: "90vh",
-    overflow: "hidden"
+    overflow: "hidden",
   },
   container: {
     ...container,
     zIndex: "2",
-    position: "relative"
+    position: "relative",
   },
   brand: {
     color: whiteColor,
@@ -28,23 +28,23 @@ const componentsStyle = {
       fontSize: "4.2rem",
       fontWeight: "600",
       display: "inline-block",
-      position: "relative"
+      position: "relative",
     },
     "& h3": {
       fontSize: "1.313rem",
       maxWidth: "500px",
-      margin: "10px auto 0"
-    }
+      margin: "10px auto 0",
+    },
   },
   title: {
     ...title,
-    color: whiteColor + "  !important"
+    color: whiteColor + "  !important",
   },
   link: {
-    textDecoration: "none"
+    textDecoration: "none",
   },
   textCenter: {
-    textAlign: "center"
+    textAlign: "center",
   },
   proBadge: {
     position: "absolute",
@@ -58,14 +58,14 @@ const componentsStyle = {
     borderRadius: "3px",
     color: grayColor[18],
     lineHeight: "22px",
-    boxShadow: "0px 5px 5px -2px rgba(" + hexToRgb(grayColor[25]) + ",0.4)"
+    boxShadow: "0px 5px 5px -2px rgba(" + hexToRgb(grayColor[25]) + ",0.4)",
   },
   section: {
     ...section,
-    padding: "70px 0px"
+    padding: "70px 0px",
   },
   sectionGray: {
-    background: grayColor[14]
+    background: grayColor[14],
   },
   block: {
     color: "inherit",
@@ -76,33 +76,33 @@ const componentsStyle = {
     borderRadius: "3px",
     textDecoration: "none",
     position: "relative",
-    display: "block"
+    display: "block",
   },
   inlineBlock: {
     display: "inline-block",
     padding: "0px",
-    width: "auto"
+    width: "auto",
   },
   list: {
     marginBottom: "0",
     padding: "0",
-    marginTop: "0"
+    marginTop: "0",
   },
   left: {
     float: "left!important",
-    display: "block"
+    display: "block",
   },
   right: {
     padding: "15px 0",
     margin: "0",
-    float: "right"
+    float: "right",
   },
   icon: {
     width: "18px",
     height: "18px",
     top: "3px",
-    position: "relative"
-  }
+    position: "relative",
+  },
 };
 
 export default componentsStyle;

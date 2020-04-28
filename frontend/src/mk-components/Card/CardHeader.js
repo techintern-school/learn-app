@@ -33,7 +33,7 @@ export default function CardHeader(props) {
     [classes.cardHeaderContact]: contact,
     [classes.cardHeaderSignup]: signup,
     [classes.noShadow]: noShadow,
-    [className]: className !== undefined
+    [className]: className !== undefined,
   });
   return (
     <div className={cardHeaderClasses} {...rest}>
@@ -50,12 +50,12 @@ CardHeader.propTypes = {
     "danger",
     "info",
     "primary",
-    "rose"
+    "rose",
   ]),
   plain: PropTypes.bool,
   image: PropTypes.bool,
   contact: PropTypes.bool,
   signup: PropTypes.bool,
   noShadow: PropTypes.bool,
-  children: PropTypes.node
+  children: PropTypes.node,
 };

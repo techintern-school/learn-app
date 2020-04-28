@@ -5,29 +5,29 @@ const sectionBlogInfoStyle = {
     paddingBottom: "0",
     backgroundPosition: "50%",
     backgroundSize: "cover",
-    padding: "70px 0"
+    padding: "70px 0",
   },
   blogTags: {
-    marginTop: "8px"
+    marginTop: "8px",
   },
   buttons: {
     marginTop: "0",
     marginBottom: "0",
-    float: "right !important"
+    float: "right !important",
   },
   card: {
     marginTop: "0",
-    textAlign: "left"
+    textAlign: "left",
   },
   cardTitle,
   description: {
     fontSize: "1rem",
-    color: grayColor[0]
+    color: grayColor[0],
   },
   pullRight: {
     marginTop: "25px",
-    float: "right"
-  }
+    float: "right",
+  },
 };
 
 export default sectionBlogInfoStyle;

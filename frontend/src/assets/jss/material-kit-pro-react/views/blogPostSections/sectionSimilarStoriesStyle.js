@@ -3,7 +3,7 @@ import {
   title,
   cardTitle,
   grayColor,
-  coloredShadow
+  coloredShadow,
 } from "assets/jss/material-kit-pro-react.js";
 
 const sectionSimilarStoriesStyle = {
@@ -12,16 +12,16 @@ const sectionSimilarStoriesStyle = {
   cardTitle,
   coloredShadow,
   textCenter: {
-    textAlign: "center"
+    textAlign: "center",
   },
   section: {
     backgroundPosition: "50%",
     backgroundSize: "cover",
-    padding: "70px 0"
+    padding: "70px 0",
   },
   description: {
-    color: grayColor[0]
-  }
+    color: grayColor[0],
+  },
 };
 
 export default sectionSimilarStoriesStyle;

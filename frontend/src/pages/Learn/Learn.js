@@ -1,216 +1,251 @@
-import React, { useEffect } from 'react';
-import { connect } from 'react-redux'
-import clsx from 'clsx';
-import { useTheme } from '@material-ui/core/styles';
-import Drawer from '@material-ui/core/Drawer';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import List from '@material-ui/core/List';
-import Typography from '@material-ui/core/Typography';
-import Divider from '@material-ui/core/Divider';
-import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
-import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
-import ProjectContent from './ProjectContent'
-import GithubIssue from '../../components/GithubIssue'
-import Button from '@material-ui/core/Button';
-import { setActiveProject, markProjectCompleted } from '../../redux/actions.js';
-import { handleLoginFromRefresh, updateUserData, updateProjectsCompleted } from '../../utils/backend.js'
-import { setUser } from '../../redux/actions.js';
-import { useStyles } from "./Styles.js"
-import { useFirestoreConnect } from 'react-redux-firebase'
-
+import React, { useEffect } from "react";
+import { connect } from "react-redux";
+import clsx from "clsx";
+import { useTheme } from "@material-ui/core/styles";
+import Drawer from "@material-ui/core/Drawer";
+import CssBaseline from "@material-ui/core/CssBaseline";
+import AppBar from "@material-ui/core/AppBar";
+import Toolbar from "@material-ui/core/Toolbar";
+import List from "@material-ui/core/List";
+import Typography from "@material-ui/core/Typography";
+import Divider from "@material-ui/core/Divider";
+import IconButton from "@material-ui/core/IconButton";
+import MenuIcon from "@material-ui/icons/Menu";
+import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
+import ChevronRightIcon from "@material-ui/icons/ChevronRight";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemText from "@material-ui/core/ListItemText";
+import ProjectContent from "./ProjectContent";
+import GithubIssue from "../../components/GithubIssue";
+import Button from "@material-ui/core/Button";
+import { setActiveProject, markProjectCompleted } from "../../redux/actions.js";
+import {
+  handleLoginFromRefresh,
+  updateUserData,
+  updateProjectsCompleted,
+} from "../../utils/backend.js";
+import { setUser } from "../../redux/actions.js";
+import { useStyles } from "./Styles.js";
+import { useFirestoreConnect } from "react-redux-firebase";
 
 function Learn(props) {
-    const classes = useStyles();
-    const theme = useTheme();
-    const [open, setOpen] = React.useState(false);
-    const [projects, setProjects] = React.useState([{ Name: "Loading Projects" }]);
+  const classes = useStyles();
+  const theme = useTheme();
+  const [open, setOpen] = React.useState(false);
+  const [projects, setProjects] = React.useState([
+    { Name: "Loading Projects" },
+  ]);
 
-    let fireStoreConnectArg = []
+  let fireStoreConnectArg = [];
 
-    if (props.user.uid) {
-        fireStoreConnectArg.push({
-            collection: 'users',
-            doc: props.user.uid,
-            storeAs: 'userInfo'
-        })
-        if (getActiveProjectID(props)) {
-            fireStoreConnectArg.push({
-                collection: 'users',
-                doc: props.user.uid,
-                subcollections: [{
-                    collection: 'projects',
-                    doc: getActiveProjectID(props)
-                }],
-                storeAs: 'project'
-            })
-        }
+  if (props.user.uid) {
+    fireStoreConnectArg.push({
+      collection: "users",
+      doc: props.user.uid,
+      storeAs: "userInfo",
+    });
+    if (getActiveProjectID(props)) {
+      fireStoreConnectArg.push({
+        collection: "users",
+        doc: props.user.uid,
+        subcollections: [
+          {
+            collection: "projects",
+            doc: getActiveProjectID(props),
+          },
+        ],
+        storeAs: "project",
+      });
     }
-    useFirestoreConnect(fireStoreConnectArg);
+  }
+  useFirestoreConnect(fireStoreConnectArg);
 
-    function getCuricVersion(userInfo) {
-        const defaultCuricVersion = 1;
-        if (!userInfo) {
-            return defaultCuricVersion;
-        }
-        return userInfo.curicVersion || defaultCuricVersion
+  function getCuricVersion(userInfo) {
+    const defaultCuricVersion = 1;
+    if (!userInfo) {
+      return defaultCuricVersion;
     }
+    return userInfo.curicVersion || defaultCuricVersion;
+  }
 
-
-    function getActiveProject(props) {
-        if (props.userInfo) {
-            return props.userInfo.activeProject
-        }
-        return null;
+  function getActiveProject(props) {
+    if (props.userInfo) {
+      return props.userInfo.activeProject;
     }
-    function getActiveProjectID(props) {
-        if (props.userInfo) {
-            return props.userInfo.activeProjectID
-        }
-        return null;
+    return null;
+  }
+  function getActiveProjectID(props) {
+    if (props.userInfo) {
+      return props.userInfo.activeProjectID;
     }
+    return null;
+  }
 
-    const handleProjectClick = (index) => {
-        updateUserData({ 
-            activeProject: index, 
-            activeProjectID: projects.length > index ? projects[index].id : "" 
-        }); 
-        // TODO put into helper function
-        document.body.scrollTop = 0; // For Safari
-        document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+  const handleProjectClick = (index) => {
+    updateUserData({
+      activeProject: index,
+      activeProjectID: projects.length > index ? projects[index].id : "",
+    });
+    // TODO put into helper function
+    document.body.scrollTop = 0; // For Safari
+    document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+  };
+
+  const handleDrawerOpen = () => {
+    setOpen(true);
+  };
+
+  const handleDrawerClose = () => {
+    setOpen(false);
+  };
+
+  // get projects from JSON file
+  useEffect(() => {
+    fetch(`/curic/se${getCuricVersion(props.userInfo)}.json`)
+      .then((response) => response.json())
+      .then((json) => {
+        setProjects(json.content);
+        // TODO: should set projectID for user?
+      })
+      .catch((error) => console.log(error));
+  }, [props.userInfo]);
+
+  function getProject(index) {
+    if (typeof projects[index] === "object") {
+      return projects[index];
+    } else {
+      // return first project
+      return projects[0];
     }
+  }
+  useEffect(() => {
+    handleLoginFromRefresh(props.setUser);
+  }, [props.setUser]);
 
-    const handleDrawerOpen = () => {
-        setOpen(true);
-    };
+  function handleProjectCompelted() {
+    updateProjectsCompleted(getActiveProject(props));
+    // increment project index by one
+    handleProjectClick(getActiveProject(props) + 1);
+  }
 
-    const handleDrawerClose = () => {
-        setOpen(false);
-    };
-
-    // get projects from JSON file
-    useEffect(() => {
-
-        fetch(`/curic/se${getCuricVersion(props.userInfo)}.json`)
-            .then(response => response.json())
-            .then(json => {
-                setProjects(json.content)
-                // TODO: should set projectID for user?
-            })
-            .catch(error => console.log(error))
-    }, [props.userInfo])
-
-    function getProject(index) {
-        if (typeof projects[index] === "object") {
-            return projects[index];
-        } else {
-            // return first project
-            return projects[0];
-        }
-
-    }
-    useEffect(() => {
-        handleLoginFromRefresh(props.setUser);
-    }, [props.setUser])
-
-    function handleProjectCompelted() {
-
-        updateProjectsCompleted(getActiveProject(props))
-        // increment project index by one
-        handleProjectClick(getActiveProject(props) + 1)
-    }
-
-    function NextProject() {
-        return (
-            // TODO: make this only clickable when all requirements
-            <Button variant="contained" color="primary" onClick={handleProjectCompelted}>MARK PROJECT COMPLETE</Button>
-        )
-    }
-
+  function NextProject() {
     return (
-        <div className={classes.root}>
-            <CssBaseline />
-            <AppBar
-                position="fixed"
-                className={clsx(classes.appBar, {
-                    [classes.appBarShift]: open,
-                })}
-            >
-                <Toolbar>
-                    <IconButton
-                        color="inherit"
-                        aria-label="open drawer"
-                        onClick={handleDrawerOpen}
-                        edge="start"
-                        className={clsx(classes.menuButton, open && classes.hide)}
-                    >
-                        <MenuIcon />
-                    </IconButton>
-                    <Typography variant="h6" noWrap>
-                        techIntern.school - Online Learning Portal
-                    </Typography>
-                    <GithubIssue />
-                </Toolbar>
-            </AppBar>
-            <Drawer
-                className={classes.drawer}
-                variant="persistent"
-                anchor="left"
-                open={open}
-                classes={{
-                    paper: classes.drawerPaper,
-                }}
-            >
-                <div className={classes.drawerHeader}>
-                    <IconButton onClick={handleDrawerClose}>
-                        {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
-                    </IconButton>
-                </div>
-                <Divider />
-                <List>
-                    {projects.map((projectInfo, index) => (
-                        <ListItem onClick={handleProjectClick.bind(null, index)} button key={projectInfo.name + { index }}>
-                            <ListItemText primary={`${index}. ${projectInfo.name}`} />
-                        </ListItem>
-                    ))}
-                </List>
-            </Drawer>
-            {props.user.uid ? (
-                <main
-                    className={clsx(classes.content, {
-                        [classes.contentShift]: open,
-                    })}
-                >
-                    <div className={classes.drawerHeader} />
-                    <ProjectContent project={getProject(getActiveProject(props))} />
-                    <NextProject />
-                </main>
-            ) : <div><br /><br /><br /><br />TODO: Need to login</div>}
-
-        </div>
+      // TODO: make this only clickable when all requirements
+      <Button
+        variant="contained"
+        color="primary"
+        onClick={handleProjectCompelted}
+      >
+        MARK PROJECT COMPLETE
+      </Button>
     );
+  }
+
+  return (
+    <div className={classes.root}>
+      <CssBaseline />
+      <AppBar
+        position="fixed"
+        className={clsx(classes.appBar, {
+          [classes.appBarShift]: open,
+        })}
+      >
+        <Toolbar>
+          <IconButton
+            color="inherit"
+            aria-label="open drawer"
+            onClick={handleDrawerOpen}
+            edge="start"
+            className={clsx(classes.menuButton, open && classes.hide)}
+          >
+            <MenuIcon />
+          </IconButton>
+          <Typography variant="h6" noWrap>
+            techIntern.school - Online Learning Portal
+          </Typography>
+          <GithubIssue />
+        </Toolbar>
+      </AppBar>
+      <Drawer
+        className={classes.drawer}
+        variant="persistent"
+        anchor="left"
+        open={open}
+        classes={{
+          paper: classes.drawerPaper,
+        }}
+      >
+        <div className={classes.drawerHeader}>
+          <IconButton onClick={handleDrawerClose}>
+            {theme.direction === "ltr" ? (
+              <ChevronLeftIcon />
+            ) : (
+              <ChevronRightIcon />
+            )}
+          </IconButton>
+        </div>
+        <Divider />
+        <List>
+          {projects.map((projectInfo, index) => (
+            <ListItem
+              onClick={handleProjectClick.bind(null, index)}
+              button
+              key={projectInfo.name + { index }}
+            >
+              <ListItemText primary={`${index}. ${projectInfo.name}`} />
+            </ListItem>
+          ))}
+        </List>
+      </Drawer>
+      {props.user.uid ? (
+        <main
+          className={clsx(classes.content, {
+            [classes.contentShift]: open,
+          })}
+        >
+          <div className={classes.drawerHeader} />
+          <ProjectContent project={getProject(getActiveProject(props))} />
+          <NextProject />
+        </main>
+      ) : (
+        <div>
+          <br />
+          <br />
+          <br />
+          <br />
+          TODO: Need to login
+        </div>
+      )}
+    </div>
+  );
 }
 
-const mapDispatchToProps = dispatch => {
-    return {
-        setActiveProject: (id) => { dispatch(setActiveProject(id)) },
-        onProjectComplte: (id) => { dispatch(markProjectCompleted(id)) },
-        setUser: (user) => {
-            dispatch(setUser(user))
-        }
-    }
+const mapDispatchToProps = (dispatch) => {
+  return {
+    setActiveProject: (id) => {
+      dispatch(setActiveProject(id));
+    },
+    onProjectComplte: (id) => {
+      dispatch(markProjectCompleted(id));
+    },
+    setUser: (user) => {
+      dispatch(setUser(user));
+    },
+  };
 };
-const mapStateToProps = state => {
-    const { firestore: { data: { userInfo, project } }, user } = state;
-    return {
-        userInfo, project, user
-    }
-}
-const ConnectedLearn = connect(mapStateToProps, mapDispatchToProps)(Learn)
+const mapStateToProps = (state) => {
+  const {
+    firestore: {
+      data: { userInfo, project },
+    },
+    user,
+  } = state;
+  return {
+    userInfo,
+    project,
+    user,
+  };
+};
+const ConnectedLearn = connect(mapStateToProps, mapDispatchToProps)(Learn);
 
 export default ConnectedLearn;

@@ -1,8 +1,8 @@
 import {
   container,
   section,
-  darkTealColor, 
-  title
+  darkTealColor,
+  title,
 } from "../../../../../assets/jss/material-kit-pro-react.js";
 
 const descriptionStyle = {
@@ -10,14 +10,14 @@ const descriptionStyle = {
   container,
   description: {
     color: darkTealColor,
-    textAlign: "center"
+    textAlign: "center",
   },
   section: {
     ...section,
     padding: "70px 0px 30px",
     "& h4$description": {
-      fontSize: "1.5em"
-    }
+      fontSize: "1.5em",
+    },
   },
   features: {
     textAlign: "center !important",
@@ -25,9 +25,9 @@ const descriptionStyle = {
     paddingBottom: "0px",
     "& p": {
       fontSize: "16px",
-      lineHeight: "1.6em"
-    }
-  }
+      lineHeight: "1.6em",
+    },
+  },
 };
 
 export default descriptionStyle;

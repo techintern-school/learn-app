@@ -11,9 +11,9 @@ const styles = {
     width: "100%",
     minHeight: "1px",
     paddingRight: "15px",
-    paddingLeft: "15px"
+    paddingLeft: "15px",
     /* flexBasis: "auto" */
-  }
+  },
 };
 
 const useStyles = makeStyles(styles);
@@ -29,10 +29,10 @@ export default function GridItem(props) {
 }
 
 GridItem.defaultProps = {
-  className: ""
+  className: "",
 };
 
 GridItem.propTypes = {
   children: PropTypes.node,
-  className: PropTypes.string
+  className: PropTypes.string,
 };

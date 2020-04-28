@@ -29,7 +29,7 @@ export default function CardFooter(props) {
     [classes.cardFooterProfile]: profile || testimonial,
     [classes.cardFooterPricing]: pricing,
     [classes.cardFooterTestimonial]: testimonial,
-    [className]: className !== undefined
+    [className]: className !== undefined,
   });
   return (
     <div className={cardFooterClasses} {...rest}>
@@ -44,5 +44,5 @@ CardFooter.propTypes = {
   profile: PropTypes.bool,
   pricing: PropTypes.bool,
   testimonial: PropTypes.bool,
-  children: PropTypes.node
+  children: PropTypes.node,
 };

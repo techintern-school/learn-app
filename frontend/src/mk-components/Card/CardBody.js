@@ -33,7 +33,7 @@ export default function CardBody(props) {
     [classes.cardPricing]: pricing,
     [classes.cardSignup]: signup,
     [classes.cardBodyColor]: color,
-    [className]: className !== undefined
+    [className]: className !== undefined,
   });
   return (
     <div className={cardBodyClasses} {...rest}>
@@ -50,5 +50,5 @@ CardBody.propTypes = {
   pricing: PropTypes.bool,
   signup: PropTypes.bool,
   color: PropTypes.bool,
-  children: PropTypes.node
+  children: PropTypes.node,
 };

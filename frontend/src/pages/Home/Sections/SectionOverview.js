@@ -10,7 +10,7 @@ import InfoArea from "../../../mk-components/InfoArea/InfoArea.js";
 import FaceIcon from "@material-ui/icons/Face";
 import AccessTime from "@material-ui/icons/AccessTime";
 import AttachMoney from "@material-ui/icons/AttachMoney";
-import WbIncandescentIcon from '@material-ui/icons/WbIncandescent';
+import WbIncandescentIcon from "@material-ui/icons/WbIncandescent";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 
@@ -25,11 +25,13 @@ export default function SectionOverview() {
       <div
         className={classes.features5}
         style={{
-          backgroundImage: `url(${require("../../../assets/img/books.jpg")})`
+          backgroundImage: `url(${require("../../../assets/img/books.jpg")})`,
         }}
       >
         <GridItem md={8} className={classNames(classes.mlAuto, classes.mrAuto)}>
-          <h2 className={classes.title}>Why should you choose techIntern.school?</h2>
+          <h2 className={classes.title}>
+            Why should you choose techIntern.school?
+          </h2>
         </GridItem>
         <div className={classes.container}>
           <GridContainer justify="center">
@@ -38,7 +40,10 @@ export default function SectionOverview() {
                 title="Learn by doing"
                 description={
                   <p>
-                    In our project based curriculum, you will learn to solve real problems you will encounter in your career. These projects will help build out your resume, and demonstrate you can learn the skills employers need. 
+                    In our project based curriculum, you will learn to solve
+                    real problems you will encounter in your career. These
+                    projects will help build out your resume, and demonstrate
+                    you can learn the skills employers need.
                   </p>
                 }
                 icon={WbIncandescentIcon}
@@ -51,7 +56,10 @@ export default function SectionOverview() {
                 title="1 on 1 Mentoring"
                 description={
                   <p>
-                    Get mentored by an experienced software engineer. Get feedback on your progress and expand your perspective. All our mentors have 3+ years professional software engineering experience, and want to help you learn. 
+                    Get mentored by an experienced software engineer. Get
+                    feedback on your progress and expand your perspective. All
+                    our mentors have 3+ years professional software engineering
+                    experience, and want to help you learn.
                   </p>
                 }
                 icon={FaceIcon}
@@ -64,7 +72,10 @@ export default function SectionOverview() {
                 title="Cheaper than a bootcamp"
                 description={
                   <p>
-                    We designed our learning platform to be a fraction of the cost of a traditional bootcamp. Without sacrificing the valuable mentorship that bootcamps offer. We charge a monthly tuition fee, and you are able to cancel at anytime. 
+                    We designed our learning platform to be a fraction of the
+                    cost of a traditional bootcamp. Without sacrificing the
+                    valuable mentorship that bootcamps offer. We charge a
+                    monthly tuition fee, and you are able to cancel at anytime.
                   </p>
                 }
                 icon={AttachMoney}
@@ -77,7 +88,10 @@ export default function SectionOverview() {
                 title="Learn faster"
                 description={
                   <p>
-                    It is possible to become a software engineer through self guided study. The problem isn't a lack of resources, but too many. Our curriculum will focus your time on learning the right skills, so you can become a software engineer sooner. 
+                    It is possible to become a software engineer through self
+                    guided study. The problem isn't a lack of resources, but too
+                    many. Our curriculum will focus your time on learning the
+                    right skills, so you can become a software engineer sooner.
                   </p>
                 }
                 icon={AccessTime}

@@ -27,7 +27,7 @@ export default function CustomTable(props) {
     striped,
     tableShopping,
     customHeadCellClasses,
-    customHeadClassesForCells
+    customHeadClassesForCells,
   } = props;
   const classes = useStyles();
   return (
@@ -46,7 +46,7 @@ export default function CustomTable(props) {
                     [customHeadCellClasses[
                       customHeadClassesForCells.indexOf(key)
                     ]]: customHeadClassesForCells.indexOf(key) !== -1,
-                    [classes.tableShoppingHead]: tableShopping
+                    [classes.tableShoppingHead]: tableShopping,
                   });
                 return (
                   <TableCell className={tableCellClasses} key={key}>
@@ -69,7 +69,7 @@ export default function CustomTable(props) {
             const tableRowClasses = cx({
               [classes.tableRowHover]: hover,
               [classes[rowColor + "Row"]]: rowColored,
-              [classes.tableStripedRow]: striped && key % 2 === 0
+              [classes.tableStripedRow]: striped && key % 2 === 0,
             });
             if (prop.total) {
               return (
@@ -141,7 +141,7 @@ export default function CustomTable(props) {
                       [classes[colorsColls[coloredColls.indexOf(key)]]]:
                         coloredColls.indexOf(key) !== -1,
                       [customCellClasses[customClassesForCells.indexOf(key)]]:
-                        customClassesForCells.indexOf(key) !== -1
+                        customClassesForCells.indexOf(key) !== -1,
                     });
                   return (
                     <TableCell className={tableCellClasses} key={key}>
@@ -167,7 +167,7 @@ CustomTable.defaultProps = {
   customCellClasses: [],
   customClassesForCells: [],
   customHeadCellClasses: [],
-  customHeadClassesForCells: []
+  customHeadClassesForCells: [],
 };
 
 CustomTable.propTypes = {
@@ -178,7 +178,7 @@ CustomTable.propTypes = {
     "success",
     "info",
     "rose",
-    "gray"
+    "gray",
   ]),
   tableHead: PropTypes.arrayOf(PropTypes.string),
   // Of(PropTypes.arrayOf(PropTypes.node)) || Of(PropTypes.object),
@@ -193,5 +193,5 @@ CustomTable.propTypes = {
   customHeadClassesForCells: PropTypes.arrayOf(PropTypes.number),
   striped: PropTypes.bool,
   // this will cause some changes in font
-  tableShopping: PropTypes.bool
+  tableShopping: PropTypes.bool,
 };

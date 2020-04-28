@@ -16,17 +16,17 @@ export default function CustomFileInput(props) {
   // eslint-disable-next-line
   const [files, setFiles] = React.useState(null);
   let hiddenFile = React.createRef();
-  const onFocus = e => {
+  const onFocus = (e) => {
     hiddenFile.current.click(e);
   };
   // eslint-disable-next-line
-  const handleSubmit = e => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     // files is the file/image uploaded
     // in this function you can save the image (files) on form submit
     // you have to call it yourself
   };
-  const addFile = e => {
+  const addFile = (e) => {
     let fileNames = "";
     let files = e.target.files;
     for (let i = 0; i < e.target.files.length; i++) {
@@ -44,7 +44,7 @@ export default function CustomFileInput(props) {
     startButton,
     inputProps,
     formControlProps,
-    multiple
+    multiple,
   } = props;
   const classes = useStyles();
   if (inputProps && inputProps.type && inputProps.type === "file") {
@@ -80,14 +80,14 @@ export default function CustomFileInput(props) {
       <CustomInput
         id={id}
         formControlProps={{
-          ...formControlProps
+          ...formControlProps,
         }}
         inputProps={{
           ...inputProps,
           onClick: onFocus,
           value: fileNames,
           endAdornment: buttonEnd,
-          startAdornment: buttonStart
+          startAdornment: buttonStart,
         }}
       />
     </div>
@@ -95,7 +95,7 @@ export default function CustomFileInput(props) {
 }
 
 CustomFileInput.defaultProps = {
-  multiple: false
+  multiple: false,
 };
 
 CustomFileInput.propTypes = {
@@ -104,5 +104,5 @@ CustomFileInput.propTypes = {
   startButton: PropTypes.object,
   inputProps: PropTypes.object,
   formControlProps: PropTypes.object,
-  multiple: PropTypes.bool
+  multiple: PropTypes.bool,
 };

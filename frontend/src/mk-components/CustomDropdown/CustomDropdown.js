@@ -23,20 +23,20 @@ const useStyles = makeStyles(styles);
 export default function CustomDropdown(props) {
   const [anchorEl, setAnchorEl] = React.useState(null);
 
-  const handleClick = event => {
+  const handleClick = (event) => {
     if (anchorEl && anchorEl.contains(event.target)) {
       setAnchorEl(null);
     } else {
       setAnchorEl(event.currentTarget);
     }
   };
-  const handleClose = event => {
+  const handleClose = (event) => {
     if (anchorEl.contains(event.target)) {
       return;
     }
     setAnchorEl(null);
   };
-  const handleCloseMenu = param => {
+  const handleCloseMenu = (param) => {
     setAnchorEl(null);
     if (props && props.onClick) {
       props.onClick(param);
@@ -55,20 +55,20 @@ export default function CustomDropdown(props) {
     rtlActive,
     noLiPadding,
     innerDropDown,
-    navDropdown
+    navDropdown,
   } = props;
   const classes = useStyles();
   const caretClasses = classNames({
     [classes.caret]: true,
     [classes.caretDropup]: dropup && !anchorEl,
     [classes.caretActive]: Boolean(anchorEl) && !dropup,
-    [classes.caretRTL]: rtlActive
+    [classes.caretRTL]: rtlActive,
   });
   const dropdownItem = classNames({
     [classes.dropdownItem]: true,
     [classes[hoverColor + "Hover"]]: true,
     [classes.noLiPadding]: noLiPadding,
-    [classes.dropdownItemRTL]: rtlActive
+    [classes.dropdownItemRTL]: rtlActive,
   });
   const dropDownMenu = (
     <MenuList role="menu" className={classes.menuList}>
@@ -141,7 +141,7 @@ export default function CustomDropdown(props) {
         className={classNames({
           [classes.popperClose]: !anchorEl,
           [classes.pooperResponsive]: true,
-          [classes.pooperNav]: Boolean(anchorEl) && navDropdown
+          [classes.pooperNav]: Boolean(anchorEl) && navDropdown,
         })}
       >
         {() => (
@@ -173,7 +173,7 @@ export default function CustomDropdown(props) {
 CustomDropdown.defaultProps = {
   caret: true,
   dropup: false,
-  hoverColor: "primary"
+  hoverColor: "primary",
 };
 
 CustomDropdown.propTypes = {
@@ -184,7 +184,7 @@ CustomDropdown.propTypes = {
     "success",
     "warning",
     "danger",
-    "rose"
+    "rose",
   ]),
   buttonText: PropTypes.node,
   buttonIcon: PropTypes.object,
@@ -206,11 +206,11 @@ CustomDropdown.propTypes = {
     "right-start",
     "right-end",
     "left-start",
-    "left-end"
+    "left-end",
   ]),
   noLiPadding: PropTypes.bool,
   innerDropDown: PropTypes.bool,
   navDropdown: PropTypes.bool,
   // This is a function that returns the clicked menu item
-  onClick: PropTypes.func
+  onClick: PropTypes.func,
 };

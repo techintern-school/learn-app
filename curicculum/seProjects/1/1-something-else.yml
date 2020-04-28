@@ -1,15 +1,15 @@
---- 
+---
 name: "something-else"
 id: "mISvvHnHq"
 version: "0.0.1"
 index: "1"
 sections:
   - type: text
-    path: 'markdown/1-test.md'
+    path: "markdown/1-test.md"
     id: "7J66zU3rB7"
   - type: assignment
     id: "097_sLBuK"
-    content: 
+    content:
       overview: "what is what"
       requirements:
         - id: "Y7BCsb6TL_"
@@ -20,7 +20,7 @@ sections:
           isCheckable: false
   - type: steps
     id: "UoyHhD2dP"
-    content: 
+    content:
       requirements:
         - id: "QE7-ku3peM"
           text: "do x"
@@ -29,5 +29,5 @@ sections:
           text: "do y"
           isCheckable: true
   - type: text
-    path: 'markdown/1-test.md'
+    path: "markdown/1-test.md"
     id: "VCyUsUKKg"

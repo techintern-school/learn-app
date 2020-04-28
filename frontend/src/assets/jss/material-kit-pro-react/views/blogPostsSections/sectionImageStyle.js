@@ -5,14 +5,14 @@ import {
   container,
   blackColor,
   whiteColor,
-  hexToRgb
+  hexToRgb,
 } from "assets/jss/material-kit-pro-react.js";
 
 const sectionImageStyle = {
   container: {
     ...container,
     position: "relative",
-    zIndex: "2"
+    zIndex: "2",
   },
   section: {
     ...section,
@@ -28,19 +28,19 @@ const sectionImageStyle = {
       left: "0",
       top: "0",
       content: "''",
-      backgroundColor: "rgba(" + hexToRgb(blackColor) + ", 0.7)"
-    }
+      backgroundColor: "rgba(" + hexToRgb(blackColor) + ", 0.7)",
+    },
   },
   cardTitle: {
     ...cardTitle,
-    color: whiteColor + "  !important"
+    color: whiteColor + "  !important",
   },
   description: {
-    color: "rgba(" + hexToRgb(whiteColor) + ", 0.76)"
+    color: "rgba(" + hexToRgb(whiteColor) + ", 0.76)",
   },
   textLeft: {
-    textAlign: "left"
-  }
+    textAlign: "left",
+  },
 };
 
 export default sectionImageStyle;

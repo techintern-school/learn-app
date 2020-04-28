@@ -1,10 +1,10 @@
-  - type: steps
-    id: "%%ID%%"
-    content: 
-      requirements:
-        - id: "%%ID%%"
-          text: "do x"
-          isCheckable: true
-        - id: "%%ID%%"
-          text: "do y"
-          isCheckable: true
+- type: steps
+  id: "%%ID%%"
+  content:
+    requirements:
+      - id: "%%ID%%"
+        text: "do x"
+        isCheckable: true
+      - id: "%%ID%%"
+        text: "do y"
+        isCheckable: true

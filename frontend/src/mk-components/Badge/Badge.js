@@ -17,13 +17,13 @@ export default function Badge(props) {
   const badgeClasses = classNames({
     [classes.badge]: true,
     [classes[color]]: true,
-    [className]: className !== undefined
+    [className]: className !== undefined,
   });
   return <span className={badgeClasses}>{children}</span>;
 }
 
 Badge.defaultProps = {
-  color: "gray"
+  color: "gray",
 };
 
 Badge.propTypes = {
@@ -34,8 +34,8 @@ Badge.propTypes = {
     "success",
     "info",
     "rose",
-    "gray"
+    "gray",
   ]),
   className: PropTypes.string,
-  children: PropTypes.node
+  children: PropTypes.node,
 };

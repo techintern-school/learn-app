@@ -1,17 +1,20 @@
-import { applyMiddleware, createStore, combineReducers, compose } from 'redux';
-import { routerMiddleware, connectRouter } from 'connected-react-router/immutable';
-import { firestoreReducer } from 'redux-firestore'
+import { applyMiddleware, createStore, combineReducers, compose } from "redux";
+import {
+  routerMiddleware,
+  connectRouter,
+} from "connected-react-router/immutable";
+import { firestoreReducer } from "redux-firestore";
 import {
   SET_USER,
   PROJECT_COMPLETE_CONSTANT,
   PROJECT_INCOMPLETE_CONSTANT,
   SET_CURIC_VERSION,
   MARK_PROJECT_COMPLETED,
-  SET_CURRENT_PROJECT
-} from './actions';
+  SET_CURRENT_PROJECT,
+} from "./actions";
 
 let composeEnhancers = null;
-if (process.env.NODE_ENV === 'development') {
+if (process.env.NODE_ENV === "development") {
   composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__;
 } else {
   composeEnhancers = compose;
@@ -25,11 +28,7 @@ export function configureStore(history) {
   const enhancer = composeEnhancers(applyMiddleware(...middlewares));
 
   //Store creation
-  const store = createStore(
-    rootReducer(history),
-    {},
-    enhancer
-  );
+  const store = createStore(rootReducer(history), {}, enhancer);
 
   return store;
 }
@@ -39,48 +38,57 @@ const rootReducer = (history) =>
     router: connectRouter(history),
     learning: learningReducer,
     user: userReducer,
-    firestore: firestoreReducer
-  })
+    firestore: firestoreReducer,
+  });
 
 export function userReducer(state = {}, action) {
   switch (action.type) {
     case SET_USER:
-      return action.user
+      return action.user;
     default:
-      return state
+      return state;
   }
 }
 
 export function handleProjectCompleted(index, completedProjects) {
-  let projects = [...completedProjects]
+  let projects = [...completedProjects];
   // handle case where projects is longer than current index
   if (projects.length > index) {
-    projects[index] = PROJECT_COMPLETE_CONSTANT
+    projects[index] = PROJECT_COMPLETE_CONSTANT;
   } else {
     while (projects.length < index) {
-      projects.push(PROJECT_INCOMPLETE_CONSTANT)
+      projects.push(PROJECT_INCOMPLETE_CONSTANT);
     }
-    projects.push(PROJECT_COMPLETE_CONSTANT)
+    projects.push(PROJECT_COMPLETE_CONSTANT);
   }
-  return projects
+  return projects;
 }
 
-export function learningReducer(state = {
-  activeProject: 0,
-  completedProjects: [],
-  curicVersion: 1,
-  project: {
-    completedSections: []
-  }
-}, action) {
+export function learningReducer(
+  state = {
+    activeProject: 0,
+    completedProjects: [],
+    curicVersion: 1,
+    project: {
+      completedSections: [],
+    },
+  },
+  action
+) {
   switch (action.type) {
     case SET_CURRENT_PROJECT:
-      return { ...state, activeProject: action.index }
+      return { ...state, activeProject: action.index };
     case MARK_PROJECT_COMPLETED:
-      return { ...state, completedProjects: handleProjectCompleted(action.index, state.completedProjects) }
+      return {
+        ...state,
+        completedProjects: handleProjectCompleted(
+          action.index,
+          state.completedProjects
+        ),
+      };
     case SET_CURIC_VERSION:
-      return { ...state, curicVersion: action.version }
+      return { ...state, curicVersion: action.version };
     default:
-      return state
+      return state;
   }
 }

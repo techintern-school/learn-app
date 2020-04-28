@@ -24,10 +24,10 @@ export default function Footer(props) {
     [classes.footer]: true,
     [classes[theme]]: themeType,
     [classes.big]: big || children !== undefined,
-    [className]: className !== undefined
+    [className]: className !== undefined,
   });
   const aClasses = classNames({
-    [classes.a]: true
+    [classes.a]: true,
   });
 
   return (
@@ -51,5 +51,5 @@ export default function Footer(props) {
 Footer.propTypes = {
   theme: PropTypes.oneOf(["dark", "white", "transparent"]),
   big: PropTypes.bool,
-  content: PropTypes.node.isRequired
+  content: PropTypes.node.isRequired,
 };

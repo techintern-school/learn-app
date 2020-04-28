@@ -5,21 +5,21 @@ import {
   blackColor,
   whiteColor,
   grayColor,
-  hexToRgb
+  hexToRgb,
 } from "../../material-kit-pro-react.js";
 
-const signupPageStyle = theme => ({
+const signupPageStyle = (theme) => ({
   description,
   cardTitle: {
     ...cardTitle,
-    color: whiteColor + "  !important"
+    color: whiteColor + "  !important",
   },
   container: {
     ...container,
     zIndex: "4",
     [theme.breakpoints.down("sm")]: {
-      paddingBottom: "100px"
-    }
+      paddingBottom: "100px",
+    },
   },
   pageHeader: {
     color: whiteColor,
@@ -32,7 +32,7 @@ const signupPageStyle = theme => ({
     minHeight: "100vh",
     alignItems: "center",
     "&:before": {
-      background: "rgba(" + hexToRgb(blackColor) + ", 0.5)"
+      background: "rgba(" + hexToRgb(blackColor) + ", 0.5)",
     },
     "&:before,&:after": {
       position: "absolute",
@@ -42,30 +42,30 @@ const signupPageStyle = theme => ({
       display: "block",
       left: "0",
       top: "0",
-      content: '""'
-    }
+      content: '""',
+    },
   },
   form: {
-    margin: "0"
+    margin: "0",
   },
   cardHeader: {
     width: "auto",
-    textAlign: "center"
+    textAlign: "center",
   },
   socialLine: {
     marginTop: "1rem",
     textAlign: "center",
-    padding: "0"
+    padding: "0",
   },
   inputIconsColor: {
-    color: grayColor[13]
+    color: grayColor[13],
   },
   textCenter: {
-    textAlign: "center"
+    textAlign: "center",
   },
   iconButtons: {
     marginRight: "3px !important",
-    marginLeft: "3px !important"
+    marginLeft: "3px !important",
   },
   block: {
     color: "inherit",
@@ -76,38 +76,38 @@ const signupPageStyle = theme => ({
     borderRadius: "3px",
     textDecoration: "none",
     position: "relative",
-    display: "block"
+    display: "block",
   },
   inlineBlock: {
     display: "inline-block",
     padding: "0px",
-    width: "auto"
+    width: "auto",
   },
   list: {
     marginBottom: "0",
     padding: "0",
-    marginTop: "0"
+    marginTop: "0",
   },
   left: {
     float: "left!important",
     display: "block",
     "&,& *,& *:hover,& *:focus": {
-      color: whiteColor + "  !important"
-    }
+      color: whiteColor + "  !important",
+    },
   },
   right: {
     padding: "15px 0",
     margin: "0",
     float: "right",
     "&,& *,& *:hover,& *:focus": {
-      color: whiteColor + "  !important"
-    }
+      color: whiteColor + "  !important",
+    },
   },
   icon: {
     width: "18px",
     height: "18px",
     top: "3px",
-    position: "relative"
+    position: "relative",
   },
   footer: {
     position: "absolute",
@@ -115,8 +115,8 @@ const signupPageStyle = theme => ({
     background: "transparent",
     bottom: "0",
     color: whiteColor,
-    zIndex: "2"
-  }
+    zIndex: "2",
+  },
 });
 
 export default signupPageStyle;

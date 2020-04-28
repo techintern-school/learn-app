@@ -1,15 +1,15 @@
---- 
+---
 name: "welcome"
 id: "M_42tuQZ5"
 version: "0.0.1"
 index: "0"
 sections:
   - type: text
-    content: 'some words'
+    content: "some words"
     id: "Y7GR7FtYhU"
   - type: assignment
     id: "KlTh3iGK2"
-    content: 
+    content:
       overview: "what is what"
       requirements:
         - id: "rVHoW3Yt3N"
@@ -20,7 +20,7 @@ sections:
           isCheckable: false
   - type: assignment
     id: "_GtSRh70j"
-    content: 
+    content:
       overview: "what is what"
       requirements:
         - id: "ztsc4pkq8Z"

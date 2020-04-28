@@ -1,12 +1,12 @@
 export function titleCase(str) {
-    str = str.toLowerCase().split(' ');
-    for (var i = 0; i < str.length; i++) {
-        str[i] = str[i].charAt(0).toUpperCase() + str[i].slice(1);
-    }
-    return str.join(' ');
+  str = str.toLowerCase().split(" ");
+  for (var i = 0; i < str.length; i++) {
+    str[i] = str[i].charAt(0).toUpperCase() + str[i].slice(1);
+  }
+  return str.join(" ");
 }
 
 export function titleCaseFromKebabCase(kebabStr = "") {
-    let unKebabStr = kebabStr.replace(/-/g, ' ');
-    return titleCase(unKebabStr);
+  let unKebabStr = kebabStr.replace(/-/g, " ");
+  return titleCase(unKebabStr);
 }

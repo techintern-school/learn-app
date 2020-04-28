@@ -1,7 +1,7 @@
 import {
   whiteColor,
   defaultFont,
-  hexToRgb
+  hexToRgb,
 } from "../../material-kit-pro-react.js";
 
 const customTabsStyle = {
@@ -11,30 +11,30 @@ const customTabsStyle = {
     padding: "10px 10px 10px 0",
     lineHeight: "24px",
     fontSize: "14px",
-    color: whiteColor
+    color: whiteColor,
   },
   cardTitleRTL: {
     float: "right",
-    padding: "10px 0px 10px 10px !important"
+    padding: "10px 0px 10px 10px !important",
   },
   displayNone: {
-    display: "none"
+    display: "none",
   },
   tabsContainer: {},
   tabsContainerRTL: {
-    float: "right"
+    float: "right",
   },
   tabIcon: {
     width: "24px",
     height: "24px",
-    marginRight: "4px"
+    marginRight: "4px",
   },
   customTabsRoot: {
-    minHeight: "unset !important"
+    minHeight: "unset !important",
   },
   customTabSelected: {
     backgroundColor: "rgba(" + hexToRgb(whiteColor) + ", 0.2)",
-    transition: "background-color .4s"
+    transition: "background-color .4s",
   },
   customTabRoot: {
     width: "auto",
@@ -47,7 +47,7 @@ const customTabsStyle = {
     minHeight: "unset",
     fontWeight: "500",
     fontSize: "12px",
-    lineHeight: "24px"
+    lineHeight: "24px",
   },
   customTabWrapper: {
     display: "inline-block",
@@ -59,12 +59,12 @@ const customTabsStyle = {
     maxHeight: "unset !important",
     "& > svg": {
       verticalAlign: "middle",
-      margin: "-1.55px 5px 0 0 !important"
+      margin: "-1.55px 5px 0 0 !important",
     },
     "&,& *": {
-      letterSpacing: "normal !important"
-    }
-  }
+      letterSpacing: "normal !important",
+    },
+  },
 };
 
 export default customTabsStyle;

@@ -41,11 +41,10 @@ function updateDB(dbInfo, runInfo) {
                 challengeRuns[challengeID].push(runInfo)
                 projectDoc.set({ completedSections, challengeRuns }, { merge: true })
                     .then(function () {
-                        console.log("Document successfully written!");
                         resolve()
                     })
                     .catch(function (error) {
-                        console.error("Error writing document: ", error);
+                        console.error("Error persisting document: ", error);
                         reject()
                     });
             })
@@ -57,7 +56,7 @@ program.version('0.0.1');
 const userConfigFilePath = `${homedir}/.tisConfig.json`;
 
 function getOutputString(output) {
-    let str = 'no output';
+    let str = '';
     if (output && typeof output.toString === 'function' && output.toString().length > 0) {
         str = output.toString();
     }
@@ -93,6 +92,8 @@ program.command('run')
         }
         
         const userConfig = JSON.parse(userConfigFile)
+        // add to global
+        process.githubID = userConfig.githubID;
         
         // get the config file for the challenge from the current directory 
         let challengeConfigFile;
@@ -112,8 +113,17 @@ program.command('run')
         let output;
         let error;
         try {
-            output = execSync(challengeConfig.exec);
-            console.log(getOutputString(output))
+            process.testVar = 0;
+            let execString = challengeConfig.exec
+            if (challengeConfig.hasOwnProperty('execArgs')) {
+                argString = challengeConfig.execArgs.map(varName => process[varName])
+                execString = `${execString} ${argString}`;
+            }
+            output = execSync(execString);
+            outputString = getOutputString(output)
+            if (outputString) {
+                console.log(outputString)
+            }
         } catch (e) {
             error = e;
             console.log(e)

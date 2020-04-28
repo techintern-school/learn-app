@@ -20,6 +20,9 @@ var firebaseConfig = {
     measurementId: "G-BG65RP0TJK"
 };
 
+const CHALLENGE_INCOMPLETE = 0 
+const CHALLENGE_COMPLETE = 1
+
 
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
@@ -32,8 +35,10 @@ function updateDB(dbInfo, runInfo) {
         projectDoc.get()
             .then((doc) => {
                 const dbData = doc.data() || {};
-                const previouslyCompleted = dbData.completedSections || []
-                const completedSections = [...previouslyCompleted, challengeID]
+                let completedSections = dbData.completedSections || []
+                if (runInfo.status === CHALLENGE_COMPLETE) {
+                    completedSections = [...completedSections, challengeID]
+                }
                 let challengeRuns = dbData.challengeRuns || {}
                 if (!challengeRuns.hasOwnProperty(challengeID)) {
                     challengeRuns[challengeID] = []
@@ -113,7 +118,6 @@ program.command('run')
         let output;
         let error;
         try {
-            process.testVar = 0;
             let execString = challengeConfig.exec
             if (challengeConfig.hasOwnProperty('execArgs')) {
                 argString = challengeConfig.execArgs.map(varName => process[varName])
@@ -138,22 +142,25 @@ program.command('run')
         let runInfo = {
             ts: Date.now(), 
 
-            output: getOutputString(output)
+            output: outputString
         }
-        if (error === undefined) {
+        // check if the output string is COMPLETE
+        if (outputString[0] === 'C') {
             // update completed sections
             // TODO enumerate these values somewhere
-            runInfo.status = 1
+            runInfo.status = CHALLENGE_COMPLETE
 
         } else {
             // update challenge attempt
-            runInfo.status = 0
+            runInfo.status = CHALLENGE_INCOMPLETE
             // TODO: is stack too much info to save to firestore? Is there a better place to store this?
-            runInfo.error = error.message
+            if (error && error.message) {
+                runInfo.error = error.message
+            }
         }
         updateDB(dbInfo, runInfo)
-            .then(() => process.exit())
-            .catch(() => process.exit())
+            .then(() => process.exit(0))
+            .catch(() => process.exit(1))
 
     });
 

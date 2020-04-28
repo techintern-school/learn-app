@@ -1,2 +1,2 @@
-# currapp
-Curriculum application for techIntern.school
+# learning application
+Learning application for techIntern.school

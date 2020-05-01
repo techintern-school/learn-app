@@ -1,16 +1,14 @@
 ## techIntern.school Command Line Interface
 
-This CLI is used to submit solutions to challenges.
+This CLI is used to submit solutions to techIntern.school's project challenges.
 
 ### Installation
 
-Assuming Node.js and npm are already installed, install the tis CLI globally:
-
-`npm install -g tis-cli`
-
-Then run `tis setup` to complete the installation.
+`npm install tis-cli`
 
 ### Commands
+
+This package exposes a global `tis` that can be called from npm scripts or `./node_modules/.bin/tis`.
 
 #### Setup
 

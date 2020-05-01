@@ -130,10 +130,7 @@ program
         "utf8"
       );
     } catch (e) {
-      console.log(e);
-      console.log(
-        "Oh no. There was an error reading .tisC.json with error the above error message:"
-      );
+      console.log("Oh no. There was an error reading .tisC.json file");
       if (typeof challengeConfigFile !== undefined) {
         console.log(" Are you running this command in a challenge directory?");
       }

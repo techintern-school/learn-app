@@ -1,6 +1,0 @@
-{
-  "challengeID": "example",
-  "projectID": "example",
-  "exec": "exit",
-  "execArgs": ["testVar"]
-}

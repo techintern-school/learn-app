@@ -1,31 +1,70 @@
 ---
-name: "welcome"
+name: "Getting Started"
 id: "M_42tuQZ5"
 version: "0.0.1"
 index: "0"
 sections:
-  - type: text
-    content: "some words"
+  - type: markdown
+    path: "markdown/0-welcome_letter.md"
     id: "Y7GR7FtYhU"
-  - type: assignment
-    id: "KlTh3iGK2"
+  - type: markdown
+    path: "markdown/0-intro.md"
+    id: "b7O0eJqHM"
+  - type: challenge
+    id: "8-qnYajbr"
     content:
-      overview: "what is what"
+      overview: "Your first challenge will be to create a Github account and Star the learning application repository. You should follow the steps below to setup your computer to submit the challenge. When you have sucessfully compelted the challenge, this checkbox automatically be checked."
       requirements:
-        - id: "rVHoW3Yt3N"
-          text: "do x"
+        - id: "zhLKEBKuDk"
+          text: "Star the learn-app repo"
           isCheckable: false
-        - id: "NDPV7_ZNdH"
-          text: "do y"
-          isCheckable: false
-  - type: assignment
-    id: "_GtSRh70j"
+  - type: steps
+    id: "R2LtBDQzm"
     content:
-      overview: "what is what"
       requirements:
-        - id: "ztsc4pkq8Z"
-          text: "do x"
-          isCheckable: false
-        - id: "ZfTT3-b_Lm"
-          text: "do y"
-          isCheckable: false
+        - id: "1icj9acz"
+          text: "Go to https://github.com/join?source=techIntern.school and signup"
+          isCheckable: true
+        - id: "-l456x5yWr"
+          text: "Star https://github.com/techintern-school/learn-app"
+          isCheckable: true
+  - type: text
+    content: "Now we’re going to install the command line interface. If you have never worked with the terminal before, check out the resources below. The CLI is going to be installed using an application Node Package Manager (npm). In order to do this, we need to install a programming language called Node.JS. Unfortunately, NodeJS is not installed by default on OSX. The easiest way to install Node.JS is to use another package manager, called HomeBrew. "
+    id: "gWdTEJiYP"
+  - type: steps
+    id: "E_avmblRu"
+    content:
+      requirements:
+        - id: "WQvZ93FdLG"
+          text: "Install Homebrew: Follow instructions until HomeBrew commands: https://www.datacamp.com/community/tutorials/homebrew-install-use"
+          isCheckable: true
+        - id: "jBYG2f4BiB"
+          text: "Install Node: brew install node"
+          isCheckable: true
+        - id: "EHtNd6EpVv"
+          text: "Download the repository to your computer: git clone https://github.com/techintern-school/ise-projects.git"
+          isCheckable: true
+        - id: "q6_mS9sPtw"
+          text: "navigate to the repo directory: cd ise-projects"
+          isCheckable: true
+        - id: "2W32OWssb6"
+          text: "install the application: npm install"
+          isCheckable: true
+        - id: "-5cgsrSvTu"
+          text: "Run the setup command: npm run setup"
+          isCheckable: true
+        - id: "u-6p7G-x8J"
+          text: "Enter your user ID then hit enter - you can find this by clicking on the menu in the top left of the app, then clicking the account button, and copying the value"
+          isCheckable: true
+        - id: "b8c4MD-mHF"
+          text: "Enter your github ID then hit enter - you can find this in the github website"
+          isCheckable: true
+        - id: "b8c4MD-mHFz"
+          text: "Navigate to the challenge directory: cd project-0/challenge-0/"
+          isCheckable: true
+        - id: "iC7Cq5Im76"
+          text: "Submit your challenge for evaluation: npm run submit"
+          isCheckable: true
+  - type: text
+    content: "You should see the checkbox under the challenge marked as complete. Once that is done, mark this project by clicking on the purple button below and we will move onto the next project. "
+    id: "t42HQJ9GP"

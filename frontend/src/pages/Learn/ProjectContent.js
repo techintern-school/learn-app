@@ -14,15 +14,16 @@ function renderHTML(html) {
   return <div dangerouslySetInnerHTML={htmlArg} />;
 }
 
-function TextContent(content, isHTML) {
-  if (isHTML) {
-    return renderHTML(content);
-  }
+function TextContent(content) {
   return (
     <Typography variant={"body1"} paragraph>
       {content}
     </Typography>
   );
+}
+
+function MarkdownContent(content) {
+  return renderHTML(content);
 }
 
 function HintContent(content) {
@@ -63,11 +64,11 @@ function HintContent(content) {
   );
 }
 
-function AssignmentContent(content) {
+function ChallengeContent(content) {
   return (
     <div>
       <Typography variant={"h4"} paragraph>
-        Assignment:
+        Challenge:
       </Typography>
       <Typography variant={"body1"} paragraph>
         <b>Overview</b>: {content.overview}
@@ -77,17 +78,6 @@ function AssignmentContent(content) {
       </Typography>
       <CheckList items={content.requirements} />
     </div>
-  );
-}
-
-function DiscussionContent(content, isHTML) {
-  if (isHTML) {
-    return renderHTML(content);
-  }
-  return (
-    <Typography variant={"caption"} paragraph style={{ paddingTop: "10px" }}>
-      <b>Discussion:</b> {content}
-    </Typography>
   );
 }
 
@@ -106,9 +96,9 @@ function getSectionContent(section, i) {
   const type = section.type || "text";
   const lookup = {
     text: TextContent,
+    markdown: MarkdownContent,
     hints: HintContent,
-    assignment: AssignmentContent,
-    discussion: DiscussionContent,
+    challenge: ChallengeContent,
     steps: NextStepContent,
   };
   if (typeof lookup[type] !== "function") {
@@ -116,7 +106,7 @@ function getSectionContent(section, i) {
   }
   return (
     <span key={`section${i}`} style={{ paddingTop: "10px" }}>
-      {lookup[type](section.content, section.wasMarkdown)}
+      {lookup[type](section.content)}
       <Divider />
       <div style={{ paddingTop: "20px" }}></div>
     </span>

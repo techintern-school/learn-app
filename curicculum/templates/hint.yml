@@ -1,5 +1,5 @@
-- type: hint
-  id: "%%ID%%"
-  content:
-    - hint 1
-    - hint 2
+  - type: hint
+    id: "%%ID%%"
+    content:
+      - hint 1
+      - hint 2

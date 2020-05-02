@@ -20,7 +20,8 @@ function CheckList(props) {
   const classes = useStyles();
 
   const handleCheckboxClick = (item) => () => {
-    let previouslyCompletedSections = props.project.completedSections || [];
+    let previouslyCompletedSections =
+      (props.project && props.project.completedSections) || [];
     let completedSections;
 
     const { id } = item;

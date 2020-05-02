@@ -1,10 +1,11 @@
-  - type: steps
+  - type: challenge
     id: "%%ID%%"
     content:
+      overview: "what is what"
       requirements:
         - id: "%%ID%%"
           text: "do x"
-          isCheckable: true
+          isCheckable: false
         - id: "%%ID%%"
           text: "do y"
-          isCheckable: true
+          isCheckable: false

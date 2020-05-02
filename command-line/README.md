@@ -17,5 +17,5 @@ This package exposes a global `tis` that can be called from npm scripts or `./no
 
 #### Run
 
-**Command**: `tis run`
-**Description:** run this command inside any challenge directory to submit your solution.
+**Command**: `tis run {challenge_directory}`
+**Description:** run this command to submit your solution in challenge directory.

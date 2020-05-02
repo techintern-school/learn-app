@@ -96,11 +96,9 @@ program
   });
 
 program
-  .command("run")
-  .description(
-    "run the program associated with the challenge in the current directory"
-  )
-  .action(() => {
+  .command("run <challengeDirectory>")
+  .description("run the program associated with the challenge directory")
+  .action((challengeDirectory) => {
     // get the config file for the user from the configFile directory
     let userConfigFile;
     try {
@@ -126,7 +124,7 @@ program
     let challengeConfigFile;
     try {
       challengeConfigFile = fs.readFileSync(
-        `${process.cwd()}/.tisC.json`,
+        `${challengeDirectory}/.tisC.json`,
         "utf8"
       );
     } catch (e) {
@@ -142,7 +140,7 @@ program
     let output;
     let error;
     try {
-      let execString = challengeConfig.exec;
+      let execString = `cd ${challengeDirectory} && ${challengeConfig.exec}`;
       if (challengeConfig.hasOwnProperty("execArgs")) {
         argString = challengeConfig.execArgs.map((varName) => process[varName]);
         execString = `${execString} ${argString}`;

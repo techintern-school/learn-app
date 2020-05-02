@@ -10,6 +10,8 @@ import List from "@material-ui/core/List";
 import Typography from "@material-ui/core/Typography";
 import Divider from "@material-ui/core/Divider";
 import IconButton from "@material-ui/core/IconButton";
+import ListItemIcon from "@material-ui/core/ListItemIcon";
+import DoneIcon from "@material-ui/icons/Done";
 import MenuIcon from "@material-ui/icons/Menu";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
@@ -17,8 +19,13 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import ProjectContent from "./ProjectContent";
 import GithubIssue from "../../components/GithubIssue";
+import AccountButton from "../../components/AccountButton";
 import Button from "@material-ui/core/Button";
-import { setActiveProject, markProjectCompleted } from "../../redux/actions.js";
+import {
+  setActiveProject,
+  markProjectCompleted,
+  PROJECT_COMPLETE_CONSTANT,
+} from "../../redux/actions.js";
 import {
   handleLoginFromRefresh,
   updateUserData,
@@ -33,7 +40,7 @@ function Learn(props) {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
   const [projects, setProjects] = React.useState([
-    { Name: "Loading Projects" },
+    { Name: "Loading Projects", sections: [] },
   ]);
 
   let fireStoreConnectArg = [];
@@ -128,6 +135,19 @@ function Learn(props) {
     handleProjectClick(getActiveProject(props) + 1);
   }
 
+  function isProjectCompleted(pIndex) {
+    if (
+      props.userInfo &&
+      props.userInfo.completedProjects &&
+      Array.isArray(props.userInfo.completedProjects)
+    ) {
+      return (
+        props.userInfo.completedProjects[pIndex] === PROJECT_COMPLETE_CONSTANT
+      );
+    }
+    return false;
+  }
+
   function NextProject() {
     return (
       // TODO: make this only clickable when all requirements
@@ -176,6 +196,7 @@ function Learn(props) {
         }}
       >
         <div className={classes.drawerHeader}>
+          <AccountButton />
           <IconButton onClick={handleDrawerClose}>
             {theme.direction === "ltr" ? (
               <ChevronLeftIcon />
@@ -193,6 +214,11 @@ function Learn(props) {
               key={projectInfo.name + { index }}
             >
               <ListItemText primary={`${index}. ${projectInfo.name}`} />
+              {isProjectCompleted(index) ? (
+                <ListItemIcon>
+                  <DoneIcon />
+                </ListItemIcon>
+              ) : null}
             </ListItem>
           ))}
         </List>
@@ -246,6 +272,9 @@ const mapStateToProps = (state) => {
     user,
   };
 };
-const ConnectedLearn = connect(mapStateToProps, mapDispatchToProps)(Learn);
+const ConnectedLearn = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Learn);
 
 export default ConnectedLearn;

@@ -65,4 +65,16 @@ test("learningReducer", () => {
     completedProjects: [1],
     curicVersion: 1,
   });
+  const testOneAlreadyDoneState = {
+    activeProject: 0,
+    completedProjects: [1],
+    curicVersion: 1,
+  };
+  expect(
+    learningReducer(testOneAlreadyDoneState, markProjectCompleted(1))
+  ).toEqual({
+    activeProject: 0,
+    completedProjects: [1, 1],
+    curicVersion: 1,
+  });
 });

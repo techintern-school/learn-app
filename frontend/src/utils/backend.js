@@ -46,10 +46,10 @@ export function updateCompletedSections(completedSections, projectID) {
     .doc(projectID);
   projectDoc
     .set({ completedSections }, { merge: true })
-    .then(function () {
-      console.log("Document successfully written!");
+    .then(function() {
+      // console.log("Document successfully written!");
     })
-    .catch(function (error) {
+    .catch(function(error) {
       console.error("Error writing document: ", error);
     });
 }
@@ -60,10 +60,10 @@ export function updateUserData(data) {
     const userDoc = firestore.collection("users").doc(user.uid);
     userDoc
       .set({ ...data }, { merge: true })
-      .then(function () {
-        console.log("Document successfully written!");
+      .then(function() {
+        // console.log("Document successfully written!");
       })
-      .catch(function (error) {
+      .catch(function(error) {
         console.error("Error writing document: ", error);
       });
   }
@@ -72,27 +72,29 @@ export function updateUserData(data) {
 export function updateProjectsCompleted(projectIndex) {
   const user = auth.currentUser;
   const userDoc = firestore.collection("users").doc(user.uid);
-  const completedProjects = userDoc.completedProjects || [];
-  userDoc
-    .set(
-      {
-        completedProjects: handleProjectCompleted(
-          projectIndex,
-          completedProjects
-        ),
-      },
-      { merge: true }
-    )
-    .then(function () {
-      console.log("Document successfully written!");
-    })
-    .catch(function (error) {
-      console.error("Error writing document: ", error);
-    });
+  userDoc.get().then(function(doc) {
+    const completedProjects = doc.data().completedProjects || [];
+    userDoc
+      .set(
+        {
+          completedProjects: handleProjectCompleted(
+            projectIndex,
+            completedProjects
+          ),
+        },
+        { merge: true }
+      )
+      .then(function() {
+        // console.log("Document successfully written!");
+      })
+      .catch(function(error) {
+        console.error("Error writing document: ", error);
+      });
+  });
 }
 
 export function handleLoginFromRefresh(setUser) {
-  auth.onAuthStateChanged(function (user) {
+  auth.onAuthStateChanged(function(user) {
     if (user) {
       setUser(user);
     }
@@ -106,19 +108,16 @@ export function setActiveProjectFromDB(setActiveProject) {
       .collection("users")
       .doc(user.uid)
       .get()
-      .then(function (doc) {
+      .then(function(doc) {
+        // if the user already had an active project, set it
         if (doc.exists) {
           const activeProject = doc.data().activeProject;
           if (activeProject) {
             setActiveProject(activeProject);
           }
-          console.log("Document data:", doc.data());
-        } else {
-          // doc.data() will be undefined in this case
-          console.log("No such document!");
         }
       })
-      .catch(function (error) {
+      .catch(function(error) {
         console.log("Error getting document:", error);
       });
   }

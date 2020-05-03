@@ -1,0 +1,63 @@
+---
+name: "Product Catalog"
+id: "mISvvHnHq"
+version: "0.0.1"
+index: "1"
+sections:
+  - type: markdown
+    path: "markdown/1-intro.md"
+    id: "7J66zU3rB7"
+  - type: challenge
+    id: "57aJybXgi"
+    content:
+      overview: "O&O is about to receive a new shipment of Nike shoes. We need you to discount all of the existing Nike inventory by 20%. The product catalog is stored in a csv file. We need you to download the catalog, apply the discount to all products that match the filters below, and submit the updated csv catalog in the same format."
+      requirements:
+        - id: "RajXdb5ARI"
+          text: "Submit a csv file where the current_price for products that match - brand == Nike AND category == Shoes - have been reduced by 20%."
+          isCheckable: false
+  - type: steps
+    id: "xnE6kewi-"
+    content:
+      requirements:
+        - id: "cqJfRM6iDy"
+          text: "Import the product_catalog.csv from ise-projects/project-1 into Google Sheets"
+          isCheckable: true
+        - id: "Px6gczvjKI"
+          text: "Create Filters for the relevant columns  - brand and category"
+          isCheckable: true
+        - id: "TynP0QrM9K"
+          text: "Apply a 20% discount to the current price column for the remaining rows using a formula"
+          isCheckable: true
+        - id: "6vTiLC2Bfa"
+          text: "Export the spreadsheet from Google Sheets, and save file as product_catalog_updated.csv in same folder"
+          isCheckable: true
+        - id: "fXs67GBAPg"
+          text: "Navigate to the challenge directory: cd ~/ise-projects/project-0/challenge-0/"
+          isCheckable: true
+        - id: "NuMT9btFRF"
+          text: "Submit your challenge for evaluation: npm run submit"
+          isCheckable: true
+  - type: markdown
+    path: "markdown/1-c0-discussion.md"
+    id: "Jn2ru2Vdh"
+  - type: challenge
+    id: "Q0mau9u2A"
+    content:
+      overview: "We need to come up with a more efficient way to apply these price changes. We need to write a command-line utility to specify the category, brand, and the percentage change in the price. Write a Python script with the following interface: `solution.py --percent-change 80 --brand Nike --category Shoes`"
+      requirements:
+        - id: "20Q5tDZWIG"
+          text: "Write a Python script where the percent-change argument is required, the brand and category arguments are optional. Leave the product_catalog.js file unchanged, and save the updated catalog to `project-1/challenge-1/product_catalog_updated.csv`"
+          isCheckable: false
+  - type: markdown
+    path: "markdown/1-c1-tips.md"
+    id: "beQ1XDU8Q"
+  - type: steps
+    id: "wQVvohBGu"
+    content:
+      requirements:
+        - id: "w4qsKmyghr"
+          text: "Start learning python if you don’t already know it"
+          isCheckable: true
+        - id: "roxTXN6eOC"
+          text: "Write the python script based on the requirements"
+          isCheckable: true

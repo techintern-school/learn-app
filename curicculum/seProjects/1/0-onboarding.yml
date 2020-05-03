@@ -60,7 +60,7 @@ sections:
           text: "Enter your github ID then hit enter - you can find this in the github website"
           isCheckable: true
         - id: "b8c4MD-mHFz"
-          text: "Navigate to the challenge directory: cd project-0/challenge-0/"
+          text: "Navigate to the challenge directory: cd ~/ise-projects/project-0/challenge-0/"
           isCheckable: true
         - id: "iC7Cq5Im76"
           text: "Submit your challenge for evaluation: npm run submit"

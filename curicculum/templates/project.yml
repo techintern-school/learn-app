@@ -1,9 +1,9 @@
-  ---
-  name: "%%NAME%%"
-  id: "%%ID%%"
-  version: "0.0.1"
-  index: "%%INDEX%%"
-  sections:
-    - type: text
-      content: "some words"
-      id: "%%ID%%"
+---
+name: "%%NAME%%"
+id: "%%ID%%"
+version: "0.0.1"
+index: "%%INDEX%%"
+sections:
+  - type: text
+    content: "some words"
+    id: "%%ID%%"

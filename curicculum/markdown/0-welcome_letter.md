@@ -1,8 +1,12 @@
 ## New student welcome letter
 
-Welcome to techIntern.school’s Introduction to Software Engineering (ISE). I know you have a lot of choices to learn to become a software engineer (SE). Some online courses focus on teaching a particular technology. Others explain concepts, then work through a series of practice problems in your browser. ISE takes a different approach. You will start working like a SE as we work through projects based on real business problems. Without prior software experience, it will take you at least 6 months of full time (40 hours/week) effort to complete ISE. It will take longer if you are studying part-time. If you want a certification you can add to your resume in six weeks, you should look elsewhere. If you want to learn to use software to solve problems, you are in the right place.
+Welcome to techIntern.school’s Introduction to Software Engineering (ISE). I know you have a lot of choices to learn to program online. Some courses focus on teaching a particular technology. Others explain concepts, then work through a series of practice problems in your browser. ISE takes a different approach. You will start working like a Software Engineer (SE) as we work through projects based on real business problems.
 
-Along the way, you will learn these five skills to become a professional SE.
+Software engineering is the art and occasional science of creating software. Not just any software. Your software must be easy to use and meet the requirements of your users. When you create software for your own use, you can define the requirments. When you are employeed as a software engineer, these requirements and constraints are usually given to you. The software you create will include code written by you, but it will be the minority. The majority of the software in your solutions will have been written by other people. This course will teach you how to develop your own software, and how to use third party software to make more reliable solutions.
+
+Without prior software experience, ISE will take you at least 6 months of full time (40 hours/week) studying. It will take longer if you are studying part-time. If you want a certification you can add to your resume in six weeks, you should look elsewhere. If you want to learn to use software to solve problems, you are in the right place.
+
+With some risk of oversimplifying things, you need five skills to become a professional SE.
 
 #### Skill 1. Learn to get unstuck
 

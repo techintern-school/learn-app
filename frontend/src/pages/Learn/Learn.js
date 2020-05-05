@@ -111,11 +111,12 @@ function Learn(props) {
     fetch(`/curic/se${getCuricVersion(props.userInfo)}.json`)
       .then((response) => response.json())
       .then((json) => {
-        setProjects(json.content);
-        // TODO: should set projectID for user?
+        const projects = json.content;
+        // store projects in local state
+        setProjects(projects);
       })
       .catch((error) => console.log(error));
-  }, [props.userInfo]);
+  }, [props, props.userInfo]);
 
   function getProject(index) {
     if (typeof projects[index] === "object") {
@@ -127,6 +128,7 @@ function Learn(props) {
   }
   useEffect(() => {
     handleLoginFromRefresh(props.setUser);
+    // save the first project as being active if not already one set
   }, [props.setUser]);
 
   function handleProjectCompelted() {
@@ -150,7 +152,7 @@ function Learn(props) {
 
   function NextProject() {
     return (
-      // TODO: make this only clickable when all requirements
+      // TODO: make this only clickable when all requirements ar
       <Button
         variant="contained"
         color="primary"

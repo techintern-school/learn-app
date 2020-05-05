@@ -13,17 +13,17 @@ function Login(props) {
   const uiConfig = {
     // Popup signin flow rather than redirect flow.
     signInFlow: "popup",
-    // We will display Google and Facebook as auth providers.
+    // We will display Github
     signInOptions: [gProvider.providerId],
     callbacks: {
-      signInSuccessWithAuthResult: function (authResult) {
+      signInSuccessWithAuthResult: function(authResult) {
         var user = authResult.user;
         props.onLogin(user);
         setActiveProjectFromDB(setActiveProject);
         props.history.push("/learn");
         return false;
       },
-      signInFailure: function (error) {
+      signInFailure: function(error) {
         // TODO
         return false;
       },

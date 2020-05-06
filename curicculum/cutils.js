@@ -125,6 +125,13 @@ program
     });
   });
 
+function makeLinksOpenInNewTab(htmlString) {
+  function replacer(str, c1) {
+    return ` target='_blank'> ${c1}`;
+  }
+  return htmlString.replace(/>(.[^<]*<\/a>)/gi, replacer);
+}
+
 program
   .command("make-json")
   .alias("mj")
@@ -158,7 +165,10 @@ program
                 }
                 fileContents = fs.readFileSync(section.path, "utf8");
                 // delete the path property, and create content with htmlified markdown
-                section.content = md.render(fileContents);
+                section.content = makeLinksOpenInNewTab(
+                  md.render(fileContents)
+                );
+
                 section.wasMarkdown = true;
                 delete section.path;
                 return section;

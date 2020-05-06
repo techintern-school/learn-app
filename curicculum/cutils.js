@@ -125,6 +125,7 @@ program
     });
   });
 
+// injects target _blank into all <a> tags
 function makeLinksOpenInNewTab(htmlString) {
   function replacer(str, c1) {
     return ` target='_blank'> ${c1}`;

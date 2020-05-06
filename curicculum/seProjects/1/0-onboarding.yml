@@ -13,58 +13,24 @@ sections:
   - type: challenge
     id: "8-qnYajbr"
     content:
-      overview: "Your first challenge will be to create a Github account and Star the learning application repository. You should follow the steps below to setup your computer to submit the challenge. When you have sucessfully compelted the challenge, this checkbox automatically be checked."
+      overview: "Your first challenge will be to create a Github account and use it to login to this application. You can complete this by clicking the login button in the top right hand corner"
       requirements:
         - id: "zhLKEBKuDk"
-          text: "Star the learn-app repo"
+          text: "Create Github Account and Login"
           isCheckable: false
-  - type: steps
+  - type: markdown
     id: "R2LtBDQzm"
-    content:
-      requirements:
-        - id: "1icj9acz"
-          text: "Go to https://github.com/join?source=techIntern.school and signup"
-          isCheckable: true
-        - id: "-l456x5yWr"
-          text: "Star https://github.com/techintern-school/learn-app"
-          isCheckable: true
+    path: "markdown/0-c0-steps.md"
   - type: text
-    content: "Now we’re going to install the command line interface. If you have never worked with the terminal before, check out the resources below. The CLI is going to be installed using an application Node Package Manager (npm). In order to do this, we need to install a programming language called Node.JS. Unfortunately, NodeJS is not installed by default on OSX. The easiest way to install Node.JS is to use another package manager, called HomeBrew. "
+    content: "Now we’re going to install the TIS command line interface (CLI). If you have never worked with the terminal before, check out the resources linked above. The CLI is going to be installed using an application Node Package Manager (npm). In order to do this, we need to install a programming language called Node.JS. Unfortunately, NodeJS is not installed by default on OSX. The easiest way to install Node.JS is to use another package manager, called HomeBrew."
     id: "gWdTEJiYP"
-  - type: steps
-    id: "E_avmblRu"
+  - type: challenge
+    id: "BDwXOAO3y"
     content:
+      overview: "Install the TIS CLI and submit the challenge from the terminal by following the steps below."
       requirements:
-        - id: "WQvZ93FdLG"
-          text: "Install Homebrew: Follow instructions until HomeBrew commands: https://www.datacamp.com/community/tutorials/homebrew-install-use"
-          isCheckable: true
-        - id: "jBYG2f4BiB"
-          text: "Install Node: brew install node"
-          isCheckable: true
-        - id: "EHtNd6EpVv"
-          text: "Download the repository to your computer: git clone https://github.com/techintern-school/ise-projects.git"
-          isCheckable: true
-        - id: "q6_mS9sPtw"
-          text: "navigate to the repo directory: cd ise-projects"
-          isCheckable: true
-        - id: "2W32OWssb6"
-          text: "install the application: npm install"
-          isCheckable: true
-        - id: "-5cgsrSvTu"
-          text: "Run the setup command: npm run setup"
-          isCheckable: true
-        - id: "u-6p7G-x8J"
-          text: "Enter your user ID then hit enter - you can find this by clicking on the menu in the top left of the app, then clicking the account button, and copying the value"
-          isCheckable: true
-        - id: "b8c4MD-mHF"
-          text: "Enter your github ID then hit enter - you can find this in the github website"
-          isCheckable: true
-        - id: "b8c4MD-mHFz"
-          text: "Navigate to the challenge directory: cd ~/ise-projects/project-0/challenge-0/"
-          isCheckable: true
-        - id: "iC7Cq5Im76"
-          text: "Submit your challenge for evaluation: npm run submit"
-          isCheckable: true
-  - type: text
-    content: "You should see the checkbox under the challenge marked as complete. Once that is done, mark this project by clicking on the purple button below and we will move onto the next project. "
-    id: "t42HQJ9GP"
+        - id: "W1H-Pyrwv0"
+          text: "Submit Challenge 1 from the CLI"
+  - type: markdown
+    path: "markdown/0-c1-steps.md"
+    id: "8nfLG07HP"

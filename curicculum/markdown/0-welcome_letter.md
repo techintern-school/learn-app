@@ -1,16 +1,18 @@
 ## New student welcome letter
 
-Welcome to techIntern.school’s Introduction to Software Engineering (ISE). I know you have a lot of choices to learn to program online. Some courses focus on teaching a particular technology. Others explain concepts, then work through a series of practice problems in your browser. ISE takes a different approach. You will start working like a Software Engineer (SE) as we work through projects based on real business problems.
+Welcome to techIntern.school’s Introduction to Software Engineering (ISE). I know you have a lot of choices to learn to program online. Some courses focus on teaching a particular technology. Others explain concepts, then work through a series of practice problems in your browser. ISE takes a different approach. You will start working like a Software Engineer (SE) as we develop solutions to real business problems.
 
-Software engineering is the art and occasional science of creating software. Not just any software. Your software must be easy to use and meet the requirements of your users. When you create software for your own use, you can define the requirments. When you are employeed as a software engineer, these requirements and constraints are usually given to you. The software you create will include code written by you, but it will be the minority. The majority of the software in your solutions will have been written by other people. This course will teach you how to develop your own software, and how to use third party software to make more reliable solutions.
+Software engineering is the art and science of creating software. Not just any software. Simple software that meets the requirements of your users. The simple part is important. If your software is not simple enough to use, run, and maintain, you may have written software, but it was not well enough engineered to be a solution.
 
-Without prior software experience, ISE will take you at least 6 months of full time (40 hours/week) studying. It will take longer if you are studying part-time. If you want a certification you can add to your resume in six weeks, you should look elsewhere. If you want to learn to use software to solve problems, you are in the right place.
+When you include the tools you will use to develop your solutions, the majority of the software you create will have been written by other people. Working with other peoples' software preesnts its own challenges, but drastically increases your prodcutivity. To become a software engineer, you need to know more than just how to program software, You need to learn to work with other peoples' software, and to work on a team.
 
-With some risk of oversimplifying things, you need five skills to become a professional SE.
+Without prior software experience, ISE will take at least 6 months of full time (40 hours/week) studying. It will take longer if you are studying part-time. If you want a certification you can add to your resume in six weeks, you should look elsewhere. If you want to learn to use software to solve problems, you are in the right place.
+
+With some risk of oversimplifying things, you need to learn five things to become a professional SE.
 
 #### Skill 1. Learn to get unstuck
 
-A surprising percentage of the job of a SE is getting unstuck when you don’t understand something. Being stuck is not fun. The joy of solving a problem that had you stumped is fun for some people. I want you to figure out as soon as possible if you are one of the people who enjoys getting unstuck. If getting unstuck brings you joy, this is the right course for you to learn to become a SE. If not, you can still learn to become a SE, but I don’t recommend doing it here. There are other schools that put less emphasis on developing this skill.
+A surprising percentage of the job of a SE is getting unstuck when you don’t understand something. Being stuck is not fun. The feeling you get when you solve a problem that had you stumped is fun for some people. I want you to figure out as soon as possible if you are one of the people who enjoys getting unstuck. If getting unstuck brings you joy, this is the right course for you to learn to become a SE. If not, you can still learn to become a SE, but I don’t recommend doing it here. There are other schools that put less emphasis on developing this skill.
 
 We will start developing your unstucking skill right away in project 0 when we get your computer setup for ISE. We will develop it further when you start solving projects with programming. It will be challenging. Software engineering is challenging. All worthwhile things are. Without learning to get unstuck, you will have a hard time making progress on software projects.
 

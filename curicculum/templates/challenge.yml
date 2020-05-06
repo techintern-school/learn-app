@@ -5,7 +5,5 @@
       requirements:
         - id: "%%ID%%"
           text: "do x"
-          isCheckable: false
         - id: "%%ID%%"
           text: "do y"
-          isCheckable: false

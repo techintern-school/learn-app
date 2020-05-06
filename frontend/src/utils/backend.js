@@ -37,21 +37,48 @@ export function getRrfProps(store) {
   };
 }
 
-export function updateCompletedSections(completedSections, projectID) {
+export function loginPopup(setUser) {
+  firebase
+    .auth()
+    .signInWithPopup(gProvider)
+    .then(function(result) {
+      // The signed-in user info.
+      setUser(result.user);
+      handleActiveProject();
+      // register challenge compelted
+      updateCompletedSections("zhLKEBKuDk", "M_42tuQZ5");
+    });
+}
+
+export function updateCompletedSections(completed, projectID) {
   const user = auth.currentUser;
   const projectDoc = firestore
     .collection("users")
     .doc(user.uid)
     .collection("projects")
     .doc(projectID);
-  projectDoc
-    .set({ completedSections }, { merge: true })
-    .then(function() {
-      // console.log("Document successfully written!");
-    })
-    .catch(function(error) {
-      console.error("Error writing document: ", error);
-    });
+
+  projectDoc.get().then(function(doc) {
+    let completedSections;
+    // if array passed in, just use that. Otherwise, add this section to existing
+    if (typeof completed === "string") {
+      const dbData = doc.data() || {};
+      completedSections = dbData.completedSections
+        ? dbData.completedSections
+        : [];
+      completedSections.push(completed);
+    } else {
+      completedSections = completed;
+    }
+    projectDoc
+      .set({ completedSections }, { merge: true })
+      .then(function() {
+        // console.log("Document successfully written!");
+      })
+      .catch(function(error) {
+        console.error("Error writing document: ", error);
+      });
+  });
 }
 
 export function updateUserData(data) {
@@ -102,7 +129,7 @@ export function handleLoginFromRefresh(setUser) {
   });
 }
 
-export function setActiveProjectFromDB(setActiveProject) {
+export function handleActiveProject(setActiveProject) {
   const user = auth.currentUser;
   if (user) {
     firestore
@@ -114,7 +141,9 @@ export function setActiveProjectFromDB(setActiveProject) {
         if (doc.exists) {
           const activeProject = doc.data().activeProject;
           if (activeProject) {
-            setActiveProject(activeProject);
+            if (typeof setActiveProject === "function") {
+              setActiveProject(activeProject);
+            }
             return;
           }
         }

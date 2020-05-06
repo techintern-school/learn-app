@@ -20,6 +20,7 @@ import ListItemText from "@material-ui/core/ListItemText";
 import ProjectContent from "./ProjectContent";
 import GithubIssue from "../../components/GithubIssue";
 import AccountButton from "../../components/AccountButton";
+import LoginButton from "../../components/LoginButton";
 import Button from "@material-ui/core/Button";
 import {
   setActiveProject,
@@ -45,7 +46,11 @@ function Learn(props) {
 
   let fireStoreConnectArg = [];
 
-  if (props.user.uid) {
+  function isLoggedIn(props) {
+    return props.user.uid;
+  }
+
+  if (isLoggedIn(props)) {
     fireStoreConnectArg.push({
       collection: "users",
       doc: props.user.uid,
@@ -126,6 +131,15 @@ function Learn(props) {
       return projects[0];
     }
   }
+
+  function getCompletedSections(props) {
+    if (props.project && Array.isArray(props.project.completedSections)) {
+      return props.project.completedSections;
+    }
+    // return empty array if not already defined
+    return [];
+  }
+
   useEffect(() => {
     handleLoginFromRefresh(props.setUser);
     // save the first project as being active if not already one set
@@ -185,7 +199,11 @@ function Learn(props) {
           <Typography variant="h6" noWrap>
             techIntern.school - Online Learning Portal
           </Typography>
-          <GithubIssue />
+          {isLoggedIn(props) ? (
+            <GithubIssue />
+          ) : (
+            <LoginButton setUser={setUser} />
+          )}
         </Toolbar>
       </AppBar>
       <Drawer
@@ -225,25 +243,18 @@ function Learn(props) {
           ))}
         </List>
       </Drawer>
-      {props.user.uid ? (
-        <main
-          className={clsx(classes.content, {
-            [classes.contentShift]: open,
-          })}
-        >
-          <div className={classes.drawerHeader} />
-          <ProjectContent project={getProject(getActiveProject(props))} />
-          <NextProject />
-        </main>
-      ) : (
-        <div>
-          <br />
-          <br />
-          <br />
-          <br />
-          TODO: Need to login
-        </div>
-      )}
+      <main
+        className={clsx(classes.content, {
+          [classes.contentShift]: open,
+        })}
+      >
+        <div className={classes.drawerHeader} />
+        <ProjectContent
+          project={getProject(getActiveProject(props))}
+          completedSections={getCompletedSections(props)}
+        />
+        <NextProject />
+      </main>
     </div>
   );
 }

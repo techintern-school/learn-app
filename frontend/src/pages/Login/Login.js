@@ -1,10 +1,6 @@
 import React from "react";
 import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
-import {
-  auth,
-  gProvider,
-  setActiveProjectFromDB,
-} from "../../utils/backend.js";
+import { auth, gProvider, handleActiveProject } from "../../utils/backend.js";
 import { connect } from "react-redux";
 import { setUser, setActiveProject } from "../../redux/actions.js";
 
@@ -19,7 +15,7 @@ function Login(props) {
       signInSuccessWithAuthResult: function(authResult) {
         var user = authResult.user;
         props.onLogin(user);
-        setActiveProjectFromDB(setActiveProject);
+        handleActiveProject(setActiveProject);
         props.history.push("/learn");
         return false;
       },

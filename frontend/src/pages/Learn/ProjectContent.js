@@ -5,6 +5,8 @@ import ExpansionPanel from "@material-ui/core/ExpansionPanel";
 import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
 import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import AssignmentIcon from "@material-ui/icons/Assignment";
+import AssignmentTurnedInIcon from "@material-ui/icons/AssignmentTurnedIn";
 import Divider from "@material-ui/core/Divider";
 import { titleCaseFromKebabCase } from "../../utils/strings.js";
 import CheckList from "./CheckList.js";
@@ -63,8 +65,34 @@ function HintContent(content) {
     </div>
   );
 }
+function isCompletedSection(id, completed) {
+  if (Array.isArray(completed)) {
+    return completed.indexOf(id) > -1;
+  } else {
+    return false;
+  }
+}
 
-function ChallengeContent(content) {
+function ChallengeRequirement(content, completedSections) {
+  return (
+    <div>
+      <Typography variant={"h6"} paragraph>
+        {isCompletedSection(content.id, completedSections) ? (
+          <div>
+            <AssignmentTurnedInIcon /> Complete
+          </div>
+        ) : (
+          <div>
+            <AssignmentIcon /> Incomplete
+          </div>
+        )}
+        {` ^ ${content.text}`}
+      </Typography>
+    </div>
+  );
+}
+
+function ChallengeContent(content, completedSections) {
   return (
     <div>
       <Typography variant={"h4"} paragraph>
@@ -76,7 +104,9 @@ function ChallengeContent(content) {
       <Typography variant={"body1"} paragraph>
         <b>Requirements</b>:
       </Typography>
-      <CheckList items={content.requirements} />
+      {content.requirements.map((requirement) =>
+        ChallengeRequirement(requirement, completedSections)
+      )}
     </div>
   );
 }
@@ -92,7 +122,7 @@ function NextStepContent(content) {
   );
 }
 
-function getSectionContent(section, i) {
+function getSectionContent(section, i, completedSections) {
   const type = section.type || "text";
   const lookup = {
     text: TextContent,
@@ -106,7 +136,7 @@ function getSectionContent(section, i) {
   }
   return (
     <span key={`section${i}`} style={{ paddingTop: "10px" }}>
-      {lookup[type](section.content)}
+      {lookup[type](section.content, completedSections)}
       <Divider />
       <div style={{ paddingTop: "20px" }}></div>
     </span>
@@ -143,7 +173,7 @@ export default function ProjectContent(props) {
       </Typography>
       <div className={classes.centered}>
         {props.project.sections.map((section, i) =>
-          getSectionContent(section, i)
+          getSectionContent(section, i, props.completedSections)
         )}
       </div>
     </div>

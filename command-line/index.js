@@ -84,13 +84,8 @@ program
     userID = readlineSync.question(
       "What is your user techIntern.school user ID? You should copy and paste this from the web application... "
     );
-    // TODO validate userID against DB
-    githubID = readlineSync.question(
-      "What is your user github user name? You should copy and paste this from the github website... "
-    );
     const config = {
       userID,
-      githubID,
     };
     fs.writeFileSync(userConfigFilePath, JSON.stringify(config, null, 4));
   });

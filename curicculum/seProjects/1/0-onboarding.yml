@@ -37,7 +37,7 @@ sections:
   - type: challenge
     id: "J-zCwJpQh"
     content:
-      overview: "We need you to learn more about the command line and the file system. Unlike the previous project, we will not give you the commands you need to run. We need you to figure this out by googling. We reccomend starting by searching "how to copy directory command line linux" and "make file executable linux". You can test your script directly in the terminal using the `source-folder` and `dest-folder` directories that already exist in the `/project-0/challenge-2` directory. Your solution should be saved in the copy-files.sh file, and you should use a text editor like atom - https://atom.io/. 
+      overview: "Use Google to learn the command line."
       requirements:
         - id: "9z7KSCxGwK"
           text: "Write a bash script copy-files.sh to copy all files in a directory."

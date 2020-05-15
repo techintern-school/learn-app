@@ -37,10 +37,10 @@ sections:
   - type: challenge
     id: "J-zCwJpQh"
     content:
-      overview: "Use Google to learn the command line."
+      overview: "Create a backup of a folder using the command line"
       requirements:
         - id: "9z7KSCxGwK"
-          text: "Write a bash script copy-files.sh to copy all files in a directory."
+          text: "Write a bash script backup-products.sh to copy all files from `/products` to `/backup-products`."
   - type: markdown
     path: "markdown/0-c2-steps.md"
     id: "TNGG8tPz5"

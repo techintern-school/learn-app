@@ -5,7 +5,18 @@ const ncp = require("ncp").ncp;
 const shortid = require("shortid");
 const child_process = require("child_process");
 const path = require("path");
-var md = require("markdown-it")();
+var hljs = require("highlight.js");
+var md = require("markdown-it")({
+  highlight: function (str, lang) {
+    if (lang && hljs.getLanguage(lang)) {
+      try {
+        return hljs.highlight(lang, str).value;
+      } catch (__) {}
+    }
+
+    return ""; // use external default escaping
+  },
+});
 
 const configPath = "./config.json";
 const config = JSON.parse(fs.readFileSync(configPath, "utf8"));

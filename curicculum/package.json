@@ -10,6 +10,7 @@
   "license": "GNU GPLv3",
   "dependencies": {
     "commander": "^5.0.0",
+    "highlight.js": "^10.0.3",
     "markdown-it": "^10.0.0",
     "ncp": "^2.0.0",
     "shortid": "^2.2.15"

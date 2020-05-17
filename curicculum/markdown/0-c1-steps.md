@@ -29,11 +29,8 @@
     ```shell
       $ npm install
     ```
-  - Run the setup command to link your account from the website to the CLI
-    ```shell
-      $ npm run setup
-    ```
-  - Paste your user ID then hit enter - you can find this by clicking on the menu in the top left of the app, then clicking the account button, and copying the value
+  - Copy your cofiguration file content from the account tab - you can find this by clicking on the menu in the top left of the app, then clicking the account button
+  - Open VS Code, paste the file content into a new file. Save the file as `.tisConfig.json` - with the leading `.` - in your home directory `/Users/{YOUR_MAC_USERNAME}`
   - Navigate to the challenge 1 directory for project 0
     ```shell
       $ cd project-0/challenge-1/

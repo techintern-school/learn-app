@@ -8,7 +8,12 @@ function Account(props) {
     <div>
       <h2>Account</h2>
       {props.user && props.user.uid ? (
-        <h3>your user ID: {props.user.uid}</h3>
+        <div>
+          <h3>Your .tisConfig file content is:</h3>
+          <code> {`{"userID":"${props.user.uid}"}`}</code>
+          <br />
+          <br />
+        </div>
       ) : (
         <h3>
           you are not logged in, navigate back to learn and click on the account

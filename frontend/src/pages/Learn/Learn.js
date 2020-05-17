@@ -142,7 +142,6 @@ function Learn(props) {
 
   useEffect(() => {
     handleLoginFromRefresh(props.setUser);
-    // save the first project as being active if not already one set
   }, [props.setUser]);
 
   function handleProjectCompelted() {
@@ -285,9 +284,6 @@ const mapStateToProps = (state) => {
     user,
   };
 };
-const ConnectedLearn = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Learn);
+const ConnectedLearn = connect(mapStateToProps, mapDispatchToProps)(Learn);
 
 export default ConnectedLearn;

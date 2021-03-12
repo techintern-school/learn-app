@@ -61,7 +61,7 @@
     "react-animate-on-scroll": "2.1.5",
     "react-app-polyfill": "^1.0.2",
     "react-datetime": "2.16.3",
-    "react-dev-utils": "^9.0.2",
+    "react-dev-utils": "^11.0.4",
     "react-dom": "16.9.0",
     "react-firebaseui": "^4.1.0",
     "react-ga": "^2.7.0",

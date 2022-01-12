@@ -11,7 +11,7 @@
   "dependencies": {
     "commander": "^5.0.0",
     "highlight.js": "^10.0.3",
-    "markdown-it": "^10.0.0",
+    "markdown-it": "^12.3.2",
     "ncp": "^2.0.0",
     "shortid": "^2.2.15"
   },
